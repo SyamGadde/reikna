@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: basics &mdash; tigger 0.2.0dev-6fe54a6 documentation</title>
+    <title>Tutorial: basics &mdash; reikna 0.3.0+dev.5cbb8e8 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.2.0dev-6fe54a6',
+        VERSION:     '0.3.0+dev.5cbb8e8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="tigger 0.2.0dev-6fe54a6 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.3.0+dev.5cbb8e8 documentation" href="index.html" />
     <link rel="next" title="Tutorial: advanced topics" href="tutorial-advanced.html" />
     <link rel="prev" title="Introduction" href="introduction.html" /> 
   </head>
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="introduction.html" title="Introduction"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">tigger 0.2.0dev-6fe54a6 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.0+dev.5cbb8e8 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -58,13 +58,13 @@
 <span id="tutorial-basic"></span><h1>Tutorial: basics<a class="headerlink" href="#tutorial-basics" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="usage-of-computations">
 <h2>Usage of computations<a class="headerlink" href="#usage-of-computations" title="Permalink to this headline">¶</a></h2>
-<p>All <tt class="docutils literal"><span class="pre">Tigger</span></tt> computation classes are derived from the <a class="reference internal" href="api/core.html#tigger.core.Computation" title="tigger.core.Computation"><tt class="xref py py-class docutils literal"><span class="pre">Computation</span></tt></a> class and therefore share the same API and behavior.
-Each computation is parametrized by a dictionary called <strong>basis</strong> (which is hidden from the user), and, sometimes, by the names and positions of its arguments (when they can vary, for example, in <a class="reference internal" href="api/computations.html#tigger.elementwise.Elementwise" title="tigger.elementwise.Elementwise"><tt class="xref py py-class docutils literal"><span class="pre">Elementwise</span></tt></a>).</p>
-<p>Before use a computation has to be fully prepared by means of calling <a class="reference internal" href="api/core.html#tigger.core.Computation.prepare_for" title="tigger.core.Computation.prepare_for"><tt class="xref py py-meth docutils literal"><span class="pre">prepare_for()</span></tt></a>.
+<p>All <tt class="docutils literal"><span class="pre">reikna</span></tt> computation classes are derived from the <a class="reference internal" href="api/core.html#reikna.core.Computation" title="reikna.core.Computation"><tt class="xref py py-class docutils literal"><span class="pre">Computation</span></tt></a> class and therefore share the same API and behavior.
+Each computation is parametrized by a dictionary called <strong>basis</strong> (which is hidden from the user), and, sometimes, by the names and positions of its arguments (when they can vary, for example, in <a class="reference internal" href="api/computations.html#reikna.elementwise.Elementwise" title="reikna.elementwise.Elementwise"><tt class="xref py py-class docutils literal"><span class="pre">Elementwise</span></tt></a>).</p>
+<p>Before use a computation has to be fully prepared by means of calling <a class="reference internal" href="api/core.html#reikna.core.Computation.prepare_for" title="reikna.core.Computation.prepare_for"><tt class="xref py py-meth docutils literal"><span class="pre">prepare_for()</span></tt></a>.
 This method derives the basis from a set of positional arguments and optional keyword arguments.
-The positional arguments should be either the same arrays and scalars you are going to pass to the computation call (which means the same shapes and data types), or their replacements in the form of <a class="reference internal" href="api/core.html#tigger.core.ArrayValue" title="tigger.core.ArrayValue"><tt class="xref py py-class docutils literal"><span class="pre">ArrayValue</span></tt></a> and <a class="reference internal" href="api/core.html#tigger.core.ScalarValue" title="tigger.core.ScalarValue"><tt class="xref py py-class docutils literal"><span class="pre">ScalarValue</span></tt></a> objects:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="nb">input</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">allocate</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">output</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">allocate</span><span class="p">((</span><span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+The positional arguments should be either the same arrays and scalars you are going to pass to the computation call (which means the same shapes and data types), or their replacements in the form of <a class="reference internal" href="api/core.html#reikna.core.ArrayValue" title="reikna.core.ArrayValue"><tt class="xref py py-class docutils literal"><span class="pre">ArrayValue</span></tt></a> and <a class="reference internal" href="api/core.html#reikna.core.ScalarValue" title="reikna.core.ScalarValue"><tt class="xref py py-class docutils literal"><span class="pre">ScalarValue</span></tt></a> objects:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nb">input</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 <span class="n">tr</span> <span class="o">=</span> <span class="n">Transpose</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span><span class="o">.</span><span class="n">prepare_for</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
 <span class="n">tr</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
 </pre></div>
@@ -77,12 +77,12 @@ In particular, <tt class="docutils literal"><span class="pre">__call__</span></t
 <p>One often needs to perform some simple processing of the input or output values of a computation.
 This can be scaling, splitting complex values into components, and so on.
 Some of these operations require additional memory to store intermediate results, and all of them involve additional overhead of calling the kernel, and passing values to and from the device memory.
-<tt class="docutils literal"><span class="pre">Tigger</span></tt> porvides an API to define such transformations and attach them to &#8220;core&#8221; computations, effectively compiling the transformation code into the main kernel, thus avoiding all these drawbacks.</p>
+<tt class="docutils literal"><span class="pre">Reikna</span></tt> porvides an API to define such transformations and attach them to &#8220;core&#8221; computations, effectively compiling the transformation code into the main kernel, thus avoiding all these drawbacks.</p>
 </div>
 <div class="section" id="transformation-tree">
 <h2>Transformation tree<a class="headerlink" href="#transformation-tree" title="Permalink to this headline">¶</a></h2>
 <p>Before talking about transformations themselves, we need to take a closer look at the computation signatures.
-Positional arguments of any <tt class="docutils literal"><span class="pre">__call__</span></tt> method of a class derived from <a class="reference internal" href="api/core.html#tigger.core.Computation" title="tigger.core.Computation"><tt class="xref py py-meth docutils literal"><span class="pre">Computation()</span></tt></a> are output arrays, input arrays, and scalar arguments, in this order.
+Positional arguments of any <tt class="docutils literal"><span class="pre">__call__</span></tt> method of a class derived from <a class="reference internal" href="api/core.html#reikna.core.Computation" title="reikna.core.Computation"><tt class="xref py py-meth docutils literal"><span class="pre">Computation()</span></tt></a> are output arrays, input arrays, and scalar arguments, in this order.
 All these values are eventually passed to the computation kernel.</p>
 <p>All the positional arguments have an identifier which is unique for the given computation object.
 Identifiers for the base computation (without any connected transformation) are, by convention, the names of the positional arguments to <tt class="docutils literal"><span class="pre">prepare_for</span></tt> for the computation.
@@ -90,10 +90,10 @@ These identifiers serve as connection points, where the user can attach transfor
 <p>All attached transformations form a tree with roots being these base connection points, and leaves forming defining the positional arguments to <tt class="docutils literal"><span class="pre">prepare_for</span></tt> and <tt class="docutils literal"><span class="pre">__call__</span></tt> methods visible to the user.
 As an example, let us consider an elementwise computation object with one output, two inputs and a scalar parameter, which performs the calculation <tt class="docutils literal"><span class="pre">out</span> <span class="pre">=</span> <span class="pre">in1</span> <span class="pre">+</span> <span class="pre">in2</span> <span class="pre">+</span> <span class="pre">param</span></tt>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">import</span> <span class="nn">tigger.cluda</span> <span class="kn">as</span> <span class="nn">cluda</span>
-<span class="kn">from</span> <span class="nn">tigger.core</span> <span class="kn">import</span> <span class="n">Transformation</span>
-<span class="kn">from</span> <span class="nn">tigger.elementwise</span> <span class="kn">import</span> <span class="n">specialize_elementwise</span>
-<span class="kn">import</span> <span class="nn">tigger.transformations</span> <span class="kn">as</span> <span class="nn">transformations</span>
+<span class="kn">import</span> <span class="nn">reikna.cluda</span> <span class="kn">as</span> <span class="nn">cluda</span>
+<span class="kn">from</span> <span class="nn">reikna.core</span> <span class="kn">import</span> <span class="n">Transformation</span>
+<span class="kn">from</span> <span class="nn">reikna.elementwise</span> <span class="kn">import</span> <span class="n">specialize_elementwise</span>
+<span class="kn">import</span> <span class="nn">reikna.transformations</span> <span class="kn">as</span> <span class="nn">transformations</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">cluda</span><span class="o">.</span><span class="n">ocl_api</span><span class="p">()</span>
 <span class="n">ctx</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">Context</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
@@ -137,7 +137,7 @@ To achieve this, we connect the scaling transformation to it:</p>
 &gt;&gt; param2 ----/</pre>
 </div>
 <p>As can be seen, nothing has changed from the base computation&#8217;s point of view: it still gets the same inputs and outputs to the same array.
-But user-supplied parameters (<tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt>) have changed, which can be also seen in the result of the <a class="reference internal" href="api/core.html#tigger.core.Computation.signature_str" title="tigger.core.Computation.signature_str"><tt class="xref py py-meth docutils literal"><span class="pre">signature_str()</span></tt></a>:</p>
+But user-supplied parameters (<tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt>) have changed, which can be also seen in the result of the <a class="reference internal" href="api/core.html#reikna.core.Computation.signature_str" title="reikna.core.Computation.signature_str"><tt class="xref py py-meth docutils literal"><span class="pre">signature_str()</span></tt></a>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">comp</span><span class="o">.</span><span class="n">signature_str</span><span class="p">()</span>
 <span class="go">&#39;(array) out1, (array) out2, (array) in1, (array) in2_prime, (scalar) param, (scalar) param2&#39;</span>
 </pre></div>
@@ -149,8 +149,8 @@ Except for that, the order of the final signature is obtained by traversing the 
 In order to run it, we have to prepare it first.
 When <tt class="docutils literal"><span class="pre">prepare_for</span></tt> is called, the data types and shapes of the given arguments will be propagated to the roots and used to prepare the original computation.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">N</span> <span class="o">=</span> <span class="mi">128</span>
-<span class="n">out1</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">allocate</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">out2</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">allocate</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">out1</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">out2</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 <span class="n">in1</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
 <span class="n">in2_prime</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
 <span class="n">param</span> <span class="o">=</span> <span class="mi">3</span>
@@ -167,7 +167,7 @@ When <tt class="docutils literal"><span class="pre">prepare_for</span></tt> is c
 <li>Transformations are strictly elementwise.
 It means that you cannot specify the index to read from or to write to in the transformation code &#8212; it stays the same as the one used to read the value in the main kernel.</li>
 <li>Transformations connected to the input nodes must have only one output, and transformations connected to the output nodes must have only one input.
-This restriction is, in fact, enforced by the signature of <a class="reference internal" href="api/core.html#tigger.core.Computation.connect" title="tigger.core.Computation.connect"><tt class="xref py py-meth docutils literal"><span class="pre">connect()</span></tt></a>.</li>
+This restriction is, in fact, enforced by the signature of <a class="reference internal" href="api/core.html#reikna.core.Computation.connect" title="reikna.core.Computation.connect"><tt class="xref py py-meth docutils literal"><span class="pre">connect()</span></tt></a>.</li>
 <li>External endpoints of the output transformations cannot point to existing nodes in the transformation tree.
 This is the direct consequence of the strict elementwiseness &#8212; it would unavoidably create races between memory writes from different branches.
 On the other hand, input transformations can be safely connected to existing nodes, including base nodes.</li>
@@ -235,11 +235,11 @@ On the other hand, input transformations can be safely connected to existing nod
         <li class="right" >
           <a href="introduction.html" title="Introduction"
              >previous</a> |</li>
-        <li><a href="index.html">tigger 0.2.0dev-6fe54a6 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.0+dev.5cbb8e8 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2012, Bogdan Opanchuk.
+        &copy; Copyright 2012-2013, Bogdan Opanchuk.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
