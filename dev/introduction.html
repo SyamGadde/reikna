@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Introduction &mdash; reikna 0.3.0+dev.5cbb8e8 documentation</title>
+    <title>Introduction &mdash; reikna 0.3.0+dev.61e7260 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.3.0+dev.5cbb8e8',
+        VERSION:     '0.3.0+dev.61e7260',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="reikna 0.3.0+dev.5cbb8e8 documentation" href="index.html" />
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="reikna 0.3.0+dev.61e7260 documentation" href="index.html" />
     <link rel="next" title="Tutorial: basics" href="tutorial-basic.html" />
     <link rel="prev" title="Reikna, the pure Python GPGPU library" href="index.html" /> 
   </head>
@@ -45,7 +46,7 @@
         <li class="right" >
           <a href="index.html" title="Reikna, the pure Python GPGPU library"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.0+dev.5cbb8e8 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.0+dev.61e7260 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -91,7 +92,7 @@ Its main purpose is to separate the rest of <tt class="docutils literal"><span c
 <span class="n">dest_dev</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">a_dev</span><span class="p">)</span>
 
 <span class="n">multiply_them</span><span class="p">(</span><span class="n">dest_dev</span><span class="p">,</span> <span class="n">a_dev</span><span class="p">,</span> <span class="n">b_dev</span><span class="p">,</span> <span class="n">local_size</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">global_size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
-<span class="k">print</span> <span class="p">(</span><span class="n">dest_dev</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">-</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="k">print</span><span class="p">((</span><span class="n">dest_dev</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">-</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
 </pre></div>
 </div>
 <p>If you are familiar with PyCuda or PyOpenCL, you will easily understand all the steps we have done here.
@@ -133,7 +134,7 @@ The template engine of choice in <tt class="docutils literal"><span class="pre">
 <span class="n">dest_dev</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">a_dev</span><span class="p">)</span>
 
 <span class="n">multiply_them</span><span class="p">(</span><span class="n">dest_dev</span><span class="p">,</span> <span class="n">a_dev</span><span class="p">,</span> <span class="n">b_dev</span><span class="p">,</span> <span class="n">local_size</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">global_size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">norm</span><span class="p">(</span><span class="n">dest_dev</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">-</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="n">norm</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">1e-6</span>
+<span class="k">print</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">dest_dev</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">-</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="n">norm</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">1e-6</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Here we passed <tt class="docutils literal"><span class="pre">dtype</span></tt> and <tt class="docutils literal"><span class="pre">ctype</span></tt> values to the template, and used <tt class="docutils literal"><span class="pre">dtype</span></tt> to get the complex number multiplication function (<tt class="docutils literal"><span class="pre">func</span></tt> is one of the &#8220;built-in&#8221; values that are available in CLUDA templates).
@@ -175,7 +176,7 @@ Transformations are compiled into the main computation kernel and are therefore 
 
 <span class="n">res_reference</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 
-<span class="k">print</span> <span class="n">norm</span><span class="p">(</span><span class="n">res_dev</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">-</span> <span class="n">res_reference</span><span class="p">)</span> <span class="o">/</span> <span class="n">norm</span><span class="p">(</span><span class="n">res_reference</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span>
+<span class="k">print</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">res_dev</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">-</span> <span class="n">res_reference</span><span class="p">)</span> <span class="o">/</span> <span class="n">norm</span><span class="p">(</span><span class="n">res_reference</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Most of the code above should be already familiar, with the exception of the creation of <a class="reference internal" href="api/computations.html#reikna.matrixmul.MatrixMul" title="reikna.matrixmul.MatrixMul"><tt class="xref py py-class docutils literal"><span class="pre">MatrixMul</span></tt></a> object.
@@ -223,7 +224,7 @@ Transformation API allows you to connect these transformations to the core compu
 
 <span class="n">res_reference</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a_re</span> <span class="o">+</span> <span class="mi">1j</span> <span class="o">*</span> <span class="n">a_im</span><span class="p">,</span> <span class="n">b_re</span> <span class="o">+</span> <span class="mi">1j</span> <span class="o">*</span> <span class="n">b_im</span><span class="p">)</span>
 
-<span class="k">print</span> <span class="n">norm</span><span class="p">(</span><span class="n">res_dev</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">-</span> <span class="n">res_reference</span><span class="p">)</span> <span class="o">/</span> <span class="n">norm</span><span class="p">(</span><span class="n">res_reference</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span>
+<span class="k">print</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">res_dev</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">-</span> <span class="n">res_reference</span><span class="p">)</span> <span class="o">/</span> <span class="n">norm</span><span class="p">(</span><span class="n">res_reference</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We have used a pre-created transformation <a class="reference internal" href="api/transformations.html#reikna.transformations.combine_complex" title="reikna.transformations.combine_complex"><tt class="xref py py-func docutils literal"><span class="pre">combine_complex()</span></tt></a> from <a class="reference internal" href="api/transformations.html#module-reikna.transformations" title="reikna.transformations"><tt class="xref py py-mod docutils literal"><span class="pre">reikna.transformations</span></tt></a> for simplicity; developing a custom transformation is also possible and described in <a class="reference internal" href="tutorial-advanced.html#tutorial-advanced-transformation"><em>Writing a transformation</em></a>.
@@ -293,7 +294,7 @@ Note that <tt class="docutils literal"><span class="pre">prepare_for</span></tt>
         <li class="right" >
           <a href="index.html" title="Reikna, the pure Python GPGPU library"
              >previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.0+dev.5cbb8e8 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.0+dev.61e7260 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

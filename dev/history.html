@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Release history &mdash; reikna 0.3.0+dev.5cbb8e8 documentation</title>
+    <title>Release history &mdash; reikna 0.3.0+dev.61e7260 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.3.0+dev.5cbb8e8',
+        VERSION:     '0.3.0+dev.61e7260',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="reikna 0.3.0+dev.5cbb8e8 documentation" href="index.html" />
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="reikna 0.3.0+dev.61e7260 documentation" href="index.html" />
     <link rel="prev" title="Transformations" href="api/transformations.html" /> 
   </head>
   <body>
@@ -41,7 +42,7 @@
         <li class="right" >
           <a href="api/transformations.html" title="Transformations"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.0+dev.5cbb8e8 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.0+dev.61e7260 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -57,7 +58,34 @@
 <p>Under construction.</p>
 </div>
 <div class="section" id="mar-2013">
-<h2>0.2.0 (3 Mar 2013)<a class="headerlink" href="#mar-2013" title="Permalink to this headline">¶</a></h2>
+<h2>0.2.1 (8 Mar 2013)<a class="headerlink" href="#mar-2013" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">FIXED: function names for kernel <tt class="docutils literal"><span class="pre">polar()</span></tt>, <tt class="docutils literal"><span class="pre">exp()</span></tt> and <tt class="docutils literal"><span class="pre">conj()</span></tt>.</p>
+</li>
+<li><p class="first">FIXED: added forgotten kernel <tt class="docutils literal"><span class="pre">norm()</span></tt> handler.</p>
+</li>
+<li><p class="first">FIXED: bug in <tt class="docutils literal"><span class="pre">Py.Test</span></tt> testcase execution hook which caused every test to run twice.</p>
+</li>
+<li><p class="first">FIXED: bug in nested computation processing for computation with more than one kernel.</p>
+</li>
+<li><p class="first">FIXED: added dependencies between MatrixMul kernel arguments.</p>
+</li>
+<li><dl class="first docutils">
+<dt>FIXED: taking into account dependencies between input and output arrays as well as the ones</dt>
+<dd><p class="first last">between internal allocations &#8212; necessary for nested computations.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ADDED: discrete harmonic transform <a class="reference internal" href="api/computations.html#reikna.dht.DHT" title="reikna.dht.DHT"><tt class="xref py py-class docutils literal"><span class="pre">reikna.dht.DHT</span></tt></a></dt>
+<dd><p class="first last">(calculated using Gauss-Hermite quadrature).</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2>0.2.0 (3 Mar 2013)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Added FFT computation (slightly optimized PyFFT version + Bluestein&#8217;s algorithm for non-power-of-2 FFT sizes)</li>
 <li>Added Python 3 compatibility</li>
@@ -94,7 +122,8 @@
   <ul>
 <li><a class="reference internal" href="#">Release history</a><ul>
 <li><a class="reference internal" href="#current-development-version">0.3.0 (current development version)</a></li>
-<li><a class="reference internal" href="#mar-2013">0.2.0 (3 Mar 2013)</a></li>
+<li><a class="reference internal" href="#mar-2013">0.2.1 (8 Mar 2013)</a></li>
+<li><a class="reference internal" href="#id1">0.2.0 (3 Mar 2013)</a></li>
 <li><a class="reference internal" href="#sep-2012">0.1.0 (12 Sep 2012)</a></li>
 <li><a class="reference internal" href="#jul-2012">0.0.1 (22 Jul 2012)</a></li>
 </ul>
@@ -138,7 +167,7 @@
         <li class="right" >
           <a href="api/transformations.html" title="Transformations"
              >previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.0+dev.5cbb8e8 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.0+dev.61e7260 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
