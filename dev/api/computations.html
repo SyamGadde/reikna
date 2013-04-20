@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Computations &mdash; reikna 0.3.0+dev.61e7260 documentation</title>
+    <title>Computations &mdash; reikna 0.2.3+dev.5eb0057 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.0+dev.61e7260',
+        VERSION:     '0.2.3+dev.5eb0057',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.0+dev.61e7260 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.2.3+dev.5eb0057 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Transformations" href="transformations.html" />
     <link rel="prev" title="Core classes" href="core.html" /> 
@@ -47,7 +45,7 @@
         <li class="right" >
           <a href="core.html" title="Core classes"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.0+dev.61e7260 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.2.3+dev.5eb0057 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -57,8 +55,72 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-reikna.matrixmul">
-<span id="computations"></span><h1>Computations<a class="headerlink" href="#module-reikna.matrixmul" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="computations">
+<h1>Computations<a class="headerlink" href="#computations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-reikna.elementwise">
+<span id="elementwise-computations"></span><h2>Elementwise computations<a class="headerlink" href="#module-reikna.elementwise" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="reikna.elementwise.Elementwise">
+<em class="property">class </em><tt class="descclassname">reikna.elementwise.</tt><tt class="descname">Elementwise</tt><big>(</big><em>ctx</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.elementwise.Elementwise" title="Permalink to this definition">¶</a></dt>
+<dd><p>A general class for elementwise computations.</p>
+<dl class="method">
+<dt id="reikna.elementwise.Elementwise.set_argnames">
+<tt class="descname">set_argnames</tt><big>(</big><em>outputs</em>, <em>inputs</em>, <em>scalars</em><big>)</big><a class="headerlink" href="#reikna.elementwise.Elementwise.set_argnames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set argument names for the computation.
+This method should be called first after the creation of the
+<a class="reference internal" href="#reikna.elementwise.Elementwise" title="reikna.elementwise.Elementwise"><tt class="xref py py-class docutils literal"><span class="pre">Elementwise</span></tt></a> object.
+Returns <tt class="docutils literal"><span class="pre">self</span></tt>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="reikna.elementwise.Elementwise.prepare_for">
+<tt class="descname">prepare_for</tt><big>(</big><em>*args</em>, <em>code=EMPTY</em><big>)</big><a class="headerlink" href="#reikna.elementwise.Elementwise.prepare_for" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>args</strong> &#8211; arrays and scalars, according to the lists passed to <a class="reference internal" href="#reikna.elementwise.Elementwise.set_argnames" title="reikna.elementwise.Elementwise.set_argnames"><tt class="xref py py-meth docutils literal"><span class="pre">set_argnames()</span></tt></a>.</li>
+<li><strong>code</strong> &#8211; a function that takes argument mocks as parameters and returns
+a snippet with the kernel body.</li>
+<li><strong>dependencies</strong> &#8211; optional, a list of pairs of argument names
+whose arrays depend on each other.
+By default, only output arguments are dependent on each other.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="reikna.elementwise.specialize_elementwise">
+<tt class="descclassname">reikna.elementwise.</tt><tt class="descname">specialize_elementwise</tt><big>(</big><em>outputs</em>, <em>inputs</em>, <em>scalars</em>, <em>code</em>, <em>dependencies=None</em><big>)</big><a class="headerlink" href="#reikna.elementwise.specialize_elementwise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an Elementwise class specialized for given argument names and code.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>outputs</strong> &#8211; a string or a list of strings with output argument names.</li>
+<li><strong>inputs</strong> &#8211; a string or a list of strings with input argument names.</li>
+<li><strong>scalars</strong> &#8211; <tt class="docutils literal"><span class="pre">None</span></tt>, a string, or a list of strings with scalar argument names.</li>
+<li><strong>code</strong> &#8211; see the <tt class="docutils literal"><span class="pre">code</span></tt> argument of Elementwise&#8217;s
+<a class="reference internal" href="#reikna.elementwise.Elementwise.prepare_for" title="reikna.elementwise.Elementwise.prepare_for"><tt class="xref py py-meth docutils literal"><span class="pre">prepare_for()</span></tt></a>.</li>
+<li><strong>dependencies</strong> &#8211; see the <tt class="docutils literal"><span class="pre">dependencies</span></tt> argument of Elementwise&#8217;s
+<a class="reference internal" href="#reikna.elementwise.Elementwise.prepare_for" title="reikna.elementwise.Elementwise.prepare_for"><tt class="xref py py-meth docutils literal"><span class="pre">prepare_for()</span></tt></a>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-reikna.matrixmul">
+<span id="linear-algebra"></span><h2>Linear algebra<a class="headerlink" href="#module-reikna.matrixmul" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="reikna.matrixmul.MatrixMul">
 <em class="property">class </em><tt class="descclassname">reikna.matrixmul.</tt><tt class="descname">MatrixMul</tt><big>(</big><em>ctx</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.matrixmul.MatrixMul" title="Permalink to this definition">¶</a></dt>
@@ -84,58 +146,6 @@ For batching to work, the products of remaining dimensions should be equal
 </table>
 </dd></dl>
 
-</dd></dl>
-
-<span class="target" id="module-reikna.elementwise"></span><dl class="class">
-<dt id="reikna.elementwise.Elementwise">
-<em class="property">class </em><tt class="descclassname">reikna.elementwise.</tt><tt class="descname">Elementwise</tt><big>(</big><em>ctx</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.elementwise.Elementwise" title="Permalink to this definition">¶</a></dt>
-<dd><p>A general class for elementwise computations.</p>
-<dl class="method">
-<dt id="reikna.elementwise.Elementwise.set_argnames">
-<tt class="descname">set_argnames</tt><big>(</big><em>outputs</em>, <em>inputs</em>, <em>scalars</em><big>)</big><a class="headerlink" href="#reikna.elementwise.Elementwise.set_argnames" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set argument names for the computation.
-This method should be called first after the creation of the
-<a class="reference internal" href="#reikna.elementwise.Elementwise" title="reikna.elementwise.Elementwise"><tt class="xref py py-class docutils literal"><span class="pre">Elementwise</span></tt></a> object.
-Returns <tt class="docutils literal"><span class="pre">self</span></tt>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="reikna.elementwise.Elementwise.prepare_for">
-<tt class="descname">prepare_for</tt><big>(</big><em>*args</em>, <em>code=EMPTY</em><big>)</big><a class="headerlink" href="#reikna.elementwise.Elementwise.prepare_for" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>args</strong> &#8211; arrays and scalars, according to the lists passed to <a class="reference internal" href="#reikna.elementwise.Elementwise.set_argnames" title="reikna.elementwise.Elementwise.set_argnames"><tt class="xref py py-meth docutils literal"><span class="pre">set_argnames()</span></tt></a>.</li>
-<li><strong>code</strong> &#8211; kernel code.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="function">
-<dt id="reikna.elementwise.specialize_elementwise">
-<tt class="descclassname">reikna.elementwise.</tt><tt class="descname">specialize_elementwise</tt><big>(</big><em>outputs</em>, <em>inputs</em>, <em>scalars</em>, <em>code</em><big>)</big><a class="headerlink" href="#reikna.elementwise.specialize_elementwise" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an Elementwise class specialized for given argument names and code.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>outputs</strong> &#8211; a string or a list of strings with output argument names.</li>
-<li><strong>inputs</strong> &#8211; a string or a list of strings with input argument names.</li>
-<li><strong>scalars</strong> &#8211; <tt class="docutils literal"><span class="pre">None</span></tt>, a string, or a list of strings with scalar argument names.</li>
-<li><strong>code</strong> &#8211; <tt class="docutils literal"><span class="pre">dict(kernel,</span> <span class="pre">functions)</span></tt> with kernel code.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <span class="target" id="module-reikna.transpose"></span><dl class="class">
@@ -164,7 +174,10 @@ If <tt class="docutils literal"><span class="pre">None</span></tt>, then axes wi
 
 </dd></dl>
 
-<span class="target" id="module-reikna.reduce"></span><dl class="class">
+</div>
+<div class="section" id="module-reikna.reduce">
+<span id="algorithms"></span><h2>Algorithms<a class="headerlink" href="#module-reikna.reduce" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
 <dt id="reikna.reduce.Reduce">
 <em class="property">class </em><tt class="descclassname">reikna.reduce.</tt><tt class="descname">Reduce</tt><big>(</big><em>ctx</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.reduce.Reduce" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduces the array over given axis using given binary operation.</p>
@@ -180,7 +193,8 @@ If <tt class="docutils literal"><span class="pre">None</span></tt>, then axes wi
 <li><strong>input</strong> &#8211; input buffer</li>
 <li><strong>axis</strong> &#8211; axis over which reduction is performed.
 If <tt class="docutils literal"><span class="pre">None</span></tt>, the whole array will be reduced to a single element.</li>
-<li><strong>code</strong> &#8211; dictionary {kernel, functions} with the reduction code.</li>
+<li><strong>predicate</strong> &#8211; a lambda, taking positional argument mocks and returning a snippet
+which takes names of two variables to reduce and <tt class="docutils literal"><span class="pre">return</span></tt>&#8216;s the result.</li>
 </ul>
 </td>
 </tr>
@@ -190,6 +204,9 @@ If <tt class="docutils literal"><span class="pre">None</span></tt>, the whole ar
 
 </dd></dl>
 
+</div>
+<div class="section" id="fast-fourier-transform">
+<h2>Fast Fourier transform<a class="headerlink" href="#fast-fourier-transform" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="reikna.fft.FFT">
 <em class="property">class </em><tt class="descclassname">reikna.fft.</tt><tt class="descname">FFT</tt><big>(</big><em>ctx</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.fft.FFT" title="Permalink to this definition">¶</a></dt>
@@ -225,6 +242,9 @@ which effectively halves the performance.</p>
 </div>
 </dd></dl>
 
+</div>
+<div class="section" id="discrete-harmonic-transform">
+<h2>Discrete harmonic transform<a class="headerlink" href="#discrete-harmonic-transform" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="reikna.dht.get_spatial_grid">
 <tt class="descclassname">reikna.dht.</tt><tt class="descname">get_spatial_grid</tt><big>(</big><em>modes</em>, <em>order</em>, <em>add_points=0</em><big>)</big><a class="headerlink" href="#reikna.dht.get_spatial_grid" title="Permalink to this definition">¶</a></dt>
@@ -289,6 +309,120 @@ is chosen so that the transformation <tt class="docutils literal"><span class="p
 </dd></dl>
 
 </div>
+<div class="section" id="module-reikna.cbrng">
+<span id="counter-based-random-number-generators"></span><h2>Counter-based random number generators<a class="headerlink" href="#module-reikna.cbrng" title="Permalink to this headline">¶</a></h2>
+<p>This module is based on the paper by Salmon et al.,
+<a class="reference external" href="http://dx.doi.org/doi:10.1145/2063384.2063405">P. Int. C. High. Perform. 16 (2011)</a>.
+and the source code of <a class="reference external" href="http://www.thesalmons.org/john/random123/">Random123 library</a>.</p>
+<p>A counter-based random-number generator (CBRNG) is a parametrized function <span class="math">\(f_k(c)\)</span>,
+where <span class="math">\(k\)</span> is the key, <span class="math">\(c\)</span> is the counter, and the function <span class="math">\(f_k\)</span> defines
+a bijection in the set of integer numbers.
+Being applied to successive counters, the function produces a sequence of pseudo-random numbers.
+The key is an analogue of the seed of stateful RNGs;
+if the CBRNG is used to generate random num bers in parallel threads, the key is a combination
+of a seed and a unique thread number.</p>
+<p>There are two types of generators available, <tt class="docutils literal"><span class="pre">threefry</span></tt> (uses large number of simple functions),
+and <tt class="docutils literal"><span class="pre">philox</span></tt> (uses smaller number of more complicated functions).
+The latter one is generally faster on GPUs; see the paper above for detailed comparisons.
+These generators can be further specialized to use <tt class="docutils literal"><span class="pre">words=2</span></tt> or <tt class="docutils literal"><span class="pre">words=4</span></tt>
+<tt class="docutils literal"><span class="pre">bitness=32</span></tt>-bit or <tt class="docutils literal"><span class="pre">bitness=64</span></tt>-bit counters.
+Obviously, the period of the generator equals to the cardinality of the set of possible counters.
+For example, if the counter consits of 4 64-bit numbers,
+then the period of the generator is <span class="math">\(2^{256}\)</span>.
+As for the key size, in case of <tt class="docutils literal"><span class="pre">threefry</span></tt> the key has the same size as the counter,
+and for <tt class="docutils literal"><span class="pre">philox</span></tt> the key is half its size.</p>
+<p>This implementation sets one of the words of the key (except for <tt class="docutils literal"><span class="pre">philox-2x64</span></tt>,
+where 32 bit of the only word in the key are used), the rest are the same for all threads
+and are derived from the provided <tt class="docutils literal"><span class="pre">seed</span></tt>.
+This limits the maximum number of number-generating threads (<tt class="docutils literal"><span class="pre">size</span></tt>).
+<tt class="docutils literal"><span class="pre">philox-2x32</span></tt> has a 32-bit key and therefore cannot be used in <a class="reference internal" href="#reikna.cbrng.CBRNG" title="reikna.cbrng.CBRNG"><tt class="xref py py-class docutils literal"><span class="pre">CBRNG</span></tt></a>
+(although it can be used separately as a part of larger kernel).</p>
+<p>The <a class="reference internal" href="#reikna.cbrng.CBRNG" title="reikna.cbrng.CBRNG"><tt class="xref py py-class docutils literal"><span class="pre">CBRNG</span></tt></a> class itself is stateless, same as other computations in Reikna,
+so you have to manage the generator state yourself.
+The state is created by <a class="reference internal" href="#reikna.cbrng.create_counters" title="reikna.cbrng.create_counters"><tt class="xref py py-func docutils literal"><span class="pre">create_counters()</span></tt></a>
+and contains either a single counter if the target distribution uses the fixed number
+of generated integers, or <tt class="docutils literal"><span class="pre">size</span></tt> counters otherwise.
+This state is then passed to, and updated by a <a class="reference internal" href="#reikna.cbrng.CBRNG" title="reikna.cbrng.CBRNG"><tt class="xref py py-class docutils literal"><span class="pre">CBRNG</span></tt></a> object.</p>
+<p>The following values can be passed as <tt class="docutils literal"><span class="pre">distribution</span></tt> parameter:</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">uniform_integer</span></tt>, parameters: <tt class="docutils literal"><span class="pre">min=0</span></tt>, <tt class="docutils literal"><span class="pre">max=2**bitness-1</span></tt>,
+dtypes: <tt class="docutils literal"><span class="pre">(u)int(32/64)</span></tt>.
+Generates uniformly distributed integer numbers in the interval <tt class="docutils literal"><span class="pre">[min,</span> <span class="pre">max)</span></tt>.
+If the size of the interval is a power of 2, a fixed number of counters is used in each thread.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">uniform_float</span></tt>, parameters:  <tt class="docutils literal"><span class="pre">min=0</span></tt>, <tt class="docutils literal"><span class="pre">max=1</span></tt>, dtypes: <tt class="docutils literal"><span class="pre">float(32/64)</span></tt>.
+Generates uniformly distributed floating-points numbers in the interval <tt class="docutils literal"><span class="pre">[min,</span> <span class="pre">max)</span></tt>.
+A fixed number of counters is used in each thread.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">normal_bm</span></tt>, parameters: <tt class="docutils literal"><span class="pre">mean=0</span></tt>, <tt class="docutils literal"><span class="pre">std=1</span></tt>,  dtypes: <tt class="docutils literal"><span class="pre">float(32/64)</span></tt>.
+Generates normally distributed random numbers with the mean <tt class="docutils literal"><span class="pre">mean</span></tt> and
+the standard deviation <tt class="docutils literal"><span class="pre">std</span></tt> using Box-Muller transform.
+A fixed number of counters is used in each thread.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">gamma</span></tt>, parameters: <tt class="docutils literal"><span class="pre">shape=1</span></tt>, <tt class="docutils literal"><span class="pre">scale=1</span></tt>,  dtypes: <tt class="docutils literal"><span class="pre">float(32/64)</span></tt>.
+Generates random numbers from the gamma distribution</p>
+<div class="math">
+\[P(x) = x^{k-1} \frac{e^{-x/\theta}}{\theta^k \Gamma(k)},\]</div>
+<p>where <span class="math">\(k\)</span> is <tt class="docutils literal"><span class="pre">shape</span></tt>, and <span class="math">\(\theta\)</span> is <tt class="docutils literal"><span class="pre">scale</span></tt>.</p>
+</li>
+</ul>
+<dl class="function">
+<dt id="reikna.cbrng.create_counters">
+<tt class="descclassname">reikna.cbrng.</tt><tt class="descname">create_counters</tt><big>(</big><em>ctx</em>, <em>size</em>, <em>rng</em>, <em>distribution</em>, <em>rng_params</em><big>)</big><a class="headerlink" href="#reikna.cbrng.create_counters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a counter array on a device for use in <a class="reference internal" href="#reikna.cbrng.CBRNG" title="reikna.cbrng.CBRNG"><tt class="xref py py-class docutils literal"><span class="pre">CBRNG</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ctx</strong> &#8211; a Context object.</li>
+<li><strong>size</strong> &#8211; a shape of the target random numbers array.</li>
+<li><strong>rng</strong> &#8211; random number generator name.</li>
+<li><strong>distribution</strong> &#8211; random distribution name.</li>
+<li><strong>rng_params</strong> &#8211; random number generator parameters.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="reikna.cbrng.CBRNG">
+<em class="property">class </em><tt class="descclassname">reikna.cbrng.</tt><tt class="descname">CBRNG</tt><big>(</big><em>ctx</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.cbrng.CBRNG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Counter-based pseudo-random number generator class.</p>
+<dl class="method">
+<dt id="reikna.cbrng.CBRNG.prepare_for">
+<tt class="descname">prepare_for</tt><big>(</big><em>new_counters</em>, <em>randoms</em>, <em>old_counters</em>, <em>seed=None</em>, <em>rng='philox'</em>, <em>rng_params=None</em>, <em>distribution='uniform_float'</em>, <em>distribution_params=None</em><big>)</big><a class="headerlink" href="#reikna.cbrng.CBRNG.prepare_for" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>new_counters</strong> &#8211; array of updated counters.</li>
+<li><strong>randoms</strong> &#8211; array with generated random numbers.</li>
+<li><strong>old_counters</strong> &#8211; array of initial counters,
+generated by <a class="reference internal" href="#reikna.cbrng.create_counters" title="reikna.cbrng.create_counters"><tt class="xref py py-func docutils literal"><span class="pre">create_counters()</span></tt></a>.</li>
+<li><strong>seed</strong> &#8211; <tt class="docutils literal"><span class="pre">None</span></tt> for random seed, or an integer.</li>
+<li><strong>rng</strong> &#8211; <tt class="docutils literal"><span class="pre">&quot;philox&quot;</span></tt> or <tt class="docutils literal"><span class="pre">&quot;threefry&quot;</span></tt>.</li>
+<li><strong>rng_params</strong> &#8211; a dictionary with <tt class="docutils literal"><span class="pre">bitness</span></tt> (32 or 64,
+corresponds to the size of generated random integers),
+<tt class="docutils literal"><span class="pre">words</span></tt> (2 or 4, number of integers generated in one go),
+and <tt class="docutils literal"><span class="pre">rounds</span></tt> (the more rounds, the better randomness is achieved;
+default values are big enough to qualify as PRNG).</li>
+<li><strong>distribution</strong> &#8211; name of the distribution; see the list above.</li>
+<li><strong>distribution_params</strong> &#8211; a dictionary with distribution-specific parameters.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
 
 
           </div>
@@ -296,6 +430,19 @@ is chosen so that the transformation <tt class="docutils literal"><span class="p
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Computations</a><ul>
+<li><a class="reference internal" href="#module-reikna.elementwise">Elementwise computations</a></li>
+<li><a class="reference internal" href="#module-reikna.matrixmul">Linear algebra</a></li>
+<li><a class="reference internal" href="#module-reikna.reduce">Algorithms</a></li>
+<li><a class="reference internal" href="#fast-fourier-transform">Fast Fourier transform</a></li>
+<li><a class="reference internal" href="#discrete-harmonic-transform">Discrete harmonic transform</a></li>
+<li><a class="reference internal" href="#module-reikna.cbrng">Counter-based random number generators</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="core.html"
                         title="previous chapter">Core classes</a></p>
@@ -339,13 +486,13 @@ is chosen so that the transformation <tt class="docutils literal"><span class="p
         <li class="right" >
           <a href="core.html" title="Core classes"
              >previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.0+dev.61e7260 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.2.3+dev.5eb0057 documentation</a> &raquo;</li>
           <li><a href="index.html" >API reference</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2012-2013, Bogdan Opanchuk.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
 </html>

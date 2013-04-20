@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>CLUDA layer &mdash; reikna 0.3.0+dev.61e7260 documentation</title>
+    <title>CLUDA layer &mdash; reikna 0.2.3+dev.5eb0057 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -16,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.0+dev.61e7260',
+        VERSION:     '0.2.3+dev.5eb0057',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.0+dev.61e7260 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.2.3+dev.5eb0057 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Core classes" href="core.html" />
     <link rel="prev" title="Helpers" href="helpers.html" /> 
@@ -47,7 +45,7 @@
         <li class="right" >
           <a href="helpers.html" title="Helpers"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.0+dev.61e7260 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.2.3+dev.5eb0057 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -326,7 +324,7 @@ to be used while rendering the template.</li>
 
 <dl class="method">
 <dt id="reikna.cluda.api.Context.compile_static">
-<tt class="descname">compile_static</tt><big>(</big><em>template_src</em>, <em>name</em>, <em>global_size</em>, <em>local_size=None</em>, <em>local_mem=0</em>, <em>render_kwds=None</em><big>)</big><a class="headerlink" href="#reikna.cluda.api.Context.compile_static" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">compile_static</tt><big>(</big><em>template_src</em>, <em>name</em>, <em>global_size</em>, <em>local_size=None</em>, <em>local_mem=0</em>, <em>render_args=None</em>, <em>render_kwds=None</em><big>)</big><a class="headerlink" href="#reikna.cluda.api.Context.compile_static" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a kernel object with fixed call sizes,
 which allows to overcome some backend limitations.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -334,12 +332,14 @@ which allows to overcome some backend limitations.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>template_src</strong> &#8211; Mako template source to render</li>
+<li><strong>template_src</strong> &#8211; Mako template or a template source to render</li>
 <li><strong>name</strong> &#8211; name of the kernel function</li>
 <li><strong>global_size</strong> &#8211; global size to be used</li>
 <li><strong>local_size</strong> &#8211; local size to be used.
 If <tt class="docutils literal"><span class="pre">None</span></tt>, some suitable one will be picked.</li>
 <li><strong>local_mem</strong> &#8211; (<strong>CUDA API only</strong>) amount of dynamically allocated local memory to be used (in bytes).</li>
+<li><strong>render_args</strong> &#8211; a list of parameters to be passed as positional arguments
+to the template.</li>
 <li><strong>render_kwds</strong> &#8211; a dictionary with additional parameters
 to be used while rendering the template.</li>
 </ul>
@@ -584,55 +584,70 @@ All virtual allocations start from the beginning of real allocations.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="kernel-toolbox">
-<span id="cluda-kernel-toolbox"></span><h2>Kernel toolbox<a class="headerlink" href="#kernel-toolbox" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-reikna.cluda.functions">
+<span id="function-modules"></span><span id="cluda-kernel-toolbox"></span><h2>Function modules<a class="headerlink" href="#module-reikna.cluda.functions" title="Permalink to this headline">¶</a></h2>
+<p>This module contains <tt class="xref py py-class docutils literal"><span class="pre">reikna.cluda.kernel.Module</span></tt> factories
+which are used to compensate for the lack of complex number operations in OpenCL,
+and the lack of C++ synthax which would allow one to write them.</p>
+<dl class="function">
+<dt id="reikna.cluda.functions.cast">
+<tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">cast</tt><big>(</big><em>out_dtype</em>, <em>in_dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.cast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <tt class="xref py py-class docutils literal"><span class="pre">reikna.cluda.kernel.Module</span></tt>
+that casts values of <tt class="docutils literal"><span class="pre">in_dtype</span></tt> to <tt class="docutils literal"><span class="pre">out_dtype</span></tt>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="reikna.cluda.functions.conj">
+<tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">conj</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.conj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <tt class="xref py py-class docutils literal"><span class="pre">reikna.cluda.kernel.Module</span></tt>
+that conjugates the value of type <tt class="docutils literal"><span class="pre">dtype</span></tt> (must be a complex data type).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="reikna.cluda.functions.div">
+<tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">div</tt><big>(</big><em>in_dtype1</em>, <em>in_dtype2</em>, <em>out_dtype=None</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.div" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <tt class="xref py py-class docutils literal"><span class="pre">reikna.cluda.kernel.Module</span></tt>
+that divides values of <tt class="docutils literal"><span class="pre">in_dtype1</span></tt> and <tt class="docutils literal"><span class="pre">in_dtype2</span></tt>.
+If <tt class="docutils literal"><span class="pre">out_dtype</span></tt> is given, it will be set as a return type for this function.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="reikna.cluda.functions.exp">
+<tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">exp</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.exp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <tt class="xref py py-class docutils literal"><span class="pre">reikna.cluda.kernel.Module</span></tt>
+that exponentiates the value of type <tt class="docutils literal"><span class="pre">dtype</span></tt>
+(must be a real or complex data type).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="reikna.cluda.functions.mul">
+<tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">mul</tt><big>(</big><em>*in_dtypes</em>, <em>out_dtype=None</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.mul" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <tt class="xref py py-class docutils literal"><span class="pre">reikna.cluda.kernel.Module</span></tt>
+that multiplies values of types <tt class="docutils literal"><span class="pre">in_dtypes</span></tt>.
+If <tt class="docutils literal"><span class="pre">out_dtype</span></tt> is given, it will be set as a return type for this function.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="reikna.cluda.functions.norm">
+<tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">norm</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.norm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <tt class="xref py py-class docutils literal"><span class="pre">reikna.cluda.kernel.Module</span></tt>
+that returns the norm of the value of type <tt class="docutils literal"><span class="pre">dtype</span></tt>
+(product by the complex conjugate if the value is complex, square otherwise).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="reikna.cluda.functions.polar">
+<tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">polar</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.polar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <tt class="xref py py-class docutils literal"><span class="pre">reikna.cluda.kernel.Module</span></tt>
+that calculates <tt class="docutils literal"><span class="pre">rho</span> <span class="pre">*</span> <span class="pre">exp(i</span> <span class="pre">*</span> <span class="pre">theta)</span></tt>
+for values <tt class="docutils literal"><span class="pre">rho,</span> <span class="pre">theta</span></tt> of type <tt class="docutils literal"><span class="pre">dtype</span></tt> (must be a real data type).</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-reikna.cluda.kernel">
+<span id="kernel-toolbox"></span><h2>Kernel toolbox<a class="headerlink" href="#module-reikna.cluda.kernel" title="Permalink to this headline">¶</a></h2>
 <p>The stuff available for the kernel passed for compilation consists of two parts.</p>
-<p>First, there are several objects available at the template rendering stage, namely <tt class="docutils literal"><span class="pre">numpy</span></tt>, <a class="reference internal" href="#module-reikna.cluda.dtypes" title="reikna.cluda.dtypes"><tt class="xref py py-mod docutils literal"><span class="pre">reikna.cluda.dtypes</span></tt></a> (as <tt class="docutils literal"><span class="pre">dtypes</span></tt>) and a <tt class="xref py py-class docutils literal"><span class="pre">FuncCollector</span></tt> instance named <tt class="docutils literal"><span class="pre">func</span></tt>, which is used to compensate for the lack of complex number operations in OpenCL, and the lack of C++ synthax which would allow one to write them.
-Its methods can be treated as if they return the name of the function necessary to operate on given dtypes.
-Available methods are:</p>
-<span class="target" id="module-reikna.cluda.kernel"></span><dl class="class">
-<dt id="reikna.cluda.kernel.FuncCollector">
-<em class="property">class </em><tt class="descclassname">reikna.cluda.kernel.</tt><tt class="descname">FuncCollector</tt><a class="headerlink" href="#reikna.cluda.kernel.FuncCollector" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="reikna.cluda.kernel.FuncCollector.mul">
-<tt class="descname">mul</tt><big>(</big><em>dtype1</em>, <em>dtype2</em>, <em>out=None</em><big>)</big><a class="headerlink" href="#reikna.cluda.kernel.FuncCollector.mul" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the name of the function that multiplies values of types <tt class="docutils literal"><span class="pre">dtype1</span></tt> and <tt class="docutils literal"><span class="pre">dtype2</span></tt>.
-If <tt class="docutils literal"><span class="pre">out</span></tt> is given, it will be set as a return type for this function.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="reikna.cluda.kernel.FuncCollector.div">
-<tt class="descname">div</tt><big>(</big><em>dtype1</em>, <em>dtype2</em>, <em>out=None</em><big>)</big><a class="headerlink" href="#reikna.cluda.kernel.FuncCollector.div" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the name of the function that divides values of <tt class="docutils literal"><span class="pre">dtype1</span></tt> and <tt class="docutils literal"><span class="pre">dtype2</span></tt>.
-If <tt class="docutils literal"><span class="pre">out</span></tt> is given, it will be set as a return type for this function.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="reikna.cluda.kernel.FuncCollector.cast">
-<tt class="descname">cast</tt><big>(</big><em>out_dtype</em>, <em>in_dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.kernel.FuncCollector.cast" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the name of the function that casts values of <tt class="docutils literal"><span class="pre">in_dtype</span></tt> to <tt class="docutils literal"><span class="pre">out_dtype</span></tt>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="reikna.cluda.kernel.FuncCollector.conj">
-<tt class="descname">conj</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.kernel.FuncCollector.conj" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the name of the function that conjugates the values of type <tt class="docutils literal"><span class="pre">dtype</span></tt> (must be a complex data type).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="reikna.cluda.kernel.FuncCollector.exp">
-<tt class="descname">exp</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.kernel.FuncCollector.exp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the name of the function that exponentiates the value of type <tt class="docutils literal"><span class="pre">dtype</span></tt> (must be a real or complex data type).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="reikna.cluda.kernel.FuncCollector.polar">
-<tt class="descname">polar</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.kernel.FuncCollector.polar" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the name of the function that calculates <tt class="docutils literal"><span class="pre">rho</span> <span class="pre">*</span> <span class="pre">exp(i</span> <span class="pre">*</span> <span class="pre">theta)</span></tt> for values <tt class="docutils literal"><span class="pre">rho,</span> <span class="pre">theta</span></tt> of type <tt class="docutils literal"><span class="pre">dtype</span></tt> (must be a real data type).</p>
-</dd></dl>
-
-</dd></dl>
-
+<p>First, there are several objects available at the template rendering stage, namely <tt class="docutils literal"><span class="pre">numpy</span></tt>, <a class="reference internal" href="#module-reikna.cluda.dtypes" title="reikna.cluda.dtypes"><tt class="xref py py-mod docutils literal"><span class="pre">reikna.cluda.dtypes</span></tt></a> (as <tt class="docutils literal"><span class="pre">dtypes</span></tt>), and <a class="reference internal" href="helpers.html#module-reikna.helpers" title="reikna.helpers"><tt class="xref py py-mod docutils literal"><span class="pre">reikna.helpers</span></tt></a> (as <tt class="docutils literal"><span class="pre">helpers</span></tt>).</p>
 <p>Second, there is a set of macros attached to any kernel depending on the API it is being compiled for:</p>
 <dl class="macro">
 <dt id="CUDA">
@@ -896,7 +911,8 @@ which takes into account types supported by GPUs.</p>
 <li><a class="reference internal" href="#root-level-interface">Root level interface</a></li>
 <li><a class="reference internal" href="#api-module">API module</a></li>
 <li><a class="reference internal" href="#temporary-arrays">Temporary Arrays</a></li>
-<li><a class="reference internal" href="#kernel-toolbox">Kernel toolbox</a></li>
+<li><a class="reference internal" href="#module-reikna.cluda.functions">Function modules</a></li>
+<li><a class="reference internal" href="#module-reikna.cluda.kernel">Kernel toolbox</a></li>
 <li><a class="reference internal" href="#datatype-tools">Datatype tools</a></li>
 </ul>
 </li>
@@ -945,13 +961,13 @@ which takes into account types supported by GPUs.</p>
         <li class="right" >
           <a href="helpers.html" title="Helpers"
              >previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.0+dev.61e7260 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.2.3+dev.5eb0057 documentation</a> &raquo;</li>
           <li><a href="index.html" >API reference</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2012-2013, Bogdan Opanchuk.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
 </html>

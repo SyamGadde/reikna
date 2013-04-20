@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: advanced topics &mdash; reikna 0.2.1 documentation</title>
+    <title>Tutorial: advanced topics &mdash; reikna 0.2.2 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '0.2.1',
+        URL_ROOT:    './',
+        VERSION:     '0.2.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,8 +24,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.2.1 documentation" href="index.html" />
-    <link rel="next" title="API reference" href="api/index.html" />
+    <link rel="top" title="reikna 0.2.2 documentation" href="index.html" />
+    <link rel="next" title="Tutorial: modules and snippets" href="tutorial-modules.html" />
     <link rel="prev" title="Tutorial: basics" href="tutorial-basic.html" /> 
   </head>
   <body>
@@ -41,12 +39,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="api/index.html" title="API reference"
+          <a href="tutorial-modules.html" title="Tutorial: modules and snippets"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="tutorial-basic.html" title="Tutorial: basics"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.2.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.2.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -75,28 +73,29 @@ For the purpose of this tutorial you only need to know several things about the 
 But you can create a custom one if you need to.
 Transformations are based on the class <a class="reference internal" href="api/core.html#reikna.core.Transformation" title="reikna.core.Transformation"><tt class="xref py py-class docutils literal"><span class="pre">Transformation</span></tt></a>.
 Its constructor has three major groups of parameters.</p>
-<p>First, <tt class="docutils literal"><span class="pre">outputs</span></tt>, <tt class="docutils literal"><span class="pre">inputs</span></tt> and <tt class="docutils literal"><span class="pre">scalars</span></tt> specify how many arguments of corresponding type the transformation take.</p>
+<p>First, <tt class="docutils literal"><span class="pre">outputs</span></tt>, <tt class="docutils literal"><span class="pre">inputs</span></tt> and <tt class="docutils literal"><span class="pre">scalars</span></tt> contain lists of names for corresponding transformation arguments.
+Alternatively, you may just pass integers; in that case the names will be generated to be <tt class="docutils literal"><span class="pre">i1</span></tt>, <tt class="docutils literal"><span class="pre">i2</span></tt>, ..., <tt class="docutils literal"><span class="pre">o1</span></tt>, <tt class="docutils literal"><span class="pre">o2</span></tt>, ..., <tt class="docutils literal"><span class="pre">s1</span></tt>, <tt class="docutils literal"><span class="pre">s2</span></tt>, ...</p>
 <p>Second, <tt class="docutils literal"><span class="pre">derive_o_from_is</span></tt> and <tt class="docutils literal"><span class="pre">derive_i_from_os</span></tt> options take functions that perform type derivation.
 This happens when <tt class="docutils literal"><span class="pre">prepare_for</span></tt> is called; first function will be used to propagate types from leaf inputs to base inputs, and the second one to propagate type from leaf outputs to base outputs.
 If the transformation has more than one output or more than one input, and, therefore, cannot be connected to the output or input argument, respectively, the corresponding function should not be supplied.
 On the other hand, if the function is not supplied, but is required, the fallback is the <a class="reference internal" href="api/cluda.html#reikna.cluda.dtypes.result_type" title="reikna.cluda.dtypes.result_type"><tt class="xref py py-func docutils literal"><span class="pre">result_type()</span></tt></a>.</p>
-<p>The format of required functions is the following (here <tt class="docutils literal"><span class="pre">iN</span></tt>, <tt class="docutils literal"><span class="pre">oN</span></tt> and <tt class="docutils literal"><span class="pre">pN</span></tt> are <tt class="xref py py-class docutils literal"><span class="pre">numpy.dtype</span></tt> objects):</p>
+<p>The format of required functions is the following (here <tt class="docutils literal"><span class="pre">iN</span></tt>, <tt class="docutils literal"><span class="pre">oN</span></tt> and <tt class="docutils literal"><span class="pre">sN</span></tt> are <tt class="xref py py-class docutils literal"><span class="pre">numpy.dtype</span></tt> objects):</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">derive_o_from_is(i1,</span> <span class="pre">...,</span> <span class="pre">p1,</span> <span class="pre">...)</span></tt>, returns the <tt class="xref py py-class docutils literal"><span class="pre">numpy.dtype</span></tt> for <tt class="docutils literal"><span class="pre">o1</span></tt>.</li>
-<li><tt class="docutils literal"><span class="pre">derive_i_from_os(o1,</span> <span class="pre">...,</span> <span class="pre">p1,</span> <span class="pre">...)</span></tt>, returns the <tt class="xref py py-class docutils literal"><span class="pre">numpy.dtype</span></tt> for <tt class="docutils literal"><span class="pre">i1</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">derive_o_from_is(i1,</span> <span class="pre">...,</span> <span class="pre">s1,</span> <span class="pre">...)</span></tt>, returns the <tt class="xref py py-class docutils literal"><span class="pre">numpy.dtype</span></tt> for <tt class="docutils literal"><span class="pre">o1</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">derive_i_from_os(o1,</span> <span class="pre">...,</span> <span class="pre">s1,</span> <span class="pre">...)</span></tt>, returns the <tt class="xref py py-class docutils literal"><span class="pre">numpy.dtype</span></tt> for <tt class="docutils literal"><span class="pre">i1</span></tt>.</li>
 </ul>
 <p>The last part of the constructor is a <tt class="docutils literal"><span class="pre">code</span></tt> parameter.
 It is a string with the Mako template which describes the transformation.
-Variables <tt class="docutils literal"><span class="pre">i1</span></tt>, ..., <tt class="docutils literal"><span class="pre">o1</span></tt>, ..., <tt class="docutils literal"><span class="pre">p1</span></tt>, ... are available in the template and help specify load and store actions for inputs, outputs and parameters, and also to obtain their data types.
+Variables <tt class="docutils literal"><span class="pre">i1</span></tt>, ..., <tt class="docutils literal"><span class="pre">o1</span></tt>, ..., <tt class="docutils literal"><span class="pre">s1</span></tt>, ... are available in the template and help specify load and store actions for inputs, outputs and parameters, and also to obtain their data types.
 Each of these variables has attributes <tt class="docutils literal"><span class="pre">dtype</span></tt> (contains the <tt class="xref py py-class docutils literal"><span class="pre">numpy.dtype</span></tt>), <tt class="docutils literal"><span class="pre">ctype</span></tt> (contains a string with corresponding C type) and either one of <tt class="docutils literal"><span class="pre">load</span></tt> (for inputs), <tt class="docutils literal"><span class="pre">store</span></tt> (for outputs) and <tt class="docutils literal"><span class="pre">__str__</span></tt> (for scalar parameters).
 <tt class="docutils literal"><span class="pre">${i1.load}</span></tt> can be used as a variable, and <tt class="docutils literal"><span class="pre">${o1.store}(val)</span></tt> as a function that takes one variable.
-Also the <tt class="docutils literal"><span class="pre">dtypes</span></tt> variable is available in the template, providing access <a class="reference internal" href="api/cluda.html#module-reikna.cluda.dtypes" title="reikna.cluda.dtypes"><tt class="xref py py-mod docutils literal"><span class="pre">dtypes</span></tt></a> module, and <tt class="docutils literal"><span class="pre">func</span></tt> is a module-like object containing generalizations of arithmetic functions (see <a class="reference internal" href="api/cluda.html#cluda-kernel-toolbox"><em>Kernel toolbox</em></a> for details).</p>
+Also the <tt class="docutils literal"><span class="pre">dtypes</span></tt> variable is available in the template, providing access <a class="reference internal" href="api/cluda.html#module-reikna.cluda.dtypes" title="reikna.cluda.dtypes"><tt class="xref py py-mod docutils literal"><span class="pre">dtypes</span></tt></a> module, and <tt class="docutils literal"><span class="pre">func</span></tt> is a module-like object containing generalizations of arithmetic functions (see <a class="reference internal" href="api/cluda.html#cluda-kernel-toolbox"><em>Function modules</em></a> for details).</p>
 <p>For example, for a scaling transformation with one input, one output and one parameter the code may look like:</p>
-<div class="highlight-python"><pre>${o1.store}(${func.mul(i1.dtype, p1.dtype, out=o1.dtype)}(${i1.load}, ${p1}));</pre>
+<div class="highlight-python"><pre>${o1.store}(${func.mul(i1.dtype, s1.dtype, out=o1.dtype)}(${i1.load}, ${s1}));</pre>
 </div>
 <p>There is a lot of stuff going on in this single line.
-First, notice that the input is loaded as <tt class="docutils literal"><span class="pre">${i1.load}</span></tt>, and the parameter as <tt class="docutils literal"><span class="pre">${p1}</span></tt>.
-Second, since any of the <tt class="docutils literal"><span class="pre">i1</span></tt> and <tt class="docutils literal"><span class="pre">p1</span></tt> can be complex, we had to use the generic multiplication template from the <tt class="docutils literal"><span class="pre">func</span></tt> quasi-module.
+First, notice that the input is loaded as <tt class="docutils literal"><span class="pre">${i1.load}</span></tt>, and the parameter as <tt class="docutils literal"><span class="pre">${s1}</span></tt>.
+Second, since any of the <tt class="docutils literal"><span class="pre">i1</span></tt> and <tt class="docutils literal"><span class="pre">s1</span></tt> can be complex, we had to use the generic multiplication template from the <tt class="docutils literal"><span class="pre">func</span></tt> quasi-module.
 The result is passed to the output by calling <tt class="docutils literal"><span class="pre">${o1.store}</span></tt>.
 If the transformation has several outputs, it will have several <tt class="docutils literal"><span class="pre">store</span></tt> statements.
 Since the <tt class="docutils literal"><span class="pre">code</span></tt> parameter will be inserted into a function, you can safely create temporary variables if you need to.</p>
@@ -174,14 +173,14 @@ It must return a filled <a class="reference internal" href="api/core.html#reikna
 <span class="sd">        &lt;/%def&gt;</span>
 <span class="sd">        &quot;&quot;&quot;</span><span class="p">)</span>
 
-    <span class="n">operations</span><span class="o">.</span><span class="n">add_kernel</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="s">&#39;testcomp&#39;</span><span class="p">,</span>
+    <span class="n">operations</span><span class="o">.</span><span class="n">add_kernel</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">get_def</span><span class="p">(</span><span class="s">&#39;testcomp&#39;</span><span class="p">),</span>
         <span class="p">[</span><span class="s">&#39;output&#39;</span><span class="p">,</span> <span class="s">&#39;input1&#39;</span><span class="p">,</span> <span class="s">&#39;input2&#39;</span><span class="p">,</span> <span class="s">&#39;param&#39;</span><span class="p">],</span>
         <span class="n">global_size</span><span class="o">=</span><span class="n">basis</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">operations</span>
 </pre></div>
 </div>
 <p>Every kernel call is based on the separate <tt class="docutils literal"><span class="pre">Mako</span></tt> template function.
-The template can be specified as a string using <a class="reference internal" href="api/helpers.html#reikna.helpers.template_from" title="reikna.helpers.template_from"><tt class="xref py py-func docutils literal"><span class="pre">template_from()</span></tt></a>, or loaded as a separate file.
+The template can be specified as a string using <a class="reference internal" href="api/helpers.html#reikna.helpers.template_func" title="reikna.helpers.template_func"><tt class="xref py py-func docutils literal"><span class="pre">template_func()</span></tt></a>, or loaded as a separate file.
 Usual pattern in this case is to call the template file same as the file where the computation class is defined (for example, <tt class="docutils literal"><span class="pre">testcomp.mako</span></tt> for <tt class="docutils literal"><span class="pre">testcomp.py</span></tt>), and store it in some variable on module load using <a class="reference internal" href="api/helpers.html#reikna.helpers.template_for" title="reikna.helpers.template_for"><tt class="xref py py-func docutils literal"><span class="pre">template_for()</span></tt></a> as <tt class="docutils literal"><span class="pre">TEMPLATE</span> <span class="pre">=</span> <span class="pre">template_for(__file__)</span></tt>.</p>
 <p>The template function should take the same number of positional arguments as the kernel; you can view <tt class="docutils literal"><span class="pre">&lt;%def</span> <span class="pre">...</span> <span class="pre">&gt;</span></tt> part as an actual kernel definition, but with the arguments being python objects containing variable metadata.
 Namely, every such object has attributes <tt class="docutils literal"><span class="pre">dtype</span></tt> and <tt class="docutils literal"><span class="pre">ctype</span></tt>, which contain <tt class="xref py py-class docutils literal"><span class="pre">numpy.dtype</span></tt> object and C type string for the corresponding argument.
@@ -216,8 +215,8 @@ Also, they must have <a class="reference internal" href="api/cluda.html#VIRTUAL_
   <p class="topless"><a href="tutorial-basic.html"
                         title="previous chapter">Tutorial: basics</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="api/index.html"
-                        title="next chapter">API reference</a></p>
+  <p class="topless"><a href="tutorial-modules.html"
+                        title="next chapter">Tutorial: modules and snippets</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/tutorial-advanced.txt"
@@ -250,17 +249,17 @@ Also, they must have <a class="reference internal" href="api/cluda.html#VIRTUAL_
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="api/index.html" title="API reference"
+          <a href="tutorial-modules.html" title="Tutorial: modules and snippets"
              >next</a> |</li>
         <li class="right" >
           <a href="tutorial-basic.html" title="Tutorial: basics"
              >previous</a> |</li>
-        <li><a href="index.html">reikna 0.2.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.2.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2012-2013, Bogdan Opanchuk.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
 </html>
