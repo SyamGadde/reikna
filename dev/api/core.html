@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Core classes &mdash; reikna 0.2.3+dev.5eb0057 documentation</title>
+    <title>Core classes &mdash; reikna 0.2.3+dev.54564e4 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2.3+dev.5eb0057',
+        VERSION:     '0.2.3+dev.54564e4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.2.3+dev.5eb0057 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.2.3+dev.54564e4 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Computations" href="computations.html" />
     <link rel="prev" title="CLUDA layer" href="cluda.html" /> 
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="cluda.html" title="CLUDA layer"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.2.3+dev.5eb0057 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.2.3+dev.54564e4 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -60,9 +60,9 @@
 <p>Computations and transformations are based on two classes, which provide the user-side interface of computation objects.</p>
 <dl class="class">
 <dt id="reikna.core.Computation">
-<em class="property">class </em><tt class="descclassname">reikna.core.</tt><tt class="descname">Computation</tt><big>(</big><em>ctx</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.core.Computation" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">reikna.core.</tt><tt class="descname">Computation</tt><big>(</big><em>thr</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.core.Computation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a computation class and performs basic initialization for the
-<a class="reference internal" href="cluda.html#reikna.cluda.api.Context" title="reikna.cluda.api.Context"><tt class="xref py py-class docutils literal"><span class="pre">Context</span></tt></a> object <tt class="docutils literal"><span class="pre">ctx</span></tt>.
+<a class="reference internal" href="cluda.html#reikna.cluda.api.Thread" title="reikna.cluda.api.Thread"><tt class="xref py py-class docutils literal"><span class="pre">Thread</span></tt></a> object <tt class="docutils literal"><span class="pre">thr</span></tt>.
 Note that the computation is unusable until <tt class="xref py py-func docutils literal"><span class="pre">prepare()</span></tt>
 or <tt class="xref py py-func docutils literal"><span class="pre">prepare_for()</span></tt> is called.
 If <tt class="docutils literal"><span class="pre">debug</span></tt> is <tt class="docutils literal"><span class="pre">True</span></tt>, a couple of additional checks will be performed in runtime
@@ -198,7 +198,7 @@ See <a class="reference internal" href="../tutorial-advanced.html#tutorial-advan
 
 <dl class="class">
 <dt id="reikna.core.operation.OperationRecorder">
-<em class="property">class </em><tt class="descclassname">reikna.core.operation.</tt><tt class="descname">OperationRecorder</tt><big>(</big><em>prefix</em>, <em>ctx</em>, <em>tr_tree</em>, <em>basis</em>, <em>base_values</em><big>)</big><a class="headerlink" href="#reikna.core.operation.OperationRecorder" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">reikna.core.operation.</tt><tt class="descname">OperationRecorder</tt><big>(</big><em>prefix</em>, <em>thr</em>, <em>tr_tree</em>, <em>basis</em>, <em>base_values</em><big>)</big><a class="headerlink" href="#reikna.core.operation.OperationRecorder" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="reikna.core.operation.OperationRecorder.add_allocation">
 <tt class="descname">add_allocation</tt><big>(</big><em>shape</em>, <em>dtype</em><big>)</big><a class="headerlink" href="#reikna.core.operation.OperationRecorder.add_allocation" title="Permalink to this definition">¶</a></dt>
@@ -324,7 +324,7 @@ If <tt class="docutils literal"><span class="pre">None</span></tt>, the local si
         <li class="right" >
           <a href="cluda.html" title="CLUDA layer"
              >previous</a> |</li>
-        <li><a href="../index.html">reikna 0.2.3+dev.5eb0057 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.2.3+dev.54564e4 documentation</a> &raquo;</li>
           <li><a href="index.html" >API reference</a> &raquo;</li> 
       </ul>
     </div>

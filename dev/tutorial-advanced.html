@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: advanced topics &mdash; reikna 0.2.3+dev.5eb0057 documentation</title>
+    <title>Tutorial: advanced topics &mdash; reikna 0.2.3+dev.54564e4 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.3+dev.5eb0057',
+        VERSION:     '0.2.3+dev.54564e4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.2.3+dev.5eb0057 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.2.3+dev.54564e4 documentation" href="index.html" />
     <link rel="next" title="Tutorial: modules and snippets" href="tutorial-modules.html" />
     <link rel="prev" title="Tutorial: basics" href="tutorial-basic.html" /> 
   </head>
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="tutorial-basic.html" title="Tutorial: basics"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.2.3+dev.5eb0057 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.2.3+dev.54564e4 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -89,7 +89,7 @@ It is a string with the Mako template which describes the transformation.
 Variables <tt class="docutils literal"><span class="pre">i1</span></tt>, ..., <tt class="docutils literal"><span class="pre">o1</span></tt>, ..., <tt class="docutils literal"><span class="pre">s1</span></tt>, ... are available in the template and help specify load and store actions for inputs, outputs and parameters, and also to obtain their data types.
 Each of these variables has attributes <tt class="docutils literal"><span class="pre">dtype</span></tt> (contains the <tt class="xref py py-class docutils literal"><span class="pre">numpy.dtype</span></tt>), <tt class="docutils literal"><span class="pre">ctype</span></tt> (contains a string with corresponding C type) and either one of <tt class="docutils literal"><span class="pre">load</span></tt> (for inputs), <tt class="docutils literal"><span class="pre">store</span></tt> (for outputs) and <tt class="docutils literal"><span class="pre">__str__</span></tt> (for scalar parameters).
 <tt class="docutils literal"><span class="pre">${i1.load}</span></tt> can be used as a variable, and <tt class="docutils literal"><span class="pre">${o1.store}(val)</span></tt> as a function that takes one variable.
-Also the <tt class="docutils literal"><span class="pre">dtypes</span></tt> variable is available in the template, providing access <a class="reference internal" href="api/cluda.html#module-reikna.cluda.dtypes" title="reikna.cluda.dtypes"><tt class="xref py py-mod docutils literal"><span class="pre">dtypes</span></tt></a> module, and <tt class="docutils literal"><span class="pre">func</span></tt> is a module-like object containing generalizations of arithmetic functions (see <a class="reference internal" href="api/cluda.html#cluda-kernel-toolbox"><em>Function modules</em></a> for details).</p>
+Also the <tt class="docutils literal"><span class="pre">dtypes</span></tt> variable is available in the template, providing access <a class="reference internal" href="api/cluda.html#module-reikna.cluda.dtypes" title="reikna.cluda.dtypes"><tt class="xref py py-mod docutils literal"><span class="pre">dtypes</span></tt></a> module, and <tt class="docutils literal"><span class="pre">func</span></tt> is a module-like object containing generalizations of arithmetic functions (see <a class="reference internal" href="api/cluda.html#cluda-kernel-toolbox"><em>Kernel toolbox</em></a> for details).</p>
 <p>For example, for a scaling transformation with one input, one output and one parameter the code may look like:</p>
 <div class="highlight-python"><pre>${o1.store}(${func.mul(i1.dtype, s1.dtype, out=o1.dtype)}(${i1.load}, ${s1}));</pre>
 </div>
@@ -188,7 +188,7 @@ Also, depending on whether the corresponding argument is an output array, an inp
 This will produce corresponding request to the global memory or kernel arguments.</p>
 <p>If you need additional device functions, they have to be specified between <tt class="docutils literal"><span class="pre">&lt;%def</span> <span class="pre">...</span> <span class="pre">&gt;</span></tt> and <tt class="docutils literal"><span class="pre">${kernel_definition}</span></tt> (the latter is where the actual kernel signature will be rendered).
 Obviously, these functions can still use <tt class="docutils literal"><span class="pre">dtype</span></tt> and <tt class="docutils literal"><span class="pre">ctype</span></tt> object properties, although <tt class="docutils literal"><span class="pre">store</span></tt> and <tt class="docutils literal"><span class="pre">load</span></tt> will lead to unpredictable results (since they are rendered as macros using main kernel arguments).</p>
-<p>Since kernel call parameters (<tt class="docutils literal"><span class="pre">global_size</span></tt> and <tt class="docutils literal"><span class="pre">local_size</span></tt>) are specified on creation, all kernel calls are rendered as CLUDA static kernels (see <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Context.compile_static" title="reikna.cluda.api.Context.compile_static"><tt class="xref py py-meth docutils literal"><span class="pre">compile_static()</span></tt></a>) and therefore can use all the corresponding macros and functions (like <a class="reference internal" href="api/cluda.html#virtual_global_flat_id" title="virtual_global_flat_id"><tt class="xref c c-func docutils literal"><span class="pre">virtual_global_flat_id()</span></tt></a> in our kernel).
+<p>Since kernel call parameters (<tt class="docutils literal"><span class="pre">global_size</span></tt> and <tt class="docutils literal"><span class="pre">local_size</span></tt>) are specified on creation, all kernel calls are rendered as CLUDA static kernels (see <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread.compile_static" title="reikna.cluda.api.Thread.compile_static"><tt class="xref py py-meth docutils literal"><span class="pre">compile_static()</span></tt></a>) and therefore can use all the corresponding macros and functions (like <a class="reference internal" href="api/cluda.html#virtual_global_flat_id" title="virtual_global_flat_id"><tt class="xref c c-func docutils literal"><span class="pre">virtual_global_flat_id()</span></tt></a> in our kernel).
 Also, they must have <a class="reference internal" href="api/cluda.html#VIRTUAL_SKIP_THREADS" title="VIRTUAL_SKIP_THREADS"><tt class="xref c c-macro docutils literal"><span class="pre">VIRTUAL_SKIP_THREADS</span></tt></a> at the beginning of the kernel.</p>
 </li>
 </ol>
@@ -254,7 +254,7 @@ Also, they must have <a class="reference internal" href="api/cluda.html#VIRTUAL_
         <li class="right" >
           <a href="tutorial-basic.html" title="Tutorial: basics"
              >previous</a> |</li>
-        <li><a href="index.html">reikna 0.2.3+dev.5eb0057 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.2.3+dev.54564e4 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

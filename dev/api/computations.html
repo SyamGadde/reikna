@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Computations &mdash; reikna 0.2.3+dev.5eb0057 documentation</title>
+    <title>Computations &mdash; reikna 0.2.3+dev.54564e4 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2.3+dev.5eb0057',
+        VERSION:     '0.2.3+dev.54564e4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.2.3+dev.5eb0057 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.2.3+dev.54564e4 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Transformations" href="transformations.html" />
     <link rel="prev" title="Core classes" href="core.html" /> 
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="core.html" title="Core classes"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.2.3+dev.5eb0057 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.2.3+dev.54564e4 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -61,7 +61,7 @@
 <span id="elementwise-computations"></span><h2>Elementwise computations<a class="headerlink" href="#module-reikna.elementwise" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="reikna.elementwise.Elementwise">
-<em class="property">class </em><tt class="descclassname">reikna.elementwise.</tt><tt class="descname">Elementwise</tt><big>(</big><em>ctx</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.elementwise.Elementwise" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">reikna.elementwise.</tt><tt class="descname">Elementwise</tt><big>(</big><em>thr</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.elementwise.Elementwise" title="Permalink to this definition">¶</a></dt>
 <dd><p>A general class for elementwise computations.</p>
 <dl class="method">
 <dt id="reikna.elementwise.Elementwise.set_argnames">
@@ -123,7 +123,7 @@ By default, only output arguments are dependent on each other.</li>
 <span id="linear-algebra"></span><h2>Linear algebra<a class="headerlink" href="#module-reikna.matrixmul" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="reikna.matrixmul.MatrixMul">
-<em class="property">class </em><tt class="descclassname">reikna.matrixmul.</tt><tt class="descname">MatrixMul</tt><big>(</big><em>ctx</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.matrixmul.MatrixMul" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">reikna.matrixmul.</tt><tt class="descname">MatrixMul</tt><big>(</big><em>thr</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.matrixmul.MatrixMul" title="Permalink to this definition">¶</a></dt>
 <dd><p>Multiplies two matrices using last two dimensions and batching over remaining dimensions.
 For batching to work, the products of remaining dimensions should be equal
 (then the multiplication will be performed piecewise), or one of them should equal 1
@@ -150,7 +150,7 @@ For batching to work, the products of remaining dimensions should be equal
 
 <span class="target" id="module-reikna.transpose"></span><dl class="class">
 <dt id="reikna.transpose.Transpose">
-<em class="property">class </em><tt class="descclassname">reikna.transpose.</tt><tt class="descname">Transpose</tt><big>(</big><em>ctx</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.transpose.Transpose" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">reikna.transpose.</tt><tt class="descname">Transpose</tt><big>(</big><em>thr</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.transpose.Transpose" title="Permalink to this definition">¶</a></dt>
 <dd><p>Changes the order of axes in a multidimensional array.
 Works analogous to <tt class="xref py py-func docutils literal"><span class="pre">numpy.transpose()</span></tt>.</p>
 <dl class="method">
@@ -179,7 +179,7 @@ If <tt class="docutils literal"><span class="pre">None</span></tt>, then axes wi
 <span id="algorithms"></span><h2>Algorithms<a class="headerlink" href="#module-reikna.reduce" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="reikna.reduce.Reduce">
-<em class="property">class </em><tt class="descclassname">reikna.reduce.</tt><tt class="descname">Reduce</tt><big>(</big><em>ctx</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.reduce.Reduce" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">reikna.reduce.</tt><tt class="descname">Reduce</tt><big>(</big><em>thr</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.reduce.Reduce" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reduces the array over given axis using given binary operation.</p>
 <dl class="method">
 <dt id="reikna.reduce.Reduce.prepare_for">
@@ -209,7 +209,7 @@ which takes names of two variables to reduce and <tt class="docutils literal"><s
 <h2>Fast Fourier transform<a class="headerlink" href="#fast-fourier-transform" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="reikna.fft.FFT">
-<em class="property">class </em><tt class="descclassname">reikna.fft.</tt><tt class="descname">FFT</tt><big>(</big><em>ctx</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.fft.FFT" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">reikna.fft.</tt><tt class="descname">FFT</tt><big>(</big><em>thr</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.fft.FFT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs the Fast Fourier Transform.
 The interface is similar to <tt class="xref py py-class docutils literal"><span class="pre">numpy.fft.fftn</span></tt>.
 The inverse transform is normalized so that <tt class="docutils literal"><span class="pre">IFFT(FFT(X))</span> <span class="pre">=</span> <span class="pre">X</span></tt>.</p>
@@ -267,7 +267,7 @@ The normalization is chosen so that <span class="math">\(\int \phi_n^2(x) dx = 1
 
 <dl class="class">
 <dt id="reikna.dht.DHT">
-<em class="property">class </em><tt class="descclassname">reikna.dht.</tt><tt class="descname">DHT</tt><big>(</big><em>ctx</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.dht.DHT" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">reikna.dht.</tt><tt class="descname">DHT</tt><big>(</big><em>thr</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.dht.DHT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Discrete transform to and from harmonic oscillator modes.
 With <tt class="docutils literal"><span class="pre">inverse=True</span></tt> transforms a function defined by its expansion
 <span class="math">\(C_m,\,m=0 \ldots M-1\)</span> in the mode space with mode functions
@@ -368,14 +368,14 @@ Generates random numbers from the gamma distribution</p>
 </ul>
 <dl class="function">
 <dt id="reikna.cbrng.create_counters">
-<tt class="descclassname">reikna.cbrng.</tt><tt class="descname">create_counters</tt><big>(</big><em>ctx</em>, <em>size</em>, <em>rng</em>, <em>distribution</em>, <em>rng_params</em><big>)</big><a class="headerlink" href="#reikna.cbrng.create_counters" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">reikna.cbrng.</tt><tt class="descname">create_counters</tt><big>(</big><em>thr</em>, <em>size</em>, <em>rng</em>, <em>distribution</em>, <em>rng_params</em><big>)</big><a class="headerlink" href="#reikna.cbrng.create_counters" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a counter array on a device for use in <a class="reference internal" href="#reikna.cbrng.CBRNG" title="reikna.cbrng.CBRNG"><tt class="xref py py-class docutils literal"><span class="pre">CBRNG</span></tt></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>ctx</strong> &#8211; a Context object.</li>
+<li><strong>thr</strong> &#8211; a <a class="reference internal" href="cluda.html#reikna.cluda.api.Thread" title="reikna.cluda.api.Thread"><tt class="xref py py-class docutils literal"><span class="pre">Thread</span></tt></a> object.</li>
 <li><strong>size</strong> &#8211; a shape of the target random numbers array.</li>
 <li><strong>rng</strong> &#8211; random number generator name.</li>
 <li><strong>distribution</strong> &#8211; random distribution name.</li>
@@ -389,7 +389,7 @@ Generates random numbers from the gamma distribution</p>
 
 <dl class="class">
 <dt id="reikna.cbrng.CBRNG">
-<em class="property">class </em><tt class="descclassname">reikna.cbrng.</tt><tt class="descname">CBRNG</tt><big>(</big><em>ctx</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.cbrng.CBRNG" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">reikna.cbrng.</tt><tt class="descname">CBRNG</tt><big>(</big><em>thr</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.cbrng.CBRNG" title="Permalink to this definition">¶</a></dt>
 <dd><p>Counter-based pseudo-random number generator class.</p>
 <dl class="method">
 <dt id="reikna.cbrng.CBRNG.prepare_for">
@@ -486,7 +486,7 @@ default values are big enough to qualify as PRNG).</li>
         <li class="right" >
           <a href="core.html" title="Core classes"
              >previous</a> |</li>
-        <li><a href="../index.html">reikna 0.2.3+dev.5eb0057 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.2.3+dev.54564e4 documentation</a> &raquo;</li>
           <li><a href="index.html" >API reference</a> &raquo;</li> 
       </ul>
     </div>
