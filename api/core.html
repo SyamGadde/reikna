@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Core classes &mdash; reikna 0.2.2 documentation</title>
+    <title>Core classes &mdash; reikna 0.2.3 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2.2',
+        VERSION:     '0.2.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.2.2 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.2.3 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Computations" href="computations.html" />
     <link rel="prev" title="CLUDA layer" href="cluda.html" /> 
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="cluda.html" title="CLUDA layer"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.2.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.2.3 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -60,15 +60,15 @@
 <p>Computations and transformations are based on two classes, which provide the user-side interface of computation objects.</p>
 <dl class="class">
 <dt id="reikna.core.Computation">
-<em class="property">class </em><tt class="descclassname">reikna.core.</tt><tt class="descname">Computation</tt><big>(</big><em>ctx</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.core.Computation" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">reikna.core.</tt><tt class="descname">Computation</tt><big>(</big><em>thr</em>, <em>debug=False</em>, <em>prefix=''</em><big>)</big><a class="headerlink" href="#reikna.core.Computation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a computation class and performs basic initialization for the
-<a class="reference internal" href="cluda.html#reikna.cluda.api.Context" title="reikna.cluda.api.Context"><tt class="xref py py-class docutils literal"><span class="pre">Context</span></tt></a> object <tt class="docutils literal"><span class="pre">ctx</span></tt>.
-Note that the computation is unusable until <tt class="xref py py-func docutils literal"><span class="pre">prepare()</span></tt>
-or <tt class="xref py py-func docutils literal"><span class="pre">prepare_for()</span></tt> is called.
+<a class="reference internal" href="cluda.html#reikna.cluda.api.Thread" title="reikna.cluda.api.Thread"><tt class="xref py py-class docutils literal"><span class="pre">Thread</span></tt></a> object <tt class="docutils literal"><span class="pre">thr</span></tt>.
+Note that the computation is unusable until
+<a class="reference internal" href="#reikna.core.Computation.prepare_for" title="reikna.core.Computation.prepare_for"><tt class="xref py py-meth docutils literal"><span class="pre">prepare_for()</span></tt></a> is called.
 If <tt class="docutils literal"><span class="pre">debug</span></tt> is <tt class="docutils literal"><span class="pre">True</span></tt>, a couple of additional checks will be performed in runtime
 during preparation and calls to computation.</p>
 <p>The following methods are for overriding by computations
-inheriting <tt class="xref py py-class docutils literal"><span class="pre">Computation</span></tt> class.</p>
+inheriting <a class="reference internal" href="#reikna.core.Computation" title="reikna.core.Computation"><tt class="xref py py-class docutils literal"><span class="pre">Computation</span></tt></a> class.</p>
 <span class="target" id="module-reikna.core"></span><dl class="method">
 <dt id="reikna.core.Computation._set_argnames">
 <tt class="descname">_set_argnames</tt><big>(</big><em>outputs</em>, <em>inputs</em>, <em>scalars</em><big>)</big><a class="headerlink" href="#reikna.core.Computation._set_argnames" title="Permalink to this definition">¶</a></dt>
@@ -88,7 +88,7 @@ which is used in <a class="reference internal" href="#reikna.core.Computation._c
 <tt class="descname">_get_argnames</tt><big>(</big><big>)</big><a class="headerlink" href="#reikna.core.Computation._get_argnames" title="Permalink to this definition">¶</a></dt>
 <dd><p>Must return a tuple <tt class="docutils literal"><span class="pre">(outputs,</span> <span class="pre">inputs,</span> <span class="pre">scalars)</span></tt>, where each of
 <tt class="docutils literal"><span class="pre">outputs</span></tt>, <tt class="docutils literal"><span class="pre">inputs</span></tt>, <tt class="docutils literal"><span class="pre">scalars</span></tt> is a tuple of argument names used by this computation.
-If this method is not overridden, <tt class="xref py py-meth docutils literal"><span class="pre">set_argnames()</span></tt> will have to be called
+If this method is not overridden, <tt class="docutils literal"><span class="pre">set_argnames</span></tt> will have to be called
 right after creating the computation object.</p>
 </dd></dl>
 
@@ -119,6 +119,15 @@ for the list of available actions.</p>
 
 <p>The rest is public methods.</p>
 <dl class="method">
+<dt id="reikna.core.Computation.__call__">
+<tt class="descname">__call__</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#reikna.core.Computation.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute computation with given arguments.
+The order and types of arguments are defined by the base computation
+and connected transformations.
+The signature can be also viewed by means of <a class="reference internal" href="#reikna.core.Computation.signature_str" title="reikna.core.Computation.signature_str"><tt class="xref py py-meth docutils literal"><span class="pre">signature_str()</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="reikna.core.Computation.connect">
 <tt class="descname">connect</tt><big>(</big><em>tr</em>, <em>array_arg</em>, <em>new_array_args</em>, <em>new_scalar_args=None</em><big>)</big><a class="headerlink" href="#reikna.core.Computation.connect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connects a <a class="reference internal" href="#reikna.core.Transformation" title="reikna.core.Transformation"><tt class="xref py py-class docutils literal"><span class="pre">Transformation</span></tt></a> instance to the computation.
@@ -148,7 +157,7 @@ as were given to its own constructor.</p>
 <dl class="method">
 <dt id="reikna.core.Computation.prepare_for">
 <tt class="descname">prepare_for</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#reikna.core.Computation.prepare_for" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prepare the computation so that it could run with <tt class="docutils literal"><span class="pre">args</span></tt> supplied to <tt class="xref py py-meth docutils literal"><span class="pre">__call__()</span></tt>.</p>
+<dd><p>Prepare the computation so that it could run with <tt class="docutils literal"><span class="pre">args</span></tt> supplied to <a class="reference internal" href="#reikna.core.Computation.__call__" title="reikna.core.Computation.__call__"><tt class="xref py py-meth docutils literal"><span class="pre">__call__()</span></tt></a>.</p>
 </dd></dl>
 
 <dl class="method">
@@ -198,7 +207,7 @@ See <a class="reference internal" href="../tutorial-advanced.html#tutorial-advan
 
 <dl class="class">
 <dt id="reikna.core.operation.OperationRecorder">
-<em class="property">class </em><tt class="descclassname">reikna.core.operation.</tt><tt class="descname">OperationRecorder</tt><big>(</big><em>prefix</em>, <em>ctx</em>, <em>tr_tree</em>, <em>basis</em>, <em>base_values</em><big>)</big><a class="headerlink" href="#reikna.core.operation.OperationRecorder" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">reikna.core.operation.</tt><tt class="descname">OperationRecorder</tt><big>(</big><em>prefix</em>, <em>thr</em>, <em>tr_tree</em>, <em>basis</em>, <em>base_values</em><big>)</big><a class="headerlink" href="#reikna.core.operation.OperationRecorder" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="reikna.core.operation.OperationRecorder.add_allocation">
 <tt class="descname">add_allocation</tt><big>(</big><em>shape</em>, <em>dtype</em><big>)</big><a class="headerlink" href="#reikna.core.operation.OperationRecorder.add_allocation" title="Permalink to this definition">¶</a></dt>
@@ -226,8 +235,8 @@ See <a class="reference internal" href="../tutorial-advanced.html#tutorial-advan
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>template</strong> &#8211; Mako template for the kernel.</li>
 <li><strong>argnames</strong> &#8211; names of the arguments the kernel takes.
-These must either belong to the list of external argument names,
-or be allocated by <tt class="xref py py-meth docutils literal"><span class="pre">add_allocation()</span></tt> earlier.</li>
+These must either belong to the list of external argument names, or be allocated by
+<a class="reference internal" href="#reikna.core.operation.OperationRecorder.add_allocation" title="reikna.core.operation.OperationRecorder.add_allocation"><tt class="xref py py-meth docutils literal"><span class="pre">add_allocation()</span></tt></a> earlier.</li>
 <li><strong>global_size</strong> &#8211; global size to use for the call.</li>
 <li><strong>local_size</strong> &#8211; local size to use for the call.
 If <tt class="docutils literal"><span class="pre">None</span></tt>, the local size will be picked automatically.</li>
@@ -256,7 +265,7 @@ If <tt class="docutils literal"><span class="pre">None</span></tt>, the local si
 <dl class="attribute">
 <dt id="reikna.core.ArrayValue.dtype">
 <tt class="descname">dtype</tt><a class="headerlink" href="#reikna.core.ArrayValue.dtype" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="xref py py-class docutils literal"><span class="pre">numpy.dtype</span></tt> object specifying the data type of the array.</p>
+<dd><p><tt class="docutils literal"><span class="pre">numpy.dtype</span></tt> object specifying the data type of the array.</p>
 </dd></dl>
 
 </dd></dl>
@@ -268,7 +277,7 @@ If <tt class="docutils literal"><span class="pre">None</span></tt>, the local si
 <dl class="attribute">
 <dt id="reikna.core.ScalarValue.dtype">
 <tt class="descname">dtype</tt><a class="headerlink" href="#reikna.core.ScalarValue.dtype" title="Permalink to this definition">¶</a></dt>
-<dd><p><tt class="xref py py-class docutils literal"><span class="pre">numpy.dtype</span></tt> object specifying the data type of the scalar.</p>
+<dd><p><tt class="docutils literal"><span class="pre">numpy.dtype</span></tt> object specifying the data type of the scalar.</p>
 </dd></dl>
 
 </dd></dl>
@@ -324,7 +333,7 @@ If <tt class="docutils literal"><span class="pre">None</span></tt>, the local si
         <li class="right" >
           <a href="cluda.html" title="CLUDA layer"
              >previous</a> |</li>
-        <li><a href="../index.html">reikna 0.2.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.2.3 documentation</a> &raquo;</li>
           <li><a href="index.html" >API reference</a> &raquo;</li> 
       </ul>
     </div>

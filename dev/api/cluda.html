@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>CLUDA layer &mdash; reikna 0.2.3+dev.54564e4 documentation</title>
+    <title>CLUDA layer &mdash; reikna 0.3.0+dev.247843e documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2.3+dev.54564e4',
+        VERSION:     '0.3.0+dev.247843e',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.2.3+dev.54564e4 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.3.0+dev.247843e documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Core classes" href="core.html" />
     <link rel="prev" title="Helpers" href="helpers.html" /> 
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="helpers.html" title="Helpers"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.2.3+dev.54564e4 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.0+dev.247843e documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -63,32 +63,30 @@ It can also be used by itself, if you want to write GPU API-independent programs
 The terminology is borrowed from <tt class="docutils literal"><span class="pre">OpenCL</span></tt>, since it is a more general API.</p>
 <span class="target" id="module-reikna.cluda"></span><dl class="class">
 <dt id="reikna.cluda.Module">
-<em class="property">class </em><tt class="descclassname">reikna.cluda.</tt><tt class="descname">Module</tt><big>(</big><em>template</em>, <em>render_kwds=None</em>, <em>snippet=False</em><big>)</big><a class="headerlink" href="#reikna.cluda.Module" title="Permalink to this definition">¶</a></dt>
-<dd><p>Contains a code template and render keywords (possibly referencing other modules).</p>
+<em class="property">class </em><tt class="descclassname">reikna.cluda.</tt><tt class="descname">Module</tt><big>(</big><em>template_src</em>, <em>render_kwds=None</em><big>)</big><a class="headerlink" href="#reikna.cluda.Module" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contains a CLUDA module.
+See <a class="reference internal" href="../tutorial-modules.html#tutorial-modules"><em>Tutorial: modules and snippets</em></a> for details.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>template</strong> (<tt class="docutils literal"><span class="pre">str</span></tt> or <tt class="docutils literal"><span class="pre">Mako</span></tt> template.) &#8211; a <tt class="docutils literal"><span class="pre">Mako</span></tt> template with the module code,
+<li><strong>template_src</strong> (<tt class="docutils literal"><span class="pre">str</span></tt> or <tt class="docutils literal"><span class="pre">Mako</span></tt> template.) &#8211; a <tt class="docutils literal"><span class="pre">Mako</span></tt> template with the module code,
 or a string with the template source.</li>
 <li><strong>render_kwds</strong> &#8211; a dictionary which will be used to render the template.
-Can contain other modules.</li>
-<li><strong>snippet</strong> &#8211; defines the behavior of the module in the higher-level module
-that has it in its <tt class="docutils literal"><span class="pre">render_kwds</span></tt>.
-If <tt class="docutils literal"><span class="pre">True</span></tt>, the corresponding keyword will act as a function taking positional arguments
-and rendering the template at the place of a call with these arguments
-and its own <tt class="docutils literal"><span class="pre">render_kwds</span></tt>.
-If <tt class="docutils literal"><span class="pre">False</span></tt>, the keyword will be a string with module prefix
-which can be used to call module functions;
-the module template will be rendered before the code for the higher-level template,
-with the prefix passed as the only positional parameter.</li>
+Can contain other modules and snippets.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
-<p>For more details on how to use modules, see <a class="reference internal" href="../tutorial-modules.html#tutorial-modules"><em>Tutorial: modules and snippets</em></a>.</p>
+<dl class="classmethod">
+<dt id="reikna.cluda.Module.create">
+<em class="property">classmethod </em><tt class="descname">create</tt><big>(</big><em>code</em>, <em>render_kwds=None</em><big>)</big><a class="headerlink" href="#reikna.cluda.Module.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a module from the <tt class="docutils literal"><span class="pre">Mako</span></tt> def with a single positional argument <tt class="docutils literal"><span class="pre">prefix</span></tt>
+and the body <tt class="docutils literal"><span class="pre">code</span></tt>.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="exception">
@@ -96,6 +94,34 @@ with the prefix passed as the only positional parameter.</li>
 <em class="property">exception </em><tt class="descclassname">reikna.cluda.</tt><tt class="descname">OutOfResourcesError</tt><a class="headerlink" href="#reikna.cluda.OutOfResourcesError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Thrown by <a class="reference internal" href="#reikna.cluda.api.Thread.compile_static" title="reikna.cluda.api.Thread.compile_static"><tt class="xref py py-meth docutils literal"><span class="pre">compile_static()</span></tt></a>
 if the provided <tt class="docutils literal"><span class="pre">local_size</span></tt> is too big, or one cannot be found.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="reikna.cluda.Snippet">
+<em class="property">class </em><tt class="descclassname">reikna.cluda.</tt><tt class="descname">Snippet</tt><big>(</big><em>template_src</em>, <em>render_kwds=None</em><big>)</big><a class="headerlink" href="#reikna.cluda.Snippet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contains a CLUDA snippet.
+See <a class="reference internal" href="../tutorial-modules.html#tutorial-modules"><em>Tutorial: modules and snippets</em></a> for details.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>template_src</strong> (<tt class="docutils literal"><span class="pre">str</span></tt> or <tt class="docutils literal"><span class="pre">Mako</span></tt> template.) &#8211; a <tt class="docutils literal"><span class="pre">Mako</span></tt> template with the module code,
+or a string with the template source.</li>
+<li><strong>render_kwds</strong> &#8211; a dictionary which will be used to render the template.
+Can contain other modules and snippets.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="classmethod">
+<dt id="reikna.cluda.Snippet.create">
+<em class="property">classmethod </em><tt class="descname">create</tt><big>(</big><em>argspec_func</em>, <em>render_kwds=None</em><big>)</big><a class="headerlink" href="#reikna.cluda.Snippet.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a snippet from the <tt class="docutils literal"><span class="pre">Mako</span></tt> def with the same signature as <tt class="docutils literal"><span class="pre">argspec_func</span></tt>
+and the body equal to the string it returns.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="function">
@@ -188,8 +214,8 @@ It is referred here (and references from other parts of this documentation) as <
 <dt id="reikna.cluda.api.Buffer">
 <em class="property">class </em><tt class="descclassname">reikna.cluda.api.</tt><tt class="descname">Buffer</tt><a class="headerlink" href="#reikna.cluda.api.Buffer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Low-level untyped memory allocation.
-Actual class depends on the API: <tt class="xref py py-class docutils literal"><span class="pre">pycuda.driver.DeviceAllocation</span></tt> for <tt class="docutils literal"><span class="pre">CUDA</span></tt>
-and <tt class="xref py py-class docutils literal"><span class="pre">pyopencl.Buffer</span></tt> for <tt class="docutils literal"><span class="pre">OpenCL</span></tt>.</p>
+Actual class depends on the API: <tt class="docutils literal"><span class="pre">pycuda.driver.DeviceAllocation</span></tt> for <tt class="docutils literal"><span class="pre">CUDA</span></tt>
+and <tt class="docutils literal"><span class="pre">pyopencl.Buffer</span></tt> for <tt class="docutils literal"><span class="pre">OpenCL</span></tt>.</p>
 <dl class="attribute">
 <dt id="reikna.cluda.api.Buffer.size">
 <tt class="descname">size</tt><a class="headerlink" href="#reikna.cluda.api.Buffer.size" title="Permalink to this definition">¶</a></dt>
@@ -200,8 +226,8 @@ and <tt class="xref py py-class docutils literal"><span class="pre">pyopencl.Buf
 <dl class="class">
 <dt id="reikna.cluda.api.Array">
 <em class="property">class </em><tt class="descclassname">reikna.cluda.api.</tt><tt class="descname">Array</tt><a class="headerlink" href="#reikna.cluda.api.Array" title="Permalink to this definition">¶</a></dt>
-<dd><p>Actual array class is different depending on the API: <tt class="xref py py-class docutils literal"><span class="pre">pycuda.gpuarray.GPUArray</span></tt>
-for <tt class="docutils literal"><span class="pre">CUDA</span></tt> and <tt class="xref py py-class docutils literal"><span class="pre">pyopencl.array.Array</span></tt> for <tt class="docutils literal"><span class="pre">OpenCL</span></tt>.
+<dd><p>Actual array class is different depending on the API: <tt class="docutils literal"><span class="pre">pycuda.gpuarray.GPUArray</span></tt>
+for <tt class="docutils literal"><span class="pre">CUDA</span></tt> and <tt class="docutils literal"><span class="pre">pyopencl.array.Array</span></tt> for <tt class="docutils literal"><span class="pre">OpenCL</span></tt>.
 This is an interface they both provide.</p>
 <dl class="attribute">
 <dt id="reikna.cluda.api.Array.shape">
@@ -216,7 +242,7 @@ This is an interface they both provide.</p>
 <dl class="method">
 <dt id="reikna.cluda.api.Array.get">
 <tt class="descname">get</tt><big>(</big><big>)</big><a class="headerlink" href="#reikna.cluda.api.Array.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt> with the contents of the array.
+<dd><p>Returns <tt class="docutils literal"><span class="pre">numpy.ndarray</span></tt> with the contents of the array.
 Synchronizes the parent <a class="reference internal" href="#reikna.cluda.api.Thread" title="reikna.cluda.api.Thread"><tt class="xref py py-class docutils literal"><span class="pre">Thread</span></tt></a>.</p>
 </dd></dl>
 
@@ -561,7 +587,7 @@ If there is only one platform/device available, they will be chosen automaticall
 <dl class="method">
 <dt id="reikna.cluda.api.Thread.from_device">
 <tt class="descname">from_device</tt><big>(</big><em>arr</em>, <em>dest=None</em>, <em>async=False</em><big>)</big><a class="headerlink" href="#reikna.cluda.api.Thread.from_device" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transfers the contents of <tt class="docutils literal"><span class="pre">arr</span></tt> to a <tt class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></tt> object.
+<dd><p>Transfers the contents of <tt class="docutils literal"><span class="pre">arr</span></tt> to a <tt class="docutils literal"><span class="pre">numpy.ndarray</span></tt> object.
 The effect of <tt class="docutils literal"><span class="pre">dest</span></tt> parameter is the same as in <a class="reference internal" href="#reikna.cluda.api.Thread.to_device" title="reikna.cluda.api.Thread.to_device"><tt class="xref py py-meth docutils literal"><span class="pre">to_device()</span></tt></a>.
 If <tt class="docutils literal"><span class="pre">async</span></tt> is <tt class="docutils literal"><span class="pre">True</span></tt>, the transfer is asynchronous
 (the thread-wide asynchronisity setting does not apply here).</p>
@@ -621,7 +647,7 @@ Otherwise the destination array is created internally and returned from the meth
 <dt id="reikna.cluda.api.get_platforms">
 <tt class="descclassname">reikna.cluda.api.</tt><tt class="descname">get_platforms</tt><big>(</big><big>)</big><a class="headerlink" href="#reikna.cluda.api.get_platforms" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list of available <a class="reference internal" href="#reikna.cluda.api.Platform" title="reikna.cluda.api.Platform"><tt class="xref py py-class docutils literal"><span class="pre">Platform</span></tt></a> objects.
-In case of <tt class="docutils literal"><span class="pre">OpenCL</span></tt> returned objects are actually instances of <tt class="xref py py-class docutils literal"><span class="pre">pyopencl.Platform</span></tt>.</p>
+In case of <tt class="docutils literal"><span class="pre">OpenCL</span></tt> returned objects are actually instances of <tt class="docutils literal"><span class="pre">pyopencl.Platform</span></tt>.</p>
 </dd></dl>
 
 </div>
@@ -907,7 +933,7 @@ useful for addressing input and output arrays.</p>
 </div>
 <div class="section" id="datatype-tools">
 <h2>Datatype tools<a class="headerlink" href="#datatype-tools" title="Permalink to this headline">¶</a></h2>
-<p>This module contains various convenience functions which operate with <tt class="xref py py-class docutils literal"><span class="pre">numpy.dtype</span></tt> objects.</p>
+<p>This module contains various convenience functions which operate with <tt class="docutils literal"><span class="pre">numpy.dtype</span></tt> objects.</p>
 <span class="target" id="module-reikna.cluda.dtypes"></span><dl class="function">
 <dt id="reikna.cluda.dtypes.c_constant">
 <tt class="descclassname">reikna.cluda.dtypes.</tt><tt class="descname">c_constant</tt><big>(</big><em>val</em>, <em>dtype=None</em><big>)</big><a class="headerlink" href="#reikna.cluda.dtypes.c_constant" title="Permalink to this definition">¶</a></dt>
@@ -971,7 +997,7 @@ useful for addressing input and output arrays.</p>
 <dl class="function">
 <dt id="reikna.cluda.dtypes.min_scalar_type">
 <tt class="descclassname">reikna.cluda.dtypes.</tt><tt class="descname">min_scalar_type</tt><big>(</big><em>val</em><big>)</big><a class="headerlink" href="#reikna.cluda.dtypes.min_scalar_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wrapper for <tt class="xref py py-func docutils literal"><span class="pre">numpy.min_scalar_dtype()</span></tt>
+<dd><p>Wrapper for <tt class="docutils literal"><span class="pre">numpy.min_scalar_dtype</span></tt>
 which takes into account types supported by GPUs.</p>
 </dd></dl>
 
@@ -998,7 +1024,7 @@ and one of them does not have some important attributes.</p>
 <dl class="function">
 <dt id="reikna.cluda.dtypes.result_type">
 <tt class="descclassname">reikna.cluda.dtypes.</tt><tt class="descname">result_type</tt><big>(</big><em>*dtypes</em><big>)</big><a class="headerlink" href="#reikna.cluda.dtypes.result_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wrapper for <tt class="xref py py-func docutils literal"><span class="pre">numpy.result_type()</span></tt>
+<dd><p>Wrapper for <tt class="docutils literal"><span class="pre">numpy.result_type</span></tt>
 which takes into account types supported by GPUs.</p>
 </dd></dl>
 
@@ -1072,7 +1098,7 @@ which takes into account types supported by GPUs.</p>
         <li class="right" >
           <a href="helpers.html" title="Helpers"
              >previous</a> |</li>
-        <li><a href="../index.html">reikna 0.2.3+dev.54564e4 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.0+dev.247843e documentation</a> &raquo;</li>
           <li><a href="index.html" >API reference</a> &raquo;</li> 
       </ul>
     </div>

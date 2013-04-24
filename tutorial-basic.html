@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: basics &mdash; reikna 0.2.2 documentation</title>
+    <title>Tutorial: basics &mdash; reikna 0.2.3 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.2',
+        VERSION:     '0.2.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.2.2 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.2.3 documentation" href="index.html" />
     <link rel="next" title="Tutorial: advanced topics" href="tutorial-advanced.html" />
-    <link rel="prev" title="Introduction" href="introduction.html" /> 
+    <link rel="prev" title="Tutorial: modules and snippets" href="tutorial-modules.html" /> 
   </head>
   <body>
     <div class="related">
@@ -42,9 +42,9 @@
           <a href="tutorial-advanced.html" title="Tutorial: advanced topics"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="introduction.html" title="Introduction"
+          <a href="tutorial-modules.html" title="Tutorial: modules and snippets"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.2.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.2.3 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -62,9 +62,9 @@ Each computation is parametrized by a dictionary called <strong>basis</strong> (
 <p>Before use a computation has to be fully prepared by means of calling <a class="reference internal" href="api/core.html#reikna.core.Computation.prepare_for" title="reikna.core.Computation.prepare_for"><tt class="xref py py-meth docutils literal"><span class="pre">prepare_for()</span></tt></a>.
 This method derives the basis from a set of positional arguments and optional keyword arguments.
 The positional arguments should be either the same arrays and scalars you are going to pass to the computation call (which means the same shapes and data types), or their replacements in the form of <a class="reference internal" href="api/core.html#reikna.core.ArrayValue" title="reikna.core.ArrayValue"><tt class="xref py py-class docutils literal"><span class="pre">ArrayValue</span></tt></a> and <a class="reference internal" href="api/core.html#reikna.core.ScalarValue" title="reikna.core.ScalarValue"><tt class="xref py py-class docutils literal"><span class="pre">ScalarValue</span></tt></a> objects:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="nb">input</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">output</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">tr</span> <span class="o">=</span> <span class="n">Transpose</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span><span class="o">.</span><span class="n">prepare_for</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="nb">input</span> <span class="o">=</span> <span class="n">thr</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">thr</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">tr</span> <span class="o">=</span> <span class="n">Transpose</span><span class="p">(</span><span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">prepare_for</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
 <span class="n">tr</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -89,19 +89,25 @@ These identifiers serve as connection points, where the user can attach transfor
 <p>All attached transformations form a tree with roots being these base connection points, and leaves forming defining the positional arguments to <tt class="docutils literal"><span class="pre">prepare_for</span></tt> and <tt class="docutils literal"><span class="pre">__call__</span></tt> methods visible to the user.
 As an example, let us consider an elementwise computation object with one output, two inputs and a scalar parameter, which performs the calculation <tt class="docutils literal"><span class="pre">out</span> <span class="pre">=</span> <span class="pre">in1</span> <span class="pre">+</span> <span class="pre">in2</span> <span class="pre">+</span> <span class="pre">param</span></tt>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">import</span> <span class="nn">reikna.cluda</span> <span class="kn">as</span> <span class="nn">cluda</span>
+<span class="kn">from</span> <span class="nn">reikna</span> <span class="kn">import</span> <span class="n">cluda</span>
+<span class="kn">from</span> <span class="nn">reikna.cluda</span> <span class="kn">import</span> <span class="n">Snippet</span>
 <span class="kn">from</span> <span class="nn">reikna.core</span> <span class="kn">import</span> <span class="n">Transformation</span>
 <span class="kn">from</span> <span class="nn">reikna.elementwise</span> <span class="kn">import</span> <span class="n">specialize_elementwise</span>
 <span class="kn">import</span> <span class="nn">reikna.transformations</span> <span class="kn">as</span> <span class="nn">transformations</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">cluda</span><span class="o">.</span><span class="n">ocl_api</span><span class="p">()</span>
-<span class="n">ctx</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">Context</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+<span class="n">thr</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">Thread</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+
+<span class="n">code</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">out_dtype</span><span class="p">,</span> <span class="n">in1_dtype</span><span class="p">,</span> <span class="n">in2_dtype</span><span class="p">,</span> <span class="n">param_dtype</span><span class="p">:</span> <span class="n">Snippet</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">out</span><span class="p">,</span> <span class="n">in1</span><span class="p">,</span> <span class="n">in2</span><span class="p">,</span> <span class="n">param</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ${out.store}(idx, ${in1.load}(idx) + ${in2.load}(idx) + ${param});</span>
+<span class="sd">        &quot;&quot;&quot;</span><span class="p">)</span>
 
 <span class="n">TestComputation</span> <span class="o">=</span> <span class="n">specialize_elementwise</span><span class="p">(</span>
-    <span class="s">&#39;out&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;in1&#39;</span><span class="p">,</span> <span class="s">&#39;in2&#39;</span><span class="p">],</span> <span class="s">&#39;param&#39;</span><span class="p">,</span>
-    <span class="nb">dict</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">&quot;${out.store}(idx, ${in1.load}(idx) + ${in2.load}(idx) + ${param});&quot;</span><span class="p">))</span>
+    <span class="s">&#39;out&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;in1&#39;</span><span class="p">,</span> <span class="s">&#39;in2&#39;</span><span class="p">],</span> <span class="s">&#39;param&#39;</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span>
 
-<span class="n">comp</span> <span class="o">=</span> <span class="n">TestComputation</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
+<span class="n">comp</span> <span class="o">=</span> <span class="n">TestComputation</span><span class="p">(</span><span class="n">thr</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The details of creating the <tt class="docutils literal"><span class="pre">TestComputation</span></tt> class are not important for this example; they are provided here just for the sake of completeness.
@@ -148,10 +154,10 @@ Except for that, the order of the final signature is obtained by traversing the 
 In order to run it, we have to prepare it first.
 When <tt class="docutils literal"><span class="pre">prepare_for</span></tt> is called, the data types and shapes of the given arguments will be propagated to the roots and used to prepare the original computation.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">N</span> <span class="o">=</span> <span class="mi">128</span>
-<span class="n">out1</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">out2</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">in1</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
-<span class="n">in2_prime</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
+<span class="n">out1</span> <span class="o">=</span> <span class="n">thr</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">out2</span> <span class="o">=</span> <span class="n">thr</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">in1</span> <span class="o">=</span> <span class="n">thr</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
+<span class="n">in2_prime</span> <span class="o">=</span> <span class="n">thr</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
 <span class="n">param</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">param2</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">comp</span><span class="o">.</span><span class="n">prepare_for</span><span class="p">(</span><span class="n">out1</span><span class="p">,</span> <span class="n">out2</span><span class="p">,</span> <span class="n">in1</span><span class="p">,</span> <span class="n">in2_prime</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">param2</span><span class="p">)</span>
@@ -192,8 +198,8 @@ On the other hand, input transformations can be safely connected to existing nod
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="introduction.html"
-                        title="previous chapter">Introduction</a></p>
+  <p class="topless"><a href="tutorial-modules.html"
+                        title="previous chapter">Tutorial: modules and snippets</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="tutorial-advanced.html"
                         title="next chapter">Tutorial: advanced topics</a></p>
@@ -232,9 +238,9 @@ On the other hand, input transformations can be safely connected to existing nod
           <a href="tutorial-advanced.html" title="Tutorial: advanced topics"
              >next</a> |</li>
         <li class="right" >
-          <a href="introduction.html" title="Introduction"
+          <a href="tutorial-modules.html" title="Tutorial: modules and snippets"
              >previous</a> |</li>
-        <li><a href="index.html">reikna 0.2.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.2.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

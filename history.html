@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Release history &mdash; reikna 0.2.2 documentation</title>
+    <title>Release history &mdash; reikna 0.2.3 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.2',
+        VERSION:     '0.2.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.2.2 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.2.3 documentation" href="index.html" />
     <link rel="prev" title="Transformations" href="api/transformations.html" /> 
   </head>
   <body>
@@ -40,7 +40,7 @@
         <li class="right" >
           <a href="api/transformations.html" title="Transformations"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.2.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.2.3 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -52,23 +52,39 @@
   <div class="section" id="release-history">
 <h1>Release history<a class="headerlink" href="#release-history" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="current-development-version">
-<h2>0.2.3 (current development version)<a class="headerlink" href="#current-development-version" title="Permalink to this headline">¶</a></h2>
+<h2>0.3.0 (current development version)<a class="headerlink" href="#current-development-version" title="Permalink to this headline">¶</a></h2>
 <p>Under construction.</p>
 </div>
 <div class="section" id="apr-2013">
-<h2>0.2.2 (20 Apr 2013)<a class="headerlink" href="#apr-2013" title="Permalink to this headline">¶</a></h2>
+<h2>0.2.3 (25 Apr 2013)<a class="headerlink" href="#apr-2013" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>ADDED: explicit <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread.release" title="reikna.cluda.api.Thread.release"><tt class="xref py py-meth docutils literal"><span class="pre">release()</span></tt></a> (primarily for certain rare CUDA use cases).</li>
+<li>CHANGED: CLUDA API discovery interface (see the documentation).</li>
+<li>CHANGED: The part of CLUDA API that is supposed to be used by other layers was moved to the <tt class="docutils literal"><span class="pre">__init__.py</span></tt>.</li>
+<li>CHANGED: CLUDA <tt class="docutils literal"><span class="pre">Context</span></tt> was renamed to <tt class="docutils literal"><span class="pre">Thread</span></tt>, to avoid confusion with <tt class="docutils literal"><span class="pre">PyCUDA</span></tt>/<tt class="docutils literal"><span class="pre">PyOpenCL</span></tt> contexts.</li>
+<li>CHANGED: signature of <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread.create" title="reikna.cluda.api.Thread.create"><tt class="xref py py-meth docutils literal"><span class="pre">create()</span></tt></a>; it can filter devices now, and supports interactive mode.</li>
+<li>CHANGED: <a class="reference internal" href="api/cluda.html#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a> with <tt class="docutils literal"><span class="pre">snippet=True</span></tt> is now <a class="reference internal" href="api/cluda.html#reikna.cluda.Snippet" title="reikna.cluda.Snippet"><tt class="xref py py-class docutils literal"><span class="pre">Snippet</span></tt></a></li>
+<li>FIXED: added <tt class="docutils literal"><span class="pre">transformation.mako</span></tt> and <tt class="docutils literal"><span class="pre">cbrng_ref.py</span></tt> to the distribution package.</li>
+<li>FIXED: incorrect parameter generation in <tt class="docutils literal"><span class="pre">test/cluda/cluda_vsizes/ids</span></tt>.</li>
+<li>FIXED: skipping testcases with incompatible parameters in <tt class="docutils literal"><span class="pre">test/cluda/cluda_vsizes/ids</span></tt> and <tt class="docutils literal"><span class="pre">sizes</span></tt>.</li>
+<li>FIXED: setting the correct length of <a class="reference internal" href="api/cluda.html#reikna.cluda.api.DeviceParameters.max_num_groups" title="reikna.cluda.api.DeviceParameters.max_num_groups"><tt class="xref py py-attr docutils literal"><span class="pre">max_num_groups</span></tt></a> in case of CUDA and a device with CC &lt; 2.</li>
+<li>FIXED: typo in <tt class="docutils literal"><span class="pre">cluda.api_discovery</span></tt>.</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2>0.2.2 (20 Apr 2013)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>ADDED: ability to use custom argument names in transformations.</li>
 <li>ADDED: multi-argument <a class="reference internal" href="api/cluda.html#reikna.cluda.functions.mul" title="reikna.cluda.functions.mul"><tt class="xref py py-func docutils literal"><span class="pre">mul()</span></tt></a>.</li>
 <li>ADDED: counter-based random number generator <a class="reference internal" href="api/computations.html#reikna.cbrng.CBRNG" title="reikna.cbrng.CBRNG"><tt class="xref py py-class docutils literal"><span class="pre">CBRNG</span></tt></a>.</li>
 <li>ADDED: <a class="reference internal" href="api/computations.html#reikna.elementwise.Elementwise" title="reikna.elementwise.Elementwise"><tt class="xref py py-class docutils literal"><span class="pre">Elementwise</span></tt></a> now supports argument dependencies.</li>
 <li>ADDED: Module support in CLUDA; see <a class="reference internal" href="tutorial-modules.html#tutorial-modules"><em>Tutorial: modules and snippets</em></a> for details.</li>
-<li>ADDED: <a class="reference internal" href="api/helpers.html#reikna.helpers.template_func" title="reikna.helpers.template_func"><tt class="xref py py-func docutils literal"><span class="pre">template_func()</span></tt></a>.</li>
-<li>CHANGED: <tt class="xref py py-func docutils literal"><span class="pre">render_template_source()</span></tt> is the main renderer now.</li>
+<li>ADDED: <a class="reference internal" href="api/helpers.html#reikna.helpers.template_def" title="reikna.helpers.template_def"><tt class="xref py py-func docutils literal"><span class="pre">template_def()</span></tt></a>.</li>
+<li>CHANGED: <tt class="docutils literal"><span class="pre">reikna.cluda.kernel.render_template_source</span></tt> is the main renderer now.</li>
 <li>CHANGED: <tt class="docutils literal"><span class="pre">FuncCollector</span></tt> class was removed; functions are now used as common modules.</li>
 <li>CHANGED: all templates created with <a class="reference internal" href="api/helpers.html#reikna.helpers.template_for" title="reikna.helpers.template_for"><tt class="xref py py-func docutils literal"><span class="pre">template_for()</span></tt></a> are now rendered with <tt class="docutils literal"><span class="pre">from</span> <span class="pre">__future__</span> <span class="pre">import</span> <span class="pre">division</span></tt>.</li>
 <li>CHANGED: signature of <a class="reference internal" href="api/core.html#reikna.core.operation.OperationRecorder.add_kernel" title="reikna.core.operation.OperationRecorder.add_kernel"><tt class="xref py py-meth docutils literal"><span class="pre">add_kernel()</span></tt></a> takes a renderable instead of a full template.</li>
-<li>CHANGED: <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Context.compile_static" title="reikna.cluda.api.Context.compile_static"><tt class="xref py py-meth docutils literal"><span class="pre">compile_static()</span></tt></a> now takes a template instead of a source.</li>
+<li>CHANGED: <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread.compile_static" title="reikna.cluda.api.Thread.compile_static"><tt class="xref py py-meth docutils literal"><span class="pre">compile_static()</span></tt></a> now takes a template instead of a source.</li>
 <li>CHANGED: <a class="reference internal" href="api/computations.html#reikna.elementwise.Elementwise" title="reikna.elementwise.Elementwise"><tt class="xref py py-class docutils literal"><span class="pre">Elementwise</span></tt></a> now uses modules.</li>
 <li>FIXED: potential problem with local size finidng in static kernels (first approximation for the maximum workgroup size was not that good)</li>
 <li>FIXED: some OpenCL compilation warnings caused by an incorrect version querying macro.</li>
@@ -91,12 +107,12 @@ between internal allocations &#8212; necessary for nested computations.</li>
 (calculated using Gauss-Hermite quadrature).</li>
 </ul>
 </div>
-<div class="section" id="id1">
-<h2>0.2.0 (3 Mar 2013)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h2>0.2.0 (3 Mar 2013)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Added FFT computation (slightly optimized PyFFT version + Bluestein&#8217;s algorithm for non-power-of-2 FFT sizes)</li>
 <li>Added Python 3 compatibility</li>
-<li>Added Context-global automatic memory packing</li>
+<li>Added Thread-global automatic memory packing</li>
 <li>Added polar(), conj() and exp() functions to kernel toolbox</li>
 <li>Changed name because of the clash with <a class="reference external" href="http://www.astron.nl/meqwiki/Tigger">another Tigger</a>.</li>
 </ul>
@@ -128,10 +144,11 @@ between internal allocations &#8212; necessary for nested computations.</li>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Release history</a><ul>
-<li><a class="reference internal" href="#current-development-version">0.2.3 (current development version)</a></li>
-<li><a class="reference internal" href="#apr-2013">0.2.2 (20 Apr 2013)</a></li>
+<li><a class="reference internal" href="#current-development-version">0.3.0 (current development version)</a></li>
+<li><a class="reference internal" href="#apr-2013">0.2.3 (25 Apr 2013)</a></li>
+<li><a class="reference internal" href="#id1">0.2.2 (20 Apr 2013)</a></li>
 <li><a class="reference internal" href="#mar-2013">0.2.1 (8 Mar 2013)</a></li>
-<li><a class="reference internal" href="#id1">0.2.0 (3 Mar 2013)</a></li>
+<li><a class="reference internal" href="#id2">0.2.0 (3 Mar 2013)</a></li>
 <li><a class="reference internal" href="#sep-2012">0.1.0 (12 Sep 2012)</a></li>
 <li><a class="reference internal" href="#jul-2012">0.0.1 (22 Jul 2012)</a></li>
 </ul>
@@ -175,7 +192,7 @@ between internal allocations &#8212; necessary for nested computations.</li>
         <li class="right" >
           <a href="api/transformations.html" title="Transformations"
              >previous</a> |</li>
-        <li><a href="index.html">reikna 0.2.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.2.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

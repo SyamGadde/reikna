@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Helpers &mdash; reikna 0.2.2 documentation</title>
+    <title>Helpers &mdash; reikna 0.2.3 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2.2',
+        VERSION:     '0.2.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.2.2 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.2.3 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="CLUDA layer" href="cluda.html" />
     <link rel="prev" title="Version queries" href="version.html" /> 
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="version.html" title="Version queries"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.2.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.2.3 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -108,6 +108,24 @@ necessary to cover the array with length <tt class="docutils literal"><span clas
 </dd></dl>
 
 <dl class="function">
+<dt id="reikna.helpers.template_def">
+<tt class="descclassname">reikna.helpers.</tt><tt class="descname">template_def</tt><big>(</big><em>argspec</em>, <em>code</em><big>)</big><a class="headerlink" href="#reikna.helpers.template_def" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a <tt class="docutils literal"><span class="pre">Mako</span></tt> template def.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argspec</strong> &#8211; a list of postitional argument names, or a named tuple <tt class="docutils literal"><span class="pre">ArgSpec</span></tt>
+(returned from Python&#8217;s standard :py:func:<tt class="docutils literal"><span class="pre">inspect.getargspec</span></tt>,
+see the documentation for <tt class="docutils literal"><span class="pre">inspect</span></tt> module for details).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Code :</th><td class="field-body">a body of the template.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="reikna.helpers.template_for">
 <tt class="descclassname">reikna.helpers.</tt><tt class="descname">template_for</tt><big>(</big><em>filename</em><big>)</big><a class="headerlink" href="#reikna.helpers.template_for" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the Mako template object created from the file
@@ -120,13 +138,6 @@ Typically used in computation modules as <tt class="docutils literal"><span clas
 <tt class="descclassname">reikna.helpers.</tt><tt class="descname">template_from</tt><big>(</big><em>template</em><big>)</big><a class="headerlink" href="#reikna.helpers.template_from" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a Mako template object from a given string.
 If <tt class="docutils literal"><span class="pre">template</span></tt> already has <tt class="docutils literal"><span class="pre">render()</span></tt> method, does nothing.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="reikna.helpers.template_func">
-<tt class="descclassname">reikna.helpers.</tt><tt class="descname">template_func</tt><big>(</big><em>argnames</em>, <em>code</em><big>)</big><a class="headerlink" href="#reikna.helpers.template_func" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a Mako template with positional arguments
-from the list <tt class="docutils literal"><span class="pre">argnames</span></tt> and the body <tt class="docutils literal"><span class="pre">code</span></tt>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -187,7 +198,7 @@ otherwise returns a tuple with a single element <tt class="docutils literal"><sp
         <li class="right" >
           <a href="version.html" title="Version queries"
              >previous</a> |</li>
-        <li><a href="../index.html">reikna 0.2.2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.2.3 documentation</a> &raquo;</li>
           <li><a href="index.html" >API reference</a> &raquo;</li> 
       </ul>
     </div>

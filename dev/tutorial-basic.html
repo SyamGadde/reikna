@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: basics &mdash; reikna 0.2.3+dev.54564e4 documentation</title>
+    <title>Tutorial: basics &mdash; reikna 0.3.0+dev.247843e documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.3+dev.54564e4',
+        VERSION:     '0.3.0+dev.247843e',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.2.3+dev.54564e4 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.3.0+dev.247843e documentation" href="index.html" />
     <link rel="next" title="Tutorial: advanced topics" href="tutorial-advanced.html" />
-    <link rel="prev" title="Introduction" href="introduction.html" /> 
+    <link rel="prev" title="Tutorial: modules and snippets" href="tutorial-modules.html" /> 
   </head>
   <body>
     <div class="related">
@@ -42,9 +42,9 @@
           <a href="tutorial-advanced.html" title="Tutorial: advanced topics"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="introduction.html" title="Introduction"
+          <a href="tutorial-modules.html" title="Tutorial: modules and snippets"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.2.3+dev.54564e4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.0+dev.247843e documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -89,7 +89,8 @@ These identifiers serve as connection points, where the user can attach transfor
 <p>All attached transformations form a tree with roots being these base connection points, and leaves forming defining the positional arguments to <tt class="docutils literal"><span class="pre">prepare_for</span></tt> and <tt class="docutils literal"><span class="pre">__call__</span></tt> methods visible to the user.
 As an example, let us consider an elementwise computation object with one output, two inputs and a scalar parameter, which performs the calculation <tt class="docutils literal"><span class="pre">out</span> <span class="pre">=</span> <span class="pre">in1</span> <span class="pre">+</span> <span class="pre">in2</span> <span class="pre">+</span> <span class="pre">param</span></tt>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">import</span> <span class="nn">reikna.cluda</span> <span class="kn">as</span> <span class="nn">cluda</span>
+<span class="kn">from</span> <span class="nn">reikna</span> <span class="kn">import</span> <span class="n">cluda</span>
+<span class="kn">from</span> <span class="nn">reikna.cluda</span> <span class="kn">import</span> <span class="n">Snippet</span>
 <span class="kn">from</span> <span class="nn">reikna.core</span> <span class="kn">import</span> <span class="n">Transformation</span>
 <span class="kn">from</span> <span class="nn">reikna.elementwise</span> <span class="kn">import</span> <span class="n">specialize_elementwise</span>
 <span class="kn">import</span> <span class="nn">reikna.transformations</span> <span class="kn">as</span> <span class="nn">transformations</span>
@@ -97,9 +98,14 @@ As an example, let us consider an elementwise computation object with one output
 <span class="n">api</span> <span class="o">=</span> <span class="n">cluda</span><span class="o">.</span><span class="n">ocl_api</span><span class="p">()</span>
 <span class="n">thr</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">Thread</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
 
+<span class="n">code</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">out_dtype</span><span class="p">,</span> <span class="n">in1_dtype</span><span class="p">,</span> <span class="n">in2_dtype</span><span class="p">,</span> <span class="n">param_dtype</span><span class="p">:</span> <span class="n">Snippet</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">out</span><span class="p">,</span> <span class="n">in1</span><span class="p">,</span> <span class="n">in2</span><span class="p">,</span> <span class="n">param</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ${out.store}(idx, ${in1.load}(idx) + ${in2.load}(idx) + ${param});</span>
+<span class="sd">        &quot;&quot;&quot;</span><span class="p">)</span>
+
 <span class="n">TestComputation</span> <span class="o">=</span> <span class="n">specialize_elementwise</span><span class="p">(</span>
-    <span class="s">&#39;out&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;in1&#39;</span><span class="p">,</span> <span class="s">&#39;in2&#39;</span><span class="p">],</span> <span class="s">&#39;param&#39;</span><span class="p">,</span>
-    <span class="nb">dict</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s">&quot;${out.store}(idx, ${in1.load}(idx) + ${in2.load}(idx) + ${param});&quot;</span><span class="p">))</span>
+    <span class="s">&#39;out&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;in1&#39;</span><span class="p">,</span> <span class="s">&#39;in2&#39;</span><span class="p">],</span> <span class="s">&#39;param&#39;</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span>
 
 <span class="n">comp</span> <span class="o">=</span> <span class="n">TestComputation</span><span class="p">(</span><span class="n">thr</span><span class="p">)</span>
 </pre></div>
@@ -192,8 +198,8 @@ On the other hand, input transformations can be safely connected to existing nod
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="introduction.html"
-                        title="previous chapter">Introduction</a></p>
+  <p class="topless"><a href="tutorial-modules.html"
+                        title="previous chapter">Tutorial: modules and snippets</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="tutorial-advanced.html"
                         title="next chapter">Tutorial: advanced topics</a></p>
@@ -232,9 +238,9 @@ On the other hand, input transformations can be safely connected to existing nod
           <a href="tutorial-advanced.html" title="Tutorial: advanced topics"
              >next</a> |</li>
         <li class="right" >
-          <a href="introduction.html" title="Introduction"
+          <a href="tutorial-modules.html" title="Tutorial: modules and snippets"
              >previous</a> |</li>
-        <li><a href="index.html">reikna 0.2.3+dev.54564e4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.0+dev.247843e documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

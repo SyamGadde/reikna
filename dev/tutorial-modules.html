@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: modules and snippets &mdash; reikna 0.2.3+dev.54564e4 documentation</title>
+    <title>Tutorial: modules and snippets &mdash; reikna 0.3.0+dev.247843e documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.3+dev.54564e4',
+        VERSION:     '0.3.0+dev.247843e',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,9 +24,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.2.3+dev.54564e4 documentation" href="index.html" />
-    <link rel="next" title="API reference" href="api/index.html" />
-    <link rel="prev" title="Tutorial: advanced topics" href="tutorial-advanced.html" /> 
+    <link rel="top" title="reikna 0.3.0+dev.247843e documentation" href="index.html" />
+    <link rel="next" title="Tutorial: basics" href="tutorial-basic.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
   </head>
   <body>
     <div class="related">
@@ -39,12 +39,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="api/index.html" title="API reference"
+          <a href="tutorial-basic.html" title="Tutorial: basics"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="tutorial-advanced.html" title="Tutorial: advanced topics"
+          <a href="introduction.html" title="Introduction"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.2.3+dev.54564e4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.0+dev.247843e documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -55,7 +55,168 @@
             
   <div class="section" id="tutorial-modules-and-snippets">
 <span id="tutorial-modules"></span><h1>Tutorial: modules and snippets<a class="headerlink" href="#tutorial-modules-and-snippets" title="Permalink to this headline">¶</a></h1>
-<p>Under construction.</p>
+<p>Modules and snippets are important primitives in CLUDA which are used in the rest of <tt class="docutils literal"><span class="pre">reikna</span></tt>, although mostly internally.
+Even if you do not write modules yourself, you will most likely use operations from the <a class="reference internal" href="api/cluda.html#module-reikna.cluda.functions" title="reikna.cluda.functions"><tt class="xref py py-mod docutils literal"><span class="pre">functions</span></tt></a> module, or common transformations from the <a class="reference internal" href="api/transformations.html#module-reikna.transformations" title="reikna.transformations"><tt class="xref py py-mod docutils literal"><span class="pre">transformations</span></tt></a> module, which are essentially snippet and module factories (callables returning <a class="reference internal" href="api/cluda.html#reikna.cluda.Snippet" title="reikna.cluda.Snippet"><tt class="xref py py-class docutils literal"><span class="pre">Snippet</span></tt></a> and <a class="reference internal" href="api/cluda.html#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a> objects).
+Therefore it helps if you know how they work under the hood.</p>
+<div class="section" id="snippets">
+<h2>Snippets<a class="headerlink" href="#snippets" title="Permalink to this headline">¶</a></h2>
+<p>Snippets are <tt class="docutils literal"><span class="pre">Mako</span></tt> template defs (essentially functions returning rendered text) with the associated dictionary of render keywords.
+Some computations which are parametrized by custom code (for example, <a class="reference internal" href="api/computations.html#reikna.elementwise.Elementwise" title="reikna.elementwise.Elementwise"><tt class="xref py py-class docutils literal"><span class="pre">Elementwise</span></tt></a>) require this code to be provided in form of a snippet with a certain call signature.
+When a snippet is used in a template, the result is quite straightworward: its template function is called, rendering and returning its contents, just as a normal <tt class="docutils literal"><span class="pre">Mako</span></tt> def.</p>
+<p>Let us demonstrate it with a simple example.
+Consider the following snippet:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">add</span> <span class="o">=</span> <span class="n">Snippet</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">&lt;</span><span class="si">%d</span><span class="s">ef name=&quot;add(varname)&quot;&gt;</span>
+<span class="s">${varname} + ${num}</span>
+<span class="s">&lt;/</span><span class="si">%d</span><span class="s">ef&gt;</span>
+<span class="s">&quot;&quot;&quot;</span><span class="p">,</span>
+<span class="n">render_kwds</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Now we can compile a template which uses this snippet:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">program</span> <span class="o">=</span> <span class="n">thr</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">KERNEL void test(int *arr)</span>
+<span class="s">{</span>
+<span class="s">    int idx = get_global_id(0);</span>
+<span class="s">    int a = arr[idx];</span>
+<span class="s">    arr[idx] = ${add(&#39;x&#39;)};</span>
+<span class="s">}</span>
+<span class="s">&quot;&quot;&quot;</span><span class="p">,</span>
+<span class="n">render_kwds</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">add</span><span class="o">=</span><span class="n">add</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>As a result, the code that gets compiled is</p>
+<div class="highlight-python"><pre>KERNEL void test(int *arr)
+{
+    int idx = get_global_id(0);
+    int a = arr[idx];
+    arr[idx] = x + 1;
+}</pre>
+</div>
+<p>The root code that gets passed to <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread.compile" title="reikna.cluda.api.Thread.compile"><tt class="xref py py-meth docutils literal"><span class="pre">compile()</span></tt></a> can be viewed as a snippet with an empty signature.</p>
+</div>
+<div class="section" id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h2>
+<p>Modules are quite similar to snippets in a sense that they are also <tt class="docutils literal"><span class="pre">Mako</span></tt> defs with an associated dictionary of render keywords.
+The difference lies in the way they are processed, and their def must take only one positional argument.
+Consider a module containing a single function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">add</span> <span class="o">=</span> <span class="n">Module</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">&lt;</span><span class="si">%d</span><span class="s">ef name=&quot;add(prefix)&quot;&gt;</span>
+<span class="s">WITHIN_KERNEL int ${prefix}(int x)</span>
+<span class="s">{</span>
+<span class="s">    return x + ${num};</span>
+<span class="s">}</span>
+<span class="s">&lt;/</span><span class="si">%d</span><span class="s">ef&gt;</span>
+<span class="s">&quot;&quot;&quot;</span><span class="p">,</span>
+<span class="n">render_kwds</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Modules contain complete C entities (function, macros, structures) and get rendered in the root level of the source file.
+In order to avoid name clashes, their def gets a string which it has to use to prefix these entities&#8217; names.
+If the module contains only one entity that is supposed to be used by the parent code, it is a good idea to set its name to <tt class="docutils literal"><span class="pre">prefix</span></tt> only, to simplify its usage.</p>
+<p>Let us now create a kernel that uses this module:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">program</span> <span class="o">=</span> <span class="n">thr</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">KERNEL void test(int *arr)</span>
+<span class="s">{</span>
+<span class="s">    int idx = get_global_id(0);</span>
+<span class="s">    int a = arr[idx];</span>
+<span class="s">    arr[idx] = ${add}(x);</span>
+<span class="s">}</span>
+<span class="s">&quot;&quot;&quot;</span><span class="p">,</span>
+<span class="n">render_kwds</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">add</span><span class="o">=</span><span class="n">add</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Before the compilation render keywords are inspected, and if a module object is encountered, the following things happen:</p>
+<ol class="arabic simple">
+<li>This object&#8217;s <tt class="docutils literal"><span class="pre">render_kwds</span></tt> are inspected recursively and any modules there are rendered in the same way as described here, producing a source file.</li>
+<li>The module itself gets assigned a new prefix and its template function is rendered with this prefix.
+The result is attached to the source file.</li>
+<li>The corresponding value in the current <tt class="docutils literal"><span class="pre">render_kwds</span></tt> is replaced by the newly assigned prefix.</li>
+</ol>
+<p>With the code above, the rendered module will produce the code</p>
+<div class="highlight-python"><pre>WITHIN_KERNEL int _module0(int x)
+{
+    return x + 1;
+}</pre>
+</div>
+<p>and the <tt class="docutils literal"><span class="pre">add</span></tt> keyword in the <tt class="docutils literal"><span class="pre">render_kwds</span></tt> gets its value changed to <tt class="docutils literal"><span class="pre">_module0</span></tt>.
+Then the main code is rendered and appended to the previously renderd parts, giving</p>
+<div class="highlight-python"><pre>WITHIN_KERNEL int _module0(int x)
+{
+    return x + 1;
+}
+
+KERNEL void test(int *arr)
+{
+    int idx = get_global_id(0);
+    int a = arr[idx];
+    arr[idx] = _module0(x);
+}</pre>
+</div>
+<p>which is then passed to the compiler.</p>
+<p>Modules can reference snippets in their <tt class="docutils literal"><span class="pre">render_kwds</span></tt>, which, in turn, can reference other modules.
+This produces a tree-like structure with the snippet made from the code passed by user at the root.
+When it is rendered, it is traversed depth-first, modules are extracted from it and arranged in a flat list in the order of appearance.
+Their positions in <tt class="docutils literal"><span class="pre">render_kwds</span></tt> are replaced by assigned prefixes.
+This flat list is then rendered, producing a single source file being fed to the compiler.</p>
+</div>
+<div class="section" id="shortcuts">
+<h2>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h2>
+<p>The amount of boilerplate code can be somewhat reduced by using <a class="reference internal" href="api/cluda.html#reikna.cluda.Snippet.create" title="reikna.cluda.Snippet.create"><tt class="xref py py-meth docutils literal"><span class="pre">Snippet.create</span></tt></a> and <a class="reference internal" href="api/cluda.html#reikna.cluda.Module.create" title="reikna.cluda.Module.create"><tt class="xref py py-meth docutils literal"><span class="pre">Module.create</span></tt></a> constructors.
+For the snippet above it would look like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">add</span> <span class="o">=</span> <span class="n">Snippet</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">varname</span><span class="p">:</span> <span class="s">&quot;${varname} + ${num}&quot;</span><span class="p">,</span>
+    <span class="n">render_kwds</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Note that the lambda here serves only to provide the information about the <tt class="docutils literal"><span class="pre">Mako</span></tt> def&#8217;s signature.
+Therefore it should return the template code regardless of the actual arguments passed.</p>
+<p>If the argument list is created dynamically, you can use <a class="reference internal" href="api/helpers.html#reikna.helpers.template_def" title="reikna.helpers.template_def"><tt class="xref py py-func docutils literal"><span class="pre">template_def()</span></tt></a> with a normal constructor:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">argnames</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;varname&#39;</span><span class="p">]</span>
+<span class="n">add</span> <span class="o">=</span> <span class="n">Snippet</span><span class="p">(</span>
+    <span class="n">template_def</span><span class="p">(</span><span class="n">argnames</span><span class="p">,</span> <span class="s">&quot;${varname} + ${num}&quot;</span><span class="p">),</span>
+    <span class="n">render_kwds</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>With modules it is a bit simpler, since their call signature is fixed.
+The shortcut constructor creates a <tt class="docutils literal"><span class="pre">Mako</span></tt> def with a single argument called <tt class="docutils literal"><span class="pre">prefix</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">add</span> <span class="o">=</span> <span class="n">Module</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">WITHIN_KERNEL int ${prefix}(int x)</span>
+<span class="s">{</span>
+<span class="s">    return x + ${num};</span>
+<span class="s">}</span>
+<span class="s">&quot;&quot;&quot;</span><span class="p">,</span>
+<span class="n">render_kwds</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Of course, both <a class="reference internal" href="api/cluda.html#reikna.cluda.Snippet" title="reikna.cluda.Snippet"><tt class="xref py py-class docutils literal"><span class="pre">Snippet</span></tt></a> and <a class="reference internal" href="api/cluda.html#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a> constructors can take already created <tt class="docutils literal"><span class="pre">Mako</span></tt> defs, which is convenient if you keep templates in a separate file.</p>
+</div>
+<div class="section" id="nontrivial-example">
+<h2>Nontrivial example<a class="headerlink" href="#nontrivial-example" title="Permalink to this headline">¶</a></h2>
+<p>Modules were introduced to help split big kernels into small reusable pieces which in <tt class="docutils literal"><span class="pre">CUDA</span></tt> or <tt class="docutils literal"><span class="pre">OpenCL</span></tt> program would be put into different source or header files.
+For example, a random number generator may be assembled from a function generating random integers, a function transforming these integers into random numbers with a certain distribution, and an <a class="reference internal" href="api/computations.html#reikna.elementwise.Elementwise" title="reikna.elementwise.Elementwise"><tt class="xref py py-class docutils literal"><span class="pre">reikna.elementwise.Elementwise</span></tt></a> computation calling these functions and saving results to global memory.
+These two functions can be extracted into separate modules, so that a user could call them from some custom kernel if he does not need to store the intermediate results.</p>
+<p>Going further with this example, one notices that functions that produce randoms with sophisticated distributions are often based on simpler distributions.
+For instance, the commonly used Marsaglia algorithm for generating Gamma-distributed random numbers requires several uniformly and normally distributed randoms.
+Normally distributed randoms, in turn, require several uniformly distributed randoms &#8212; with the range which differs from the one for uniformly distributed randoms used by the initial Gamma distribution.
+Instead of copy-pasting the function or setting its parameters dynamically (which in more complicated cases may affect the performance), one just specifies the dependencies between modules and lets the underlying system handle things.</p>
+<p>The final render tree may look like:</p>
+<div class="highlight-python"><pre>Snippet(
+    Elementwise,
+    render_kwds = {
+      base_rng -&gt; Snippet(...)
+      gamma -&gt; Snippet(
+    }            Gamma,
+                 render_kwds = {
+                   uniform -&gt; Snippet(...)
+                   normal -&gt; Snippet(
+                 }             Normal,
+               )               render_kwds = {
+                                 uniform -&gt; Snippet(...)
+                               }
+                             )</pre>
+</div>
+</div>
 </div>
 
 
@@ -64,12 +225,23 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tutorial: modules and snippets</a><ul>
+<li><a class="reference internal" href="#snippets">Snippets</a></li>
+<li><a class="reference internal" href="#modules">Modules</a></li>
+<li><a class="reference internal" href="#shortcuts">Shortcuts</a></li>
+<li><a class="reference internal" href="#nontrivial-example">Nontrivial example</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
-  <p class="topless"><a href="tutorial-advanced.html"
-                        title="previous chapter">Tutorial: advanced topics</a></p>
+  <p class="topless"><a href="introduction.html"
+                        title="previous chapter">Introduction</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="api/index.html"
-                        title="next chapter">API reference</a></p>
+  <p class="topless"><a href="tutorial-basic.html"
+                        title="next chapter">Tutorial: basics</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/tutorial-modules.txt"
@@ -102,12 +274,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="api/index.html" title="API reference"
+          <a href="tutorial-basic.html" title="Tutorial: basics"
              >next</a> |</li>
         <li class="right" >
-          <a href="tutorial-advanced.html" title="Tutorial: advanced topics"
+          <a href="introduction.html" title="Introduction"
              >previous</a> |</li>
-        <li><a href="index.html">reikna 0.2.3+dev.54564e4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.0+dev.247843e documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

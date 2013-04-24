@@ -3,8 +3,14 @@ Release history
 ***************
 
 
-0.2.3 (current development version)
+0.3.0 (current development version)
 ===================================
+
+Under construction.
+
+
+0.2.3 (25 Apr 2013)
+===================
 
 * ADDED: explicit :py:meth:`~reikna.cluda.api.Thread.release` (primarily for certain rare CUDA use cases).
 
@@ -15,6 +21,8 @@ Release history
 * CHANGED: CLUDA ``Context`` was renamed to ``Thread``, to avoid confusion with ``PyCUDA``/``PyOpenCL`` contexts.
 
 * CHANGED: signature of :py:meth:`~reikna.cluda.api.Thread.create`; it can filter devices now, and supports interactive mode.
+
+* CHANGED: :py:class:`~reikna.cluda.Module` with ``snippet=True`` is now :py:class:`~reikna.cluda.Snippet`
 
 * FIXED: added ``transformation.mako`` and ``cbrng_ref.py`` to the distribution package.
 
@@ -40,9 +48,9 @@ Release history
 
 * ADDED: Module support in CLUDA; see :ref:`tutorial-modules` for details.
 
-* ADDED: :py:func:`~reikna.helpers.template_func`.
+* ADDED: :py:func:`~reikna.helpers.template_def`.
 
-* CHANGED: :py:func:`~reikna.cluda.kernel.render_template_source` is the main renderer now.
+* CHANGED: ``reikna.cluda.kernel.render_template_source`` is the main renderer now.
 
 * CHANGED: ``FuncCollector`` class was removed; functions are now used as common modules.
 
