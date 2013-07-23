@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Transformations &mdash; reikna 0.2.4 documentation</title>
+    <title>Transformations &mdash; reikna 0.3.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.2.4',
+        VERSION:     '0.3.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,10 +24,24 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.2.4 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.3.0 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Release history" href="../history.html" />
-    <link rel="prev" title="Computations" href="computations.html" /> 
+    <link rel="prev" title="Computations" href="computations.html" />
+ 
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34054312-1']);
+    _gaq.push(['_setDomainName', 'publicfields.net']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+
   </head>
   <body>
     <div class="related">
@@ -45,7 +59,7 @@
         <li class="right" >
           <a href="computations.html" title="Computations"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.2.4 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.0 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -60,36 +74,36 @@
 <p>This module contains a number of pre-created transformations.</p>
 <dl class="function">
 <dt id="reikna.transformations.combine_complex">
-<tt class="descclassname">reikna.transformations.</tt><tt class="descname">combine_complex</tt><big>(</big><big>)</big><a class="headerlink" href="#reikna.transformations.combine_complex" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">reikna.transformations.</tt><tt class="descname">combine_complex</tt><big>(</big><em>output_arr_t</em><big>)</big><a class="headerlink" href="#reikna.transformations.combine_complex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a transformation which joins two real inputs into complex output
-(1 output, 2 inputs): <tt class="docutils literal"><span class="pre">out</span> <span class="pre">=</span> <span class="pre">in_re</span> <span class="pre">+</span> <span class="pre">1j</span> <span class="pre">*</span> <span class="pre">in_im</span></tt>.</p>
+(1 output, 2 inputs): <tt class="docutils literal"><span class="pre">output</span> <span class="pre">=</span> <span class="pre">real</span> <span class="pre">+</span> <span class="pre">1j</span> <span class="pre">*</span> <span class="pre">imag</span></tt>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="reikna.transformations.identity">
-<tt class="descclassname">reikna.transformations.</tt><tt class="descname">identity</tt><big>(</big><big>)</big><a class="headerlink" href="#reikna.transformations.identity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an identity transformation (1 output, 1 input): <tt class="docutils literal"><span class="pre">output1</span> <span class="pre">=</span> <span class="pre">input1</span></tt>.</p>
+<tt class="descclassname">reikna.transformations.</tt><tt class="descname">identity</tt><big>(</big><em>arr_t</em><big>)</big><a class="headerlink" href="#reikna.transformations.identity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an identity transformation (1 output, 1 input): <tt class="docutils literal"><span class="pre">output</span> <span class="pre">=</span> <span class="pre">input</span></tt>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="reikna.transformations.scale_const">
-<tt class="descclassname">reikna.transformations.</tt><tt class="descname">scale_const</tt><big>(</big><em>multiplier</em><big>)</big><a class="headerlink" href="#reikna.transformations.scale_const" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">reikna.transformations.</tt><tt class="descname">scale_const</tt><big>(</big><em>arr_t</em>, <em>coeff</em><big>)</big><a class="headerlink" href="#reikna.transformations.scale_const" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a scaling transformation with fixed parameter (1 output, 1 input):
-<tt class="docutils literal"><span class="pre">output1</span> <span class="pre">=</span> <span class="pre">input1</span> <span class="pre">*</span> <span class="pre">&lt;multiplier&gt;</span></tt>.</p>
+<tt class="docutils literal"><span class="pre">output</span> <span class="pre">=</span> <span class="pre">input</span> <span class="pre">*</span> <span class="pre">&lt;coeff&gt;</span></tt>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="reikna.transformations.scale_param">
-<tt class="descclassname">reikna.transformations.</tt><tt class="descname">scale_param</tt><big>(</big><big>)</big><a class="headerlink" href="#reikna.transformations.scale_param" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">reikna.transformations.</tt><tt class="descname">scale_param</tt><big>(</big><em>arr_t</em>, <em>coeff_dtype</em><big>)</big><a class="headerlink" href="#reikna.transformations.scale_param" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a scaling transformation with dynamic parameter (1 output, 1 input, 1 scalar):
-<tt class="docutils literal"><span class="pre">output1</span> <span class="pre">=</span> <span class="pre">input1</span> <span class="pre">*</span> <span class="pre">scalar1</span></tt>.</p>
+<tt class="docutils literal"><span class="pre">output</span> <span class="pre">=</span> <span class="pre">input</span> <span class="pre">*</span> <span class="pre">coeff</span></tt>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="reikna.transformations.split_complex">
-<tt class="descclassname">reikna.transformations.</tt><tt class="descname">split_complex</tt><big>(</big><big>)</big><a class="headerlink" href="#reikna.transformations.split_complex" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">reikna.transformations.</tt><tt class="descname">split_complex</tt><big>(</big><em>input_arr_t</em><big>)</big><a class="headerlink" href="#reikna.transformations.split_complex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a transformation which splits complex input into two real outputs
-(2 outputs, 1 input): <tt class="docutils literal"><span class="pre">out_re</span> <span class="pre">=</span> <span class="pre">Re(in),</span> <span class="pre">out_im</span> <span class="pre">=</span> <span class="pre">Im(in)</span></tt>.</p>
+(2 outputs, 1 input): <tt class="docutils literal"><span class="pre">real</span> <span class="pre">=</span> <span class="pre">Re(input),</span> <span class="pre">imag</span> <span class="pre">=</span> <span class="pre">Im(input)</span></tt>.</p>
 </dd></dl>
 
 </div>
@@ -143,7 +157,7 @@
         <li class="right" >
           <a href="computations.html" title="Computations"
              >previous</a> |</li>
-        <li><a href="../index.html">reikna 0.2.4 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.0 documentation</a> &raquo;</li>
           <li><a href="index.html" >API reference</a> &raquo;</li> 
       </ul>
     </div>

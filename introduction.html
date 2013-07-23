@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Introduction &mdash; reikna 0.2.4 documentation</title>
+    <title>Introduction &mdash; reikna 0.3.0 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.4',
+        VERSION:     '0.3.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,9 +24,23 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.2.4 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.3.0 documentation" href="index.html" />
     <link rel="next" title="Tutorial: modules and snippets" href="tutorial-modules.html" />
-    <link rel="prev" title="Reikna, the pure Python GPGPU library" href="index.html" /> 
+    <link rel="prev" title="Reikna, the pure Python GPGPU library" href="index.html" />
+ 
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34054312-1']);
+    _gaq.push(['_setDomainName', 'publicfields.net']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+
   </head>
   <body>
     <div class="related">
@@ -44,7 +58,7 @@
         <li class="right" >
           <a href="index.html" title="Reikna, the pure Python GPGPU library"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.2.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -152,7 +166,7 @@ If there is only one public object in the module (which is recommended), it is a
 <p>Now it&#8217;s time for the main part of the functionality.
 <tt class="docutils literal"><span class="pre">reikna</span></tt> provides GPGPU algorithms in the form of <a class="reference internal" href="api/core.html#reikna.core.Computation" title="reikna.core.Computation"><tt class="xref py py-class docutils literal"><span class="pre">Computation</span></tt></a>-based cores and <a class="reference internal" href="api/core.html#reikna.core.Transformation" title="reikna.core.Transformation"><tt class="xref py py-class docutils literal"><span class="pre">Transformation</span></tt></a>-based plug-ins.
 Computations contain the algorithm itself; examples are matrix multiplication, reduction, sorting and so on.
-Transformations are elementwise operations on inputs or outputs of computations, used for scaling, typecast and other auxiliary purposes.
+Transformations are parallel operations on inputs or outputs of computations, used for scaling, typecast and other auxiliary purposes.
 Transformations are compiled into the main computation kernel and are therefore quite cheap in terms of performance.</p>
 <p>As an example, we will consider the matrix multiplication.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span>
@@ -172,8 +186,9 @@ Transformations are compiled into the main computation kernel and are therefore 
 <span class="n">b_dev</span> <span class="o">=</span> <span class="n">thr</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 <span class="n">res_dev</span> <span class="o">=</span> <span class="n">thr</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">shape1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">shape2</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
-<span class="n">dot</span> <span class="o">=</span> <span class="n">MatrixMul</span><span class="p">(</span><span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">prepare_for</span><span class="p">(</span><span class="n">res_dev</span><span class="p">,</span> <span class="n">a_dev</span><span class="p">,</span> <span class="n">b_dev</span><span class="p">)</span>
-<span class="n">dot</span><span class="p">(</span><span class="n">res_dev</span><span class="p">,</span> <span class="n">a_dev</span><span class="p">,</span> <span class="n">b_dev</span><span class="p">)</span>
+<span class="n">dot</span> <span class="o">=</span> <span class="n">MatrixMul</span><span class="p">(</span><span class="n">a_dev</span><span class="p">,</span> <span class="n">b_dev</span><span class="p">,</span> <span class="n">out_arr</span><span class="o">=</span><span class="n">res_dev</span><span class="p">)</span>
+<span class="n">dotc</span> <span class="o">=</span> <span class="n">dot</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">thr</span><span class="p">)</span>
+<span class="n">dotc</span><span class="p">(</span><span class="n">res_dev</span><span class="p">,</span> <span class="n">a_dev</span><span class="p">,</span> <span class="n">b_dev</span><span class="p">)</span>
 
 <span class="n">res_reference</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
 
@@ -181,24 +196,20 @@ Transformations are compiled into the main computation kernel and are therefore 
 </pre></div>
 </div>
 <p>Most of the code above should be already familiar, with the exception of the creation of <a class="reference internal" href="api/computations.html#reikna.matrixmul.MatrixMul" title="reikna.matrixmul.MatrixMul"><tt class="xref py py-class docutils literal"><span class="pre">MatrixMul</span></tt></a> object.
-As any other class derived from <a class="reference internal" href="api/core.html#reikna.core.Computation" title="reikna.core.Computation"><tt class="xref py py-class docutils literal"><span class="pre">Computation</span></tt></a>, it requires a <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread" title="reikna.cluda.api.Thread"><tt class="xref py py-class docutils literal"><span class="pre">Thread</span></tt></a> as a constructor argument.
-The thread serves as a source of data about the target API and device, and provides an execution queue.</p>
-<p>Before usage the object has to be prepared.
-It does not happen in the constructor, since the transformations may be connected after that, and they would invalidate previous preparation.
-The preparation consists of passing to the <a class="reference internal" href="api/core.html#reikna.core.Computation.prepare_for" title="reikna.core.Computation.prepare_for"><tt class="xref py py-meth docutils literal"><span class="pre">prepare_for()</span></tt></a> array and scalar arguments we will use to call the computation (or stub <a class="reference internal" href="api/core.html#reikna.core.ArrayValue" title="reikna.core.ArrayValue"><tt class="xref py py-class docutils literal"><span class="pre">ArrayValue</span></tt></a> and <a class="reference internal" href="api/core.html#reikna.core.ScalarValue" title="reikna.core.ScalarValue"><tt class="xref py py-class docutils literal"><span class="pre">ScalarValue</span></tt></a> objects, if real arrays are not available at preparation time), along with some optional keyword arguments.
-The list of required positional and keyword arguments for any computation is specified in its documentation; for <a class="reference internal" href="api/computations.html#reikna.matrixmul.MatrixMul" title="reikna.matrixmul.MatrixMul"><tt class="xref py py-class docutils literal"><span class="pre">MatrixMul</span></tt></a> it is <a class="reference internal" href="api/computations.html#reikna.matrixmul.MatrixMul.prepare_for" title="reikna.matrixmul.MatrixMul.prepare_for"><tt class="xref py py-class docutils literal"><span class="pre">MatrixMul.prepare_for()</span></tt></a>.</p>
-<p>From the documentation we know that we need three array parameters, and we ask <a class="reference internal" href="api/computations.html#reikna.matrixmul.MatrixMul" title="reikna.matrixmul.MatrixMul"><tt class="xref py py-class docutils literal"><span class="pre">MatrixMul</span></tt></a> to prepare itself to handle arrays <tt class="docutils literal"><span class="pre">res_dev</span></tt>, <tt class="docutils literal"><span class="pre">a_dev</span></tt> and <tt class="docutils literal"><span class="pre">b_dev</span></tt> when they are passed to it.</p>
-<p>After the preparation we can use the object as a callable, passing it arrays and scalars with the same data types and shapes we used to prepare the computation.</p>
+The computation constructor takes two array-like objects, representing arrays that will participate in the computation.
+After that the computation object has to be compiled.
+The <a class="reference internal" href="api/core.html#reikna.core.Computation.compile" title="reikna.core.Computation.compile"><tt class="xref py py-meth docutils literal"><span class="pre">compile()</span></tt></a> method requires a <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread" title="reikna.cluda.api.Thread"><tt class="xref py py-class docutils literal"><span class="pre">Thread</span></tt></a> object, which serves as a source of data about the target API and device, and provides an execution queue.</p>
 </div>
 <div class="section" id="transformations">
 <h2>Transformations<a class="headerlink" href="#transformations" title="Permalink to this headline">¶</a></h2>
 <p>Now imagine that you want to multiply complex matrices, but real and imaginary parts of your data are kept in separate arrays.
-You could create elementwise kernels that would join your data into arrays of complex values, but this would require additional storage and additional calls to GPU.
+You could create additional kernels that would join your data into arrays of complex values, but this would require additional storage and additional calls to GPU.
 Transformation API allows you to connect these transformations to the core computation &#8212; matrix multiplication &#8212; effectively adding the code into the main computation kernel and changing its signature.</p>
 <p>Let us change the previous example and connect transformations to it.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span>
 <span class="kn">import</span> <span class="nn">reikna.cluda</span> <span class="kn">as</span> <span class="nn">cluda</span>
+<span class="kn">from</span> <span class="nn">reikna.core</span> <span class="kn">import</span> <span class="n">Type</span>
 <span class="kn">from</span> <span class="nn">reikna.matrixmul</span> <span class="kn">import</span> <span class="n">MatrixMul</span>
 <span class="kn">from</span> <span class="nn">reikna.transformations</span> <span class="kn">import</span> <span class="n">combine_complex</span>
 
@@ -212,16 +223,26 @@ Transformation API allows you to connect these transformations to the core compu
 <span class="n">a_im</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="o">*</span><span class="n">shape1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 <span class="n">b_re</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="o">*</span><span class="n">shape2</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 <span class="n">b_im</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="o">*</span><span class="n">shape2</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">a_re_dev</span><span class="p">,</span> <span class="n">a_im_dev</span><span class="p">,</span> <span class="n">b_re_dev</span><span class="p">,</span> <span class="n">b_im_dev</span> <span class="o">=</span> <span class="p">[</span><span class="n">thr</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a_re</span><span class="p">,</span> <span class="n">a_im</span><span class="p">,</span> <span class="n">b_re</span><span class="p">,</span> <span class="n">b_im</span><span class="p">]]</span>
 
+<span class="n">arrays</span> <span class="o">=</span> <span class="p">[</span><span class="n">thr</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">a_re</span><span class="p">,</span> <span class="n">a_im</span><span class="p">,</span> <span class="n">b_re</span><span class="p">,</span> <span class="n">b_im</span><span class="p">]]</span>
+<span class="n">a_re_dev</span><span class="p">,</span> <span class="n">a_im_dev</span><span class="p">,</span> <span class="n">b_re_dev</span><span class="p">,</span> <span class="n">b_im_dev</span> <span class="o">=</span> <span class="n">arrays</span>
+
+<span class="n">a_type</span> <span class="o">=</span> <span class="n">Type</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">complex64</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">shape1</span><span class="p">)</span>
+<span class="n">b_type</span> <span class="o">=</span> <span class="n">Type</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">complex64</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">shape2</span><span class="p">)</span>
 <span class="n">res_dev</span> <span class="o">=</span> <span class="n">thr</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">shape1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">shape2</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">complex64</span><span class="p">)</span>
 
-<span class="n">dot</span> <span class="o">=</span> <span class="n">MatrixMul</span><span class="p">(</span><span class="n">thr</span><span class="p">)</span>
-<span class="n">dot</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">combine_complex</span><span class="p">(),</span> <span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;a_re&#39;</span><span class="p">,</span> <span class="s">&#39;a_im&#39;</span><span class="p">])</span>
-<span class="n">dot</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">combine_complex</span><span class="p">(),</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;b_re&#39;</span><span class="p">,</span> <span class="s">&#39;b_im&#39;</span><span class="p">])</span>
-<span class="n">dot</span><span class="o">.</span><span class="n">prepare_for</span><span class="p">(</span><span class="n">res_dev</span><span class="p">,</span> <span class="n">a_re_dev</span><span class="p">,</span> <span class="n">a_im_dev</span><span class="p">,</span> <span class="n">b_re_dev</span><span class="p">,</span> <span class="n">b_im_dev</span><span class="p">)</span>
+<span class="n">dot</span> <span class="o">=</span> <span class="n">MatrixMul</span><span class="p">(</span><span class="n">a_type</span><span class="p">,</span> <span class="n">b_type</span><span class="p">,</span> <span class="n">out_arr</span><span class="o">=</span><span class="n">res_dev</span><span class="p">)</span>
+<span class="n">combine_a</span> <span class="o">=</span> <span class="n">combine_complex</span><span class="p">(</span><span class="n">a_type</span><span class="p">)</span>
+<span class="n">combine_b</span> <span class="o">=</span> <span class="n">combine_complex</span><span class="p">(</span><span class="n">b_type</span><span class="p">)</span>
 
-<span class="n">dot</span><span class="p">(</span><span class="n">res_dev</span><span class="p">,</span> <span class="n">a_re_dev</span><span class="p">,</span> <span class="n">a_im_dev</span><span class="p">,</span> <span class="n">b_re_dev</span><span class="p">,</span> <span class="n">b_im_dev</span><span class="p">)</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">parameter</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="n">combine_a</span><span class="p">,</span> <span class="n">combine_a</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">a_re</span><span class="o">=</span><span class="n">combine_a</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">a_im</span><span class="o">=</span><span class="n">combine_a</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">parameter</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="n">combine_b</span><span class="p">,</span> <span class="n">combine_b</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">b_re</span><span class="o">=</span><span class="n">combine_b</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">b_im</span><span class="o">=</span><span class="n">combine_b</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
+
+<span class="n">dotc</span> <span class="o">=</span> <span class="n">dot</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">thr</span><span class="p">)</span>
+
+<span class="n">dotc</span><span class="p">(</span><span class="n">res_dev</span><span class="p">,</span> <span class="n">a_re_dev</span><span class="p">,</span> <span class="n">a_im_dev</span><span class="p">,</span> <span class="n">b_re_dev</span><span class="p">,</span> <span class="n">b_im_dev</span><span class="p">)</span>
 
 <span class="n">res_reference</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a_re</span> <span class="o">+</span> <span class="mi">1j</span> <span class="o">*</span> <span class="n">a_im</span><span class="p">,</span> <span class="n">b_re</span> <span class="o">+</span> <span class="mi">1j</span> <span class="o">*</span> <span class="n">b_im</span><span class="p">)</span>
 
@@ -230,9 +251,9 @@ Transformation API allows you to connect these transformations to the core compu
 </div>
 <p>We have used a pre-created transformation <a class="reference internal" href="api/transformations.html#reikna.transformations.combine_complex" title="reikna.transformations.combine_complex"><tt class="xref py py-func docutils literal"><span class="pre">combine_complex()</span></tt></a> from <a class="reference internal" href="api/transformations.html#module-reikna.transformations" title="reikna.transformations"><tt class="xref py py-mod docutils literal"><span class="pre">reikna.transformations</span></tt></a> for simplicity; developing a custom transformation is also possible and described in <a class="reference internal" href="tutorial-advanced.html#tutorial-advanced-transformation"><em>Writing a transformation</em></a>.
 From the documentation we know that it transforms two inputs into one output; therefore we need to attach it to one of the inputs of <tt class="docutils literal"><span class="pre">dot</span></tt> (identified by its name), and provide names for two new inputs.</p>
-<p>Names to attach to are obtained from the documentation for the particular computation. By convention they are the same as the names of positional arguments to <a class="reference internal" href="api/core.html#reikna.core.Computation.prepare_for" title="reikna.core.Computation.prepare_for"><tt class="xref py py-meth docutils literal"><span class="pre">prepare_for()</span></tt></a>; for <a class="reference internal" href="api/computations.html#reikna.matrixmul.MatrixMul" title="reikna.matrixmul.MatrixMul"><tt class="xref py py-class docutils literal"><span class="pre">MatrixMul</span></tt></a> these are <tt class="docutils literal"><span class="pre">out</span></tt>, <tt class="docutils literal"><span class="pre">a</span></tt> and <tt class="docutils literal"><span class="pre">b</span></tt>.</p>
+<p>Names to attach to are obtained from the documentation for the particular computation; for <a class="reference internal" href="api/computations.html#reikna.matrixmul.MatrixMul" title="reikna.matrixmul.MatrixMul"><tt class="xref py py-class docutils literal"><span class="pre">MatrixMul</span></tt></a> these are <tt class="docutils literal"><span class="pre">out</span></tt>, <tt class="docutils literal"><span class="pre">a</span></tt> and <tt class="docutils literal"><span class="pre">b</span></tt>.</p>
 <p>In the current example we have attached the transformations to both inputs.
-Note that <tt class="docutils literal"><span class="pre">prepare_for</span></tt> has a new signature now, and the resulting <tt class="docutils literal"><span class="pre">dot</span></tt> object now works with split complex numbers.</p>
+Note that the computation has a new signature now, and the compiled <tt class="docutils literal"><span class="pre">dot</span></tt> object now works with split complex numbers.</p>
 </div>
 </div>
 
@@ -295,7 +316,7 @@ Note that <tt class="docutils literal"><span class="pre">prepare_for</span></tt>
         <li class="right" >
           <a href="index.html" title="Reikna, the pure Python GPGPU library"
              >previous</a> |</li>
-        <li><a href="index.html">reikna 0.2.4 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
