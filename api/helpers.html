@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Helpers &mdash; reikna 0.3.0 documentation</title>
+    <title>Helpers &mdash; reikna 0.3.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.0',
+        VERSION:     '0.3.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.0 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.3.1 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="CLUDA layer" href="cluda.html" />
     <link rel="prev" title="Version queries" href="version.html" />
@@ -59,7 +59,7 @@
         <li class="right" >
           <a href="version.html" title="Version queries"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.1 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -82,15 +82,15 @@ which allows one to address its elements as attributes
 
 <dl class="function">
 <dt id="reikna.helpers.bounding_power_of_2">
-<tt class="descclassname">reikna.helpers.</tt><tt class="descname">bounding_power_of_2</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#reikna.helpers.bounding_power_of_2" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">reikna.helpers.</tt><tt class="descname">bounding_power_of_2</tt><big>(</big><em>num</em><big>)</big><a class="headerlink" href="#reikna.helpers.bounding_power_of_2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns closest number of the form <tt class="docutils literal"><span class="pre">2**m</span></tt> such it is greater or equal to <tt class="docutils literal"><span class="pre">n</span></tt>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="reikna.helpers.factors">
-<tt class="descclassname">reikna.helpers.</tt><tt class="descname">factors</tt><big>(</big><em>n</em>, <em>limit=None</em><big>)</big><a class="headerlink" href="#reikna.helpers.factors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the list of pairs <tt class="docutils literal"><span class="pre">(factor,</span> <span class="pre">n/factor)</span></tt> for all factors of <tt class="docutils literal"><span class="pre">n</span></tt>
-(including 1 and <tt class="docutils literal"><span class="pre">n</span></tt>), sorted by <tt class="docutils literal"><span class="pre">factor</span></tt>.
+<tt class="descclassname">reikna.helpers.</tt><tt class="descname">factors</tt><big>(</big><em>num</em>, <em>limit=None</em><big>)</big><a class="headerlink" href="#reikna.helpers.factors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of pairs <tt class="docutils literal"><span class="pre">(factor,</span> <span class="pre">num/factor)</span></tt> for all factors of <tt class="docutils literal"><span class="pre">num</span></tt>
+(including 1 and <tt class="docutils literal"><span class="pre">num</span></tt>), sorted by <tt class="docutils literal"><span class="pre">factor</span></tt>.
 If <tt class="docutils literal"><span class="pre">limit</span></tt> is set, only pairs with <tt class="docutils literal"><span class="pre">factor</span> <span class="pre">&lt;=</span> <span class="pre">limit</span></tt> are returned.</p>
 </dd></dl>
 
@@ -103,7 +103,7 @@ If <tt class="docutils literal"><span class="pre">limit</span></tt> is set, only
 
 <dl class="function">
 <dt id="reikna.helpers.log2">
-<tt class="descclassname">reikna.helpers.</tt><tt class="descname">log2</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#reikna.helpers.log2" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">reikna.helpers.</tt><tt class="descname">log2</tt><big>(</big><em>num</em><big>)</big><a class="headerlink" href="#reikna.helpers.log2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Integer-valued logarigthm with base 2.
 If <tt class="docutils literal"><span class="pre">n</span></tt> is not a power of 2, the result is rounded to the smallest number.</p>
 </dd></dl>
@@ -155,9 +155,9 @@ If <tt class="docutils literal"><span class="pre">template</span></tt> already h
 
 <dl class="function">
 <dt id="reikna.helpers.wrap_in_tuple">
-<tt class="descclassname">reikna.helpers.</tt><tt class="descname">wrap_in_tuple</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#reikna.helpers.wrap_in_tuple" title="Permalink to this definition">¶</a></dt>
-<dd><p>If <tt class="docutils literal"><span class="pre">x</span></tt> is a sequence, converts it to a <tt class="docutils literal"><span class="pre">tuple</span></tt>,
-otherwise returns a tuple with a single element <tt class="docutils literal"><span class="pre">x</span></tt>.</p>
+<tt class="descclassname">reikna.helpers.</tt><tt class="descname">wrap_in_tuple</tt><big>(</big><em>seq_or_elem</em><big>)</big><a class="headerlink" href="#reikna.helpers.wrap_in_tuple" title="Permalink to this definition">¶</a></dt>
+<dd><p>If <tt class="docutils literal"><span class="pre">seq_or_elem</span></tt> is a sequence, converts it to a <tt class="docutils literal"><span class="pre">tuple</span></tt>,
+otherwise returns a tuple with a single element <tt class="docutils literal"><span class="pre">seq_or_elem</span></tt>.</p>
 </dd></dl>
 
 </div>
@@ -211,7 +211,7 @@ otherwise returns a tuple with a single element <tt class="docutils literal"><sp
         <li class="right" >
           <a href="version.html" title="Version queries"
              >previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.1 documentation</a> &raquo;</li>
           <li><a href="index.html" >API reference</a> &raquo;</li> 
       </ul>
     </div>

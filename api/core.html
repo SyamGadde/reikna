@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Core functionality &mdash; reikna 0.3.0 documentation</title>
+    <title>Core functionality &mdash; reikna 0.3.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.0',
+        VERSION:     '0.3.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.0 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.3.1 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Computations" href="computations.html" />
     <link rel="prev" title="CLUDA layer" href="cluda.html" />
@@ -59,7 +59,7 @@
         <li class="right" >
           <a href="cluda.html" title="CLUDA layer"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.1 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -209,6 +209,20 @@ returns the resulting <tt class="docutils literal"><span class="pre">BoundArgume
 </tr>
 </tbody>
 </table>
+<dl class="attribute">
+<dt id="reikna.core.Computation.signature">
+<tt class="descname">signature</tt><a class="headerlink" href="#reikna.core.Computation.signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference internal" href="#reikna.core.Signature" title="reikna.core.Signature"><tt class="xref py py-class docutils literal"><span class="pre">Signature</span></tt></a> object representing current computation signature
+(taking into account connected transformations).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="reikna.core.Computation.parameter">
+<tt class="descname">parameter</tt><a class="headerlink" href="#reikna.core.Computation.parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>A named tuple of <a class="reference internal" href="#reikna.core.computation.ComputationParameter" title="reikna.core.computation.ComputationParameter"><tt class="xref py py-class docutils literal"><span class="pre">ComputationParameter</span></tt></a> objects
+corresponding to parameters from the current <a class="reference internal" href="#reikna.core.Computation.signature" title="reikna.core.Computation.signature"><tt class="xref py py-attr docutils literal"><span class="pre">signature</span></tt></a>.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="reikna.core.Computation._build_plan">
 <tt class="descname">_build_plan</tt><big>(</big><em>plan_factory</em>, <em>device_params</em>, <em>*args</em><big>)</big><a class="headerlink" href="#reikna.core.Computation._build_plan" title="Permalink to this definition">¶</a></dt>
@@ -234,18 +248,11 @@ of this computation object.</li>
 </table>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="reikna.core.Computation.signature">
-<tt class="descname">signature</tt><a class="headerlink" href="#reikna.core.Computation.signature" title="Permalink to this definition">¶</a></dt>
-<dd><p>A <a class="reference internal" href="#reikna.core.Signature" title="reikna.core.Signature"><tt class="xref py py-class docutils literal"><span class="pre">Signature</span></tt></a> object representing current computation signature
-(taking into account connected transformations).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="reikna.core.Computation.parameter">
-<tt class="descname">parameter</tt><a class="headerlink" href="#reikna.core.Computation.parameter" title="Permalink to this definition">¶</a></dt>
-<dd><p>A named tuple of <a class="reference internal" href="#reikna.core.computation.ComputationParameter" title="reikna.core.computation.ComputationParameter"><tt class="xref py py-class docutils literal"><span class="pre">ComputationParameter</span></tt></a> objects
-corresponding to parameters from the current <a class="reference internal" href="#reikna.core.Computation.signature" title="reikna.core.Computation.signature"><tt class="xref py py-attr docutils literal"><span class="pre">signature</span></tt></a>.</p>
+<dl class="method">
+<dt id="reikna.core.Computation._update_attributes">
+<tt class="descname">_update_attributes</tt><big>(</big><big>)</big><a class="headerlink" href="#reikna.core.Computation._update_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates <tt class="docutils literal"><span class="pre">signature</span></tt> and <tt class="docutils literal"><span class="pre">parameter</span></tt> attributes.
+Called by the methods that change the signature.</p>
 </dd></dl>
 
 <dl class="method">
@@ -257,7 +264,7 @@ and returns a <a class="reference internal" href="#reikna.core.computation.Compu
 
 <dl class="method">
 <dt id="reikna.core.Computation.connect">
-<tt class="descname">connect</tt><big>(</big><em>_comp_connector</em>, <em>_tr</em>, <em>_tr_connector</em>, <em>**tr_from_comp</em><big>)</big><a class="headerlink" href="#reikna.core.Computation.connect" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">connect</tt><big>(</big><em>_comp_connector</em>, <em>_trf</em>, <em>_tr_connector</em>, <em>**tr_from_comp</em><big>)</big><a class="headerlink" href="#reikna.core.Computation.connect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Connect a transformation to the computation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -267,7 +274,7 @@ and returns a <a class="reference internal" href="#reikna.core.computation.Compu
 <li><strong>_comp_connector</strong> &#8211; connection target &#8212;
 a <a class="reference internal" href="#reikna.core.computation.ComputationParameter" title="reikna.core.computation.ComputationParameter"><tt class="xref py py-class docutils literal"><span class="pre">ComputationParameter</span></tt></a> object
 beloning to this computation object, or a string with its name.</li>
-<li><strong>_tr</strong> &#8211; a <a class="reference internal" href="#reikna.core.Transformation" title="reikna.core.Transformation"><tt class="xref py py-class docutils literal"><span class="pre">Transformation</span></tt></a> object.</li>
+<li><strong>_trf</strong> &#8211; a <a class="reference internal" href="#reikna.core.Transformation" title="reikna.core.Transformation"><tt class="xref py py-class docutils literal"><span class="pre">Transformation</span></tt></a> object.</li>
 <li><strong>_tr_connector</strong> &#8211; connector on the side of the transformation &#8212;
 a <a class="reference internal" href="#reikna.core.transformation.TransformationParameter" title="reikna.core.transformation.TransformationParameter"><tt class="xref py py-class docutils literal"><span class="pre">TransformationParameter</span></tt></a> object
 beloning to <tt class="docutils literal"><span class="pre">tr</span></tt>, or a string with its name.</li>
@@ -357,7 +364,7 @@ Can be used as a substitute of an array for functions
 which are only interested in array metadata.</p>
 <dl class="method">
 <dt id="reikna.core.computation.ComputationParameter.connect">
-<tt class="descname">connect</tt><big>(</big><em>_tr</em>, <em>_tr_connector</em>, <em>**tr_from_comp</em><big>)</big><a class="headerlink" href="#reikna.core.computation.ComputationParameter.connect" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">connect</tt><big>(</big><em>_trf</em>, <em>_tr_connector</em>, <em>**tr_from_comp</em><big>)</big><a class="headerlink" href="#reikna.core.computation.ComputationParameter.connect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shortcut for <a class="reference internal" href="#reikna.core.Computation.connect" title="reikna.core.Computation.connect"><tt class="xref py py-meth docutils literal"><span class="pre">connect()</span></tt></a>
 with this parameter as a first argument.</p>
 </dd></dl>
@@ -436,7 +443,7 @@ from array or array-like object <tt class="docutils literal"><span class="pre">a
 
 <span class="target" id="module-reikna.core.transformation"></span><dl class="class">
 <dt id="reikna.core.transformation.TransformationParameter">
-<em class="property">class </em><tt class="descclassname">reikna.core.transformation.</tt><tt class="descname">TransformationParameter</tt><big>(</big><em>tr</em>, <em>name</em>, <em>type_</em><big>)</big><a class="headerlink" href="#reikna.core.transformation.TransformationParameter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">reikna.core.transformation.</tt><tt class="descname">TransformationParameter</tt><big>(</big><em>trf</em>, <em>name</em>, <em>type_</em><big>)</big><a class="headerlink" href="#reikna.core.transformation.TransformationParameter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#reikna.core.Type" title="reikna.core.Type"><tt class="xref py py-class docutils literal"><span class="pre">Type</span></tt></a></p>
 <p>Represents a typed transformation parameter.
 Can be used as a substitute of an array for functions
@@ -573,7 +580,7 @@ using the indices used by the caller of the transformation.</p>
         <li class="right" >
           <a href="cluda.html" title="CLUDA layer"
              >previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.1 documentation</a> &raquo;</li>
           <li><a href="index.html" >API reference</a> &raquo;</li> 
       </ul>
     </div>
