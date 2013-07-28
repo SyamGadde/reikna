@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Core functionality &mdash; reikna 0.3.2+dev.3647c35 documentation</title>
+    <title>Core functionality &mdash; reikna 0.3.4+dev.d952702 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.2+dev.3647c35',
+        VERSION:     '0.3.4+dev.d952702',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.2+dev.3647c35 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.3.4+dev.d952702 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Computations" href="computations.html" />
     <link rel="prev" title="CLUDA layer" href="cluda.html" />
@@ -59,7 +59,7 @@
         <li class="right" >
           <a href="cluda.html" title="CLUDA layer"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.2+dev.3647c35 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.4+dev.d952702 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -290,6 +290,18 @@ computation parameters as keys, and
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The resulting parameter order is determined by traversing
+the graph of connections depth-first (starting from the initial computation parameters),
+with the additional condition: the nodes do not change their order
+in the same branching level (i.e. in the list of computation or
+transformation parameters, both of which are ordered).</p>
+<p class="last">For example, consider a computation with parameters <tt class="docutils literal"><span class="pre">(a,</span> <span class="pre">b,</span> <span class="pre">c,</span> <span class="pre">d)</span></tt>.
+If you connect a transformation <tt class="docutils literal"><span class="pre">(a',</span> <span class="pre">c)</span> <span class="pre">-&gt;</span> <span class="pre">a</span></tt>, the resulting computation
+will have the signature <tt class="docutils literal"><span class="pre">(a',</span> <span class="pre">b,</span> <span class="pre">c,</span> <span class="pre">d)</span></tt> (as opposed to <tt class="docutils literal"><span class="pre">(a',</span> <span class="pre">c,</span> <span class="pre">b,</span> <span class="pre">d)</span></tt>
+it would have for the pure depth-first traversal).</p>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -580,7 +592,7 @@ using the indices used by the caller of the transformation.</p>
         <li class="right" >
           <a href="cluda.html" title="CLUDA layer"
              >previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.2+dev.3647c35 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.4+dev.d952702 documentation</a> &raquo;</li>
           <li><a href="index.html" >API reference</a> &raquo;</li> 
       </ul>
     </div>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: modules and snippets &mdash; reikna 0.3.2+dev.3647c35 documentation</title>
+    <title>Tutorial: modules and snippets &mdash; reikna 0.3.4+dev.d952702 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.3.2+dev.3647c35',
+        VERSION:     '0.3.4+dev.d952702',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.2+dev.3647c35 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.3.4+dev.d952702 documentation" href="index.html" />
     <link rel="next" title="Tutorial: basics" href="tutorial-basic.html" />
     <link rel="prev" title="Introduction" href="introduction.html" />
  
@@ -58,7 +58,7 @@
         <li class="right" >
           <a href="introduction.html" title="Introduction"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.2+dev.3647c35 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.4+dev.d952702 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -174,6 +174,8 @@ This produces a tree-like structure with the snippet made from the code passed b
 When it is rendered, it is traversed depth-first, modules are extracted from it and arranged in a flat list in the order of appearance.
 Their positions in <tt class="docutils literal"><span class="pre">render_kwds</span></tt> are replaced by assigned prefixes.
 This flat list is then rendered, producing a single source file being fed to the compiler.</p>
+<p>Note that if the same module object was used without arguments in several other modules or in the kernel itself, it will only be rendered once.
+Therefore one can create a &#8220;root&#8221; module with the data structure declaration and then use that structure in other modules without producing type errors on compilation.</p>
 </div>
 <div class="section" id="shortcuts">
 <h2>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h2>
@@ -212,7 +214,7 @@ If you provide your own signature, its first positional argument will receive th
 <p>Sometimes you may want to pass a module or a snippet inside a template as an attribute of a custom object.
 In order for CLUDA to be able to discover and process it without modifying your original object, you need to make your object comply to a discovery protocol.
 The protocol method takes a processing function and is expected to return a <strong>new object</strong> of the same class with the processing function applied to all the attributes that may contain a module or a snippet.
-By default, objects of type <tt class="docutils literal"><span class="pre">tuple</span></tt>, <tt class="docutils literal"><span class="pre">list</span></tt>, <tt class="docutils literal"><span class="pre">dict</span></tt> and <a class="reference internal" href="api/helpers.html#reikna.helpers.AttrDict" title="reikna.helpers.AttrDict"><tt class="xref py py-class docutils literal"><span class="pre">AttrDict</span></tt></a> are discoverable.</p>
+By default, objects of type <tt class="docutils literal"><span class="pre">tuple</span></tt>, <tt class="docutils literal"><span class="pre">list</span></tt>, and <tt class="docutils literal"><span class="pre">dict</span></tt> are discoverable.</p>
 <p>For example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
 
@@ -315,7 +317,7 @@ Instead of copy-pasting the function or setting its parameters dynamically (whic
         <li class="right" >
           <a href="introduction.html" title="Introduction"
              >previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.2+dev.3647c35 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.4+dev.d952702 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

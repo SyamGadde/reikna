@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: advanced topics &mdash; reikna 0.3.2+dev.3647c35 documentation</title>
+    <title>Tutorial: advanced topics &mdash; reikna 0.3.4+dev.d952702 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.3.2+dev.3647c35',
+        VERSION:     '0.3.4+dev.d952702',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.2+dev.3647c35 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.3.4+dev.d952702 documentation" href="index.html" />
     <link rel="next" title="API reference" href="api/index.html" />
     <link rel="prev" title="Tutorial: basics" href="tutorial-basic.html" />
  
@@ -58,7 +58,7 @@
         <li class="right" >
           <a href="tutorial-basic.html" title="Tutorial: basics"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.2+dev.3647c35 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.4+dev.d952702 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -157,8 +157,8 @@ The method must return a filled <a class="reference internal" href="api/core.htm
 
     <span class="n">template</span> <span class="o">=</span> <span class="n">template_from</span><span class="p">(</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        &lt;%def name=&#39;testcomp(k_output, k_input1, k_input2, k_param)&#39;&gt;</span>
-<span class="sd">        ${kernel_definition}</span>
+<span class="sd">        &lt;%def name=&#39;testcomp(kernel_declaration, k_output, k_input1, k_input2, k_param)&#39;&gt;</span>
+<span class="sd">        ${kernel_declaration}</span>
 <span class="sd">        {</span>
 <span class="sd">            VIRTUAL_SKIP_THREADS;</span>
 <span class="sd">            int idx = virtual_global_id(0);</span>
@@ -182,10 +182,11 @@ The method must return a filled <a class="reference internal" href="api/core.htm
 <p>Every kernel call is based on the separate <tt class="docutils literal"><span class="pre">Mako</span></tt> template def.
 The template can be specified as a string using <a class="reference internal" href="api/helpers.html#reikna.helpers.template_def" title="reikna.helpers.template_def"><tt class="xref py py-func docutils literal"><span class="pre">template_def()</span></tt></a>, or loaded as a separate file.
 Usual pattern in this case is to call the template file same as the file where the computation class is defined (for example, <tt class="docutils literal"><span class="pre">testcomp.mako</span></tt> for <tt class="docutils literal"><span class="pre">testcomp.py</span></tt>), and store it in some variable on module load using <a class="reference internal" href="api/helpers.html#reikna.helpers.template_for" title="reikna.helpers.template_for"><tt class="xref py py-func docutils literal"><span class="pre">template_for()</span></tt></a> as <tt class="docutils literal"><span class="pre">TEMPLATE</span> <span class="pre">=</span> <span class="pre">template_for(__file__)</span></tt>.</p>
-<p>The template function should take the same number of positional arguments as the kernel; you can view <tt class="docutils literal"><span class="pre">&lt;%def</span> <span class="pre">...</span> <span class="pre">&gt;</span></tt> part as an actual kernel definition, but with the arguments being <a class="reference internal" href="api/core.html#reikna.core.transformation.KernelParameter" title="reikna.core.transformation.KernelParameter"><tt class="xref py py-class docutils literal"><span class="pre">KernelParameter</span></tt></a> objects containing parameter metadata.</p>
+<p>The template function should take the same number of positional arguments as the kernel plus one; you can view <tt class="docutils literal"><span class="pre">&lt;%def</span> <span class="pre">...</span> <span class="pre">&gt;</span></tt> part as an actual kernel definition, but with the arguments being <a class="reference internal" href="api/core.html#reikna.core.transformation.KernelParameter" title="reikna.core.transformation.KernelParameter"><tt class="xref py py-class docutils literal"><span class="pre">KernelParameter</span></tt></a> objects containing parameter metadata.
+The first argument will contain the string with the kernel declaration.</p>
 <p>Also, depending on whether the corresponding argument is an output array, an input array or a scalar parameter, the object can be used as <tt class="docutils literal"><span class="pre">${obj.store_idx}(index,</span> <span class="pre">val)</span></tt>, <tt class="docutils literal"><span class="pre">${obj.load_idx}(index)</span></tt> or <tt class="docutils literal"><span class="pre">${obj}</span></tt>.
 This will produce the corresponding request to the global memory or kernel arguments.</p>
-<p>If you need additional device functions, they have to be specified between <tt class="docutils literal"><span class="pre">&lt;%def</span> <span class="pre">...</span> <span class="pre">&gt;</span></tt> and <tt class="docutils literal"><span class="pre">${kernel_definition}</span></tt> (the latter is where the actual kernel signature will be rendered).
+<p>If you need additional device functions, they have to be specified between <tt class="docutils literal"><span class="pre">&lt;%def</span> <span class="pre">...</span> <span class="pre">&gt;</span></tt> and <tt class="docutils literal"><span class="pre">${kernel_declaration}</span></tt>.
 Obviously, these functions can still use <tt class="docutils literal"><span class="pre">dtype</span></tt> and <tt class="docutils literal"><span class="pre">ctype</span></tt> object properties, although <tt class="docutils literal"><span class="pre">store_idx</span></tt> and <tt class="docutils literal"><span class="pre">load_idx</span></tt> will most likely result in compilation error (since they are rendered as macros using main kernel arguments).</p>
 <p>Since kernel call parameters (<tt class="docutils literal"><span class="pre">global_size</span></tt> and <tt class="docutils literal"><span class="pre">local_size</span></tt>) are specified on creation, all kernel calls are rendered as CLUDA static kernels (see <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread.compile_static" title="reikna.cluda.api.Thread.compile_static"><tt class="xref py py-meth docutils literal"><span class="pre">compile_static()</span></tt></a>) and therefore can use all the corresponding macros and functions (like <a class="reference internal" href="api/cluda.html#virtual_global_flat_id" title="virtual_global_flat_id"><tt class="xref c c-func docutils literal"><span class="pre">virtual_global_flat_id()</span></tt></a> in our kernel).
 Also, they must have <a class="reference internal" href="api/cluda.html#VIRTUAL_SKIP_THREADS" title="VIRTUAL_SKIP_THREADS"><tt class="xref c c-macro docutils literal"><span class="pre">VIRTUAL_SKIP_THREADS</span></tt></a> at the beginning of the kernel which remainder threads (which can be present, for example, if the workgroup size is not a multiple of the global size).</p>
@@ -251,7 +252,7 @@ Also, they must have <a class="reference internal" href="api/cluda.html#VIRTUAL_
         <li class="right" >
           <a href="tutorial-basic.html" title="Tutorial: basics"
              >previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.2+dev.3647c35 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.4+dev.d952702 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

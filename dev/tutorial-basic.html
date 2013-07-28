@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: basics &mdash; reikna 0.3.2+dev.3647c35 documentation</title>
+    <title>Tutorial: basics &mdash; reikna 0.3.4+dev.d952702 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.3.2+dev.3647c35',
+        VERSION:     '0.3.4+dev.d952702',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.2+dev.3647c35 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.3.4+dev.d952702 documentation" href="index.html" />
     <link rel="next" title="Tutorial: advanced topics" href="tutorial-advanced.html" />
     <link rel="prev" title="Tutorial: modules and snippets" href="tutorial-modules.html" />
  
@@ -58,7 +58,7 @@
         <li class="right" >
           <a href="tutorial-modules.html" title="Tutorial: modules and snippets"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.2+dev.3647c35 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.4+dev.d952702 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -166,7 +166,8 @@ But user-supplied parameters (<tt class="docutils literal"><span class="pre">&gt
 <span class="go">param:Annotation(float32)</span>
 </pre></div>
 </div>
-<p>Notice that the order of the final signature is obtained by traversing the transformation tree depth-first, starting from the base parameters.</p>
+<p>Notice that the order of the final signature is obtained by traversing the transformation tree depth-first, starting from the base parameters.
+For more details see the note in the documentation for <a class="reference internal" href="api/core.html#reikna.core.Computation.connect" title="reikna.core.Computation.connect"><tt class="xref py py-meth docutils literal"><span class="pre">connect()</span></tt></a>.</p>
 <p>The resulting computation returns the value <tt class="docutils literal"><span class="pre">in1</span> <span class="pre">+</span> <span class="pre">(in2_prime</span> <span class="pre">*</span> <span class="pre">param2)</span> <span class="pre">+</span> <span class="pre">param</span></tt> split in half.
 In order to run it, we have to compile it first.
 When <tt class="docutils literal"><span class="pre">prepare_for</span></tt> is called, the data types and shapes of the given arguments will be propagated to the roots and used to prepare the original computation.</p>
@@ -261,7 +262,7 @@ On the other hand, input transformations can be safely connected to existing nod
         <li class="right" >
           <a href="tutorial-modules.html" title="Tutorial: modules and snippets"
              >previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.2+dev.3647c35 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.4+dev.d952702 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
