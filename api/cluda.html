@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>CLUDA layer &mdash; reikna 0.3.3 documentation</title>
+    <title>CLUDA layer &mdash; reikna 0.3.4 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.3',
+        VERSION:     '0.3.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.3 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.3.4 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Core functionality" href="core.html" />
     <link rel="prev" title="Helpers" href="helpers.html" />
@@ -59,7 +59,7 @@
         <li class="right" >
           <a href="helpers.html" title="Helpers"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.3 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.4 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -533,7 +533,12 @@ representing the physical address on the device (for instance, <a class="referen
 <dt id="reikna.cluda.api.Thread.compile_static">
 <tt class="descname">compile_static</tt><big>(</big><em>template_src</em>, <em>name</em>, <em>global_size</em>, <em>local_size=None</em>, <em>render_args=None</em>, <em>render_kwds=None</em><big>)</big><a class="headerlink" href="#reikna.cluda.api.Thread.compile_static" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a kernel object with fixed call sizes,
-which allows to overcome some backend limitations.</p>
+which allows to overcome some backend limitations.
+Global and local sizes can have any length, providing that
+<tt class="docutils literal"><span class="pre">len(global_size)</span> <span class="pre">&gt;=</span> <span class="pre">len(local_size)</span></tt>, and the total number of work items and work groups
+is less than the corresponding total number available for the device.
+In order to get IDs and sizes in such kernels, virtual size functions have to be used
+(see <a class="reference internal" href="#VIRTUAL_SKIP_THREADS" title="VIRTUAL_SKIP_THREADS"><tt class="xref c c-macro docutils literal"><span class="pre">VIRTUAL_SKIP_THREADS</span></tt></a> and others for details).</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -541,10 +546,11 @@ which allows to overcome some backend limitations.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>template_src</strong> &#8211; Mako template or a template source to render</li>
 <li><strong>name</strong> &#8211; name of the kernel function</li>
-<li><strong>global_size</strong> &#8211; global size to be used</li>
-<li><strong>local_size</strong> &#8211; local size to be used.
+<li><strong>global_size</strong> &#8211; global size to be used, in <strong>row-major</strong> order.</li>
+<li><strong>local_size</strong> &#8211; local size to be used, in <strong>row-major</strong> order.
 If <tt class="docutils literal"><span class="pre">None</span></tt>, some suitable one will be picked.</li>
-<li><strong>local_mem</strong> &#8211; (<strong>CUDA API only</strong>) amount of dynamically allocated local memory to be used (in bytes).</li>
+<li><strong>local_mem</strong> &#8211; (<strong>CUDA API only</strong>) amount of dynamically allocated local memory
+to be used (in bytes).</li>
 <li><strong>render_args</strong> &#8211; a list of parameters to be passed as positional arguments
 to the template.</li>
 <li><strong>render_kwds</strong> &#8211; a dictionary with additional parameters
@@ -872,36 +878,53 @@ for values <tt class="docutils literal"><span class="pre">rho,</span> <span clas
 <dd><p>Modifier for inline functions.</p>
 </dd></dl>
 
+<dl class="macro">
+<dt id="SIZE_T">
+<tt class="descname">SIZE_T</tt><a class="headerlink" href="#SIZE_T" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type of local/global IDs and sizes.
+Equal to <tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span></tt> for CUDA, and <tt class="docutils literal"><span class="pre">size_t</span></tt> for OpenCL
+(which can be 32- or 64-bit unsigned integer, depending on the device).</p>
+</dd></dl>
+
 <dl class="function">
 <dt id="get_local_id">
-int <tt class="descname">get_local_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_local_id" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_local_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_local_id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="get_group_id">
-int <tt class="descname">get_group_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_group_id" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_group_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_group_id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="get_global_id">
-int <tt class="descname">get_global_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_global_id" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_global_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_global_id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="get_local_size">
-int <tt class="descname">get_local_size</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_local_size" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_local_size</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_local_size" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="get_num_groups">
-int <tt class="descname">get_num_groups</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_num_groups" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_num_groups</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_num_groups" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="get_global_size">
-int <tt class="descname">get_global_size</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_global_size" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_global_size</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_global_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Local, group and global identifiers and sizes.
 In case of CUDA mimic the behavior of corresponding OpenCL functions.</p>
+</dd></dl>
+
+<dl class="macro">
+<dt id="VSIZE_T">
+<tt class="descname">VSIZE_T</tt><a class="headerlink" href="#VSIZE_T" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type of local/global IDs in the virtual grid.
+It is separate from <a class="reference internal" href="#SIZE_T" title="SIZE_T"><tt class="xref c c-macro docutils literal"><span class="pre">SIZE_T</span></tt></a> because the former is intended to be equivalent to
+what the backend is using, while <tt class="docutils literal"><span class="pre">VSIZE_T</span></tt> is a separate type and can be made larger
+than <tt class="docutils literal"><span class="pre">SIZE_T</span></tt> in the future if necessary.</p>
 </dd></dl>
 
 <dl class="macro">
@@ -913,46 +936,44 @@ It skips all the empty threads resulting from fitting call parameters into backe
 
 <dl class="function">
 <dt id="virtual_local_id">
-int <tt class="descname">virtual_local_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_local_id" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_local_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_local_id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="virtual_group_id">
-int <tt class="descname">virtual_group_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_group_id" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_group_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_group_id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="virtual_global_id">
-int <tt class="descname">virtual_global_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_global_id" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_global_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_global_id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="virtual_local_size">
-int <tt class="descname">virtual_local_size</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_local_size" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_local_size</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_local_size" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="virtual_num_groups">
-int <tt class="descname">virtual_num_groups</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_num_groups" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_num_groups</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_num_groups" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="virtual_global_size">
-int <tt class="descname">virtual_global_size</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_global_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Only available in <a class="reference internal" href="#reikna.cluda.api.StaticKernel" title="reikna.cluda.api.StaticKernel"><tt class="xref py py-class docutils literal"><span class="pre">StaticKernel</span></tt></a> objects obtained from <a class="reference internal" href="#reikna.cluda.api.Thread.compile_static" title="reikna.cluda.api.Thread.compile_static"><tt class="xref py py-meth docutils literal"><span class="pre">compile_static()</span></tt></a>.
-Since its dimensions can differ from actual call dimensions, these functions have to be used.</p>
-</dd></dl>
+<a class="reference internal" href="#VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_global_size</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_global_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="function">
 <dt id="virtual_global_flat_id">
-int <tt class="descname">virtual_global_flat_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_global_flat_id" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_global_flat_id</tt><big>(</big><big>)</big><a class="headerlink" href="#virtual_global_flat_id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="virtual_global_flat_size">
-int <tt class="descname">virtual_global_flat_size</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_global_flat_size" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_global_flat_size</tt><big>(</big><big>)</big><a class="headerlink" href="#virtual_global_flat_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Only available in <a class="reference internal" href="#reikna.cluda.api.StaticKernel" title="reikna.cluda.api.StaticKernel"><tt class="xref py py-class docutils literal"><span class="pre">StaticKernel</span></tt></a> objects obtained from <a class="reference internal" href="#reikna.cluda.api.Thread.compile_static" title="reikna.cluda.api.Thread.compile_static"><tt class="xref py py-meth docutils literal"><span class="pre">compile_static()</span></tt></a>.
-useful for addressing input and output arrays.</p>
+Since its dimensions can differ from actual call dimensions, these functions have to be used.</p>
 </dd></dl>
 
 </div>
@@ -1123,7 +1144,7 @@ which takes into account types supported by GPUs.</p>
         <li class="right" >
           <a href="helpers.html" title="Helpers"
              >previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.3 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.4 documentation</a> &raquo;</li>
           <li><a href="index.html" >API reference</a> &raquo;</li> 
       </ul>
     </div>

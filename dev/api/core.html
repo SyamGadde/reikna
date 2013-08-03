@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Core functionality &mdash; reikna 0.3.4+dev.d952702 documentation</title>
+    <title>Core functionality &mdash; reikna 0.3.5+dev.882a04e documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.4+dev.d952702',
+        VERSION:     '0.3.5+dev.882a04e',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.4+dev.d952702 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.3.5+dev.882a04e documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Computations" href="computations.html" />
     <link rel="prev" title="CLUDA layer" href="cluda.html" />
@@ -59,7 +59,7 @@
         <li class="right" >
           <a href="cluda.html" title="CLUDA layer"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.4+dev.d952702 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.5+dev.882a04e documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -416,8 +416,8 @@ The <tt class="docutils literal"><span class="pre">computation</span></tt> value
 <a class="reference internal" href="#reikna.core.computation.KernelArgument" title="reikna.core.computation.KernelArgument"><tt class="xref py py-class docutils literal"><span class="pre">KernelArgument</span></tt></a> objects,
 or scalar values wrapped in <tt class="docutils literal"><span class="pre">numpy.ndarray</span></tt>,
 that are going to be passed to the kernel during execution.</li>
-<li><strong>global_size</strong> &#8211; global size to use for the call.</li>
-<li><strong>local_size</strong> &#8211; local size to use for the call.
+<li><strong>global_size</strong> &#8211; global size to use for the call, in <strong>row-major</strong> order.</li>
+<li><strong>local_size</strong> &#8211; local size to use for the call, in <strong>row-major</strong> order.
 If <tt class="docutils literal"><span class="pre">None</span></tt>, the local size will be picked automatically.</li>
 <li><strong>render_kwds</strong> &#8211; dictionary with additional values used to render the template.</li>
 </ul>
@@ -592,7 +592,7 @@ using the indices used by the caller of the transformation.</p>
         <li class="right" >
           <a href="cluda.html" title="CLUDA layer"
              >previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.4+dev.d952702 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.5+dev.882a04e documentation</a> &raquo;</li>
           <li><a href="index.html" >API reference</a> &raquo;</li> 
       </ul>
     </div>

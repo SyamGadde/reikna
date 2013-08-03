@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Release history &mdash; reikna 0.3.3 documentation</title>
+    <title>Release history &mdash; reikna 0.3.4 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.3.3',
+        VERSION:     '0.3.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.3 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.3.4 documentation" href="index.html" />
     <link rel="prev" title="Transformations" href="api/transformations.html" />
  
 <script type="text/javascript">
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="api/transformations.html" title="Transformations"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.4 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -65,6 +65,19 @@
             
   <div class="section" id="release-history">
 <h1>Release history<a class="headerlink" href="#release-history" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="aug-2013">
+<h2>0.3.4 (3 Aug 2013)<a class="headerlink" href="#aug-2013" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>CHANGED: virtual sizes algorithms were rewritten and are now more maintainable.
+In addition, virtual sizes can now handle any number of dimensions of local and global size,
+providing the device can support the corresponding total number of work items and groups.</li>
+<li>CHANGED: id- and size- getting kernel functions now have return types corresponding to their equivalents.
+Virtual size functions have their own independent return type.</li>
+<li>CHANGED: <tt class="docutils literal"><span class="pre">Thread.compile_static()</span></tt> and <tt class="docutils literal"><span class="pre">ComputationPlan.kernel_call()</span></tt> take global and local sizes in the row-major order, to correspond to the matrix indexing in load/store macros.</li>
+<li>FIXED: requirements for PyCUDA extras (a currently non-existent version was specified).</li>
+<li>FIXED: an error in gamma distribution sampler, which lead to slightly wrong shape of the resulting distribution.</li>
+</ul>
+</div>
 <div class="section" id="jul-2013">
 <h2>0.3.3 (29 Jul 2013)<a class="headerlink" href="#jul-2013" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -219,6 +232,7 @@ between internal allocations &#8212; necessary for nested computations.</li>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Release history</a><ul>
+<li><a class="reference internal" href="#aug-2013">0.3.4 (3 Aug 2013)</a></li>
 <li><a class="reference internal" href="#jul-2013">0.3.3 (29 Jul 2013)</a></li>
 <li><a class="reference internal" href="#id1">0.3.2 (29 Jul 2013)</a></li>
 <li><a class="reference internal" href="#id2">0.3.1 (25 Jul 2013)</a></li>
@@ -271,7 +285,7 @@ between internal allocations &#8212; necessary for nested computations.</li>
         <li class="right" >
           <a href="api/transformations.html" title="Transformations"
              >previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.4 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

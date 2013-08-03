@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: modules and snippets &mdash; reikna 0.3.4+dev.d952702 documentation</title>
+    <title>Tutorial: modules and snippets &mdash; reikna 0.3.5+dev.882a04e documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.3.4+dev.d952702',
+        VERSION:     '0.3.5+dev.882a04e',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.4+dev.d952702 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.3.5+dev.882a04e documentation" href="index.html" />
     <link rel="next" title="Tutorial: basics" href="tutorial-basic.html" />
     <link rel="prev" title="Introduction" href="introduction.html" />
  
@@ -58,7 +58,7 @@
         <li class="right" >
           <a href="introduction.html" title="Introduction"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.4+dev.d952702 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.5+dev.882a04e documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -91,7 +91,7 @@ Consider the following snippet:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">program</span> <span class="o">=</span> <span class="n">thr</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">KERNEL void test(int *arr)</span>
 <span class="s">{</span>
-<span class="s">    int idx = get_global_id(0);</span>
+<span class="s">    const SIZE_T idx = get_global_id(0);</span>
 <span class="s">    int a = arr[idx];</span>
 <span class="s">    arr[idx] = ${add(&#39;x&#39;)};</span>
 <span class="s">}</span>
@@ -102,7 +102,7 @@ Consider the following snippet:</p>
 <p>As a result, the code that gets compiled is</p>
 <div class="highlight-python"><pre>KERNEL void test(int *arr)
 {
-    int idx = get_global_id(0);
+    const SIZE_T idx = get_global_id(0);
     int a = arr[idx];
     arr[idx] = x + 1;
 }</pre>
@@ -132,7 +132,7 @@ If the module contains only one entity that is supposed to be used by the parent
 <div class="highlight-python"><div class="highlight"><pre><span class="n">program</span> <span class="o">=</span> <span class="n">thr</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">KERNEL void test(int *arr)</span>
 <span class="s">{</span>
-<span class="s">    int idx = get_global_id(0);</span>
+<span class="s">    const SIZE_T idx = get_global_id(0);</span>
 <span class="s">    int a = arr[idx];</span>
 <span class="s">    arr[idx] = ${add(2)}(x);</span>
 <span class="s">}</span>
@@ -162,7 +162,7 @@ Then the main code is rendered and appended to the previously renderd parts, giv
 
 KERNEL void test(int *arr)
 {
-    int idx = get_global_id(0);
+    const SIZE_T idx = get_global_id(0);
     int a = arr[idx];
     arr[idx] = _module0(x);
 }</pre>
@@ -317,7 +317,7 @@ Instead of copy-pasting the function or setting its parameters dynamically (whic
         <li class="right" >
           <a href="introduction.html" title="Introduction"
              >previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.4+dev.d952702 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.5+dev.882a04e documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

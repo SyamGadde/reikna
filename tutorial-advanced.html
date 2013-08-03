@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: advanced topics &mdash; reikna 0.3.3 documentation</title>
+    <title>Tutorial: advanced topics &mdash; reikna 0.3.4 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.3.3',
+        VERSION:     '0.3.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.3 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.3.4 documentation" href="index.html" />
     <link rel="next" title="API reference" href="api/index.html" />
     <link rel="prev" title="Tutorial: basics" href="tutorial-basic.html" />
  
@@ -58,7 +58,7 @@
         <li class="right" >
           <a href="tutorial-basic.html" title="Tutorial: basics"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.4 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -96,7 +96,7 @@ Transformations are based on the class <a class="reference internal" href="api/c
         <span class="n">Parameter</span><span class="p">(</span><span class="s">&#39;param&#39;</span><span class="p">,</span> <span class="n">Annotation</span><span class="p">(</span><span class="n">Type</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">))),</span>
     <span class="p">],</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    int idx = ${idxs[0]};</span>
+<span class="sd">    VSIZE_T idx = ${idxs[0]};</span>
 <span class="sd">    float i1 = ${in1.load_same};</span>
 <span class="sd">    float i2 = ${in2.load_idx}(100 - idx) * ${param};</span>
 <span class="sd">    ${out1.store_same}(i1);</span>
@@ -161,7 +161,7 @@ The method must return a filled <a class="reference internal" href="api/core.htm
 <span class="sd">        ${kernel_declaration}</span>
 <span class="sd">        {</span>
 <span class="sd">            VIRTUAL_SKIP_THREADS;</span>
-<span class="sd">            int idx = virtual_global_id(0);</span>
+<span class="sd">            const VSIZE_T idx = virtual_global_id(0);</span>
 <span class="sd">            ${k_output.ctype} result =</span>
 <span class="sd">                ${k_input1.load_idx}(idx) +</span>
 <span class="sd">                ${mul}(${k_input2.load_idx}(idx), ${k_param});</span>
@@ -252,7 +252,7 @@ Also, they must have <a class="reference internal" href="api/cluda.html#VIRTUAL_
         <li class="right" >
           <a href="tutorial-basic.html" title="Tutorial: basics"
              >previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.4 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
