@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Computations &mdash; reikna 0.3.5 documentation</title>
+    <title>Computations &mdash; reikna 0.3.6 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.5',
+        VERSION:     '0.3.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.5 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.3.6 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Transformations" href="transformations.html" />
     <link rel="prev" title="Core functionality" href="core.html" />
@@ -59,7 +59,7 @@
         <li class="right" >
           <a href="core.html" title="Core functionality"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.5 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.6 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -85,7 +85,14 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>parameters</strong> &#8211; a list of <a class="reference internal" href="core.html#reikna.core.Parameter" title="reikna.core.Parameter"><tt class="xref py py-class docutils literal"><span class="pre">Parameter</span></tt></a> objects.</li>
-<li><strong>code</strong> &#8211; a source code for a template def.</li>
+<li><strong>code</strong> &#8211; a source code for the computation.
+Can be a <a class="reference internal" href="cluda.html#reikna.cluda.Snippet" title="reikna.cluda.Snippet"><tt class="xref py py-class docutils literal"><span class="pre">Snippet</span></tt></a> object which will be passed
+<a class="reference internal" href="core.html#reikna.core.Indices" title="reikna.core.Indices"><tt class="xref py py-class docutils literal"><span class="pre">Indices</span></tt></a> object for the <tt class="docutils literal"><span class="pre">guiding_array</span></tt> as the first
+positional argument, and <a class="reference internal" href="core.html#reikna.core.transformation.KernelParameter" title="reikna.core.transformation.KernelParameter"><tt class="xref py py-class docutils literal"><span class="pre">KernelParameter</span></tt></a> objects
+corresponding to <tt class="docutils literal"><span class="pre">parameters</span></tt> as the rest of positional arguments.
+If it is a string, such <a class="reference internal" href="cluda.html#reikna.cluda.Snippet" title="reikna.cluda.Snippet"><tt class="xref py py-class docutils literal"><span class="pre">Snippet</span></tt></a> will be created out of it,
+with the parameter names <tt class="docutils literal"><span class="pre">idxs</span></tt> for the first one and the names of <tt class="docutils literal"><span class="pre">parameters</span></tt>
+for the remaining ones.</li>
 <li><strong>guiding_array</strong> &#8211; an tuple with the array shape, or the name of one of <tt class="docutils literal"><span class="pre">parameters</span></tt>.
 By default, the first parameter is chosen.</li>
 <li><strong>render_kwds</strong> &#8211; a dictionary with render keywords for the <tt class="docutils literal"><span class="pre">code</span></tt>.</li>
@@ -105,6 +112,14 @@ By default, the first parameter is chosen.</li>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="reikna.pureparallel.PureParallel.from_trf">
+<em class="property">classmethod </em><tt class="descname">from_trf</tt><big>(</big><em>trf</em>, <em>guiding_array=None</em><big>)</big><a class="headerlink" href="#reikna.pureparallel.PureParallel.from_trf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a <tt class="docutils literal"><span class="pre">PureParallel</span></tt> instance from a <a class="reference internal" href="core.html#reikna.core.Transformation" title="reikna.core.Transformation"><tt class="xref py py-class docutils literal"><span class="pre">Transformation</span></tt></a> object.
+<tt class="docutils literal"><span class="pre">guiding_array</span></tt> can be a string with a name of an array parameter from <tt class="docutils literal"><span class="pre">trf</span></tt>,
+or the corresponding <a class="reference internal" href="core.html#reikna.core.transformation.TransformationParameter" title="reikna.core.transformation.TransformationParameter"><tt class="xref py py-class docutils literal"><span class="pre">TransformationParameter</span></tt></a> object.</p>
 </dd></dl>
 
 </dd></dl>
@@ -295,7 +310,8 @@ which effectively halves the performance.</p>
 <dl class="method">
 <dt id="reikna.fft.FFT.compiled_signature">
 <tt class="descname">compiled_signature</tt><big>(</big><em>output:o</em>, <em>input:i</em>, <em>inverse:s</em><big>)</big><a class="headerlink" href="#reikna.fft.FFT.compiled_signature" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
+<dd><p><tt class="docutils literal"><span class="pre">output</span></tt> and <tt class="docutils literal"><span class="pre">input</span></tt> may be the same array.</p>
+<table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -890,7 +906,7 @@ Uses the same algorithm as the module.</p>
         <li class="right" >
           <a href="core.html" title="Core functionality"
              >previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.5 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.6 documentation</a> &raquo;</li>
           <li><a href="index.html" >API reference</a> &raquo;</li> 
       </ul>
     </div>

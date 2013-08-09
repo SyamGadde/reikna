@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Core functionality &mdash; reikna 0.3.5 documentation</title>
+    <title>Core functionality &mdash; reikna 0.3.6 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.5',
+        VERSION:     '0.3.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.5 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.3.6 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Computations" href="computations.html" />
     <link rel="prev" title="CLUDA layer" href="cluda.html" />
@@ -59,7 +59,7 @@
         <li class="right" >
           <a href="cluda.html" title="CLUDA layer"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.5 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.6 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -339,9 +339,28 @@ Defaults to all non-scalar parameters.</li>
 </dd></dl>
 
 </div>
-<div class="section" id="module-reikna.core.computation">
-<span id="result-and-attribute-classes"></span><h2>Result and attribute classes<a class="headerlink" href="#module-reikna.core.computation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="result-and-attribute-classes">
+<h2>Result and attribute classes<a class="headerlink" href="#result-and-attribute-classes" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
+<dt id="reikna.core.Indices">
+<em class="property">class </em><tt class="descclassname">reikna.core.</tt><tt class="descname">Indices</tt><a class="headerlink" href="#reikna.core.Indices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encapsulates the information about index variables available for the snippet.</p>
+<dl class="method">
+<dt id="reikna.core.Indices.__getitem__">
+<tt class="descname">__getitem__</tt><big>(</big><em>dim</em><big>)</big><a class="headerlink" href="#reikna.core.Indices.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the name of the index varibale for the dimension <tt class="docutils literal"><span class="pre">dim</span></tt>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="reikna.core.Indices.all">
+<tt class="descname">all</tt><big>(</big><big>)</big><a class="headerlink" href="#reikna.core.Indices.all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the comma-separated list of all index variable names
+(useful for passing the guiding indices verbatim in a load or store call).</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-reikna.core.computation"></span><dl class="class">
 <dt id="reikna.core.computation.ComputationCallable">
 <em class="property">class </em><tt class="descclassname">reikna.core.computation.</tt><tt class="descname">ComputationCallable</tt><big>(</big><em>parameters</em>, <em>kernel_calls</em>, <em>internal_args</em>, <em>temp_buffers</em><big>)</big><a class="headerlink" href="#reikna.core.computation.ComputationCallable" title="Permalink to this definition">¶</a></dt>
 <dd><p>A result of calling <a class="reference internal" href="#reikna.core.Computation.compile" title="reikna.core.Computation.compile"><tt class="xref py py-meth docutils literal"><span class="pre">compile()</span></tt></a> on a computation.
@@ -544,7 +563,7 @@ using the indices used by the caller of the transformation.</p>
 <li><a class="reference internal" href="#">Core functionality</a><ul>
 <li><a class="reference internal" href="#computation-signatures">Computation signatures</a></li>
 <li><a class="reference internal" href="#core-classes">Core classes</a></li>
-<li><a class="reference internal" href="#module-reikna.core.computation">Result and attribute classes</a></li>
+<li><a class="reference internal" href="#result-and-attribute-classes">Result and attribute classes</a></li>
 </ul>
 </li>
 </ul>
@@ -592,7 +611,7 @@ using the indices used by the caller of the transformation.</p>
         <li class="right" >
           <a href="cluda.html" title="CLUDA layer"
              >previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.5 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.3.6 documentation</a> &raquo;</li>
           <li><a href="index.html" >API reference</a> &raquo;</li> 
       </ul>
     </div>

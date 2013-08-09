@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Release history &mdash; reikna 0.3.6+dev.794e0c0 documentation</title>
+    <title>Release history &mdash; reikna 0.3.7+dev.e4e285f documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.3.6+dev.794e0c0',
+        VERSION:     '0.3.7+dev.e4e285f',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.6+dev.794e0c0 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.3.7+dev.e4e285f documentation" href="index.html" />
     <link rel="prev" title="Transformations" href="api/transformations.html" />
  
 <script type="text/javascript">
@@ -54,7 +54,7 @@
         <li class="right" >
           <a href="api/transformations.html" title="Transformations"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.6+dev.794e0c0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.7+dev.e4e285f documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -66,17 +66,25 @@
   <div class="section" id="release-history">
 <h1>Release history<a class="headerlink" href="#release-history" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="current-development-version">
-<h2>0.3.6 (current development version)<a class="headerlink" href="#current-development-version" title="Permalink to this headline">¶</a></h2>
+<h2>0.3.7 (current development version)<a class="headerlink" href="#current-development-version" title="Permalink to this headline">¶</a></h2>
 <p>Under construction.</p>
 </div>
 <div class="section" id="aug-2013">
-<h2>0.3.5 (6 Aug 2013)<a class="headerlink" href="#aug-2013" title="Permalink to this headline">¶</a></h2>
+<h2>0.3.6 (9 Aug 2013)<a class="headerlink" href="#aug-2013" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>ADDED: the first argument to the <tt class="docutils literal"><span class="pre">Transformation</span></tt> or <tt class="docutils literal"><span class="pre">PureParallel</span></tt> snippet is now a <tt class="docutils literal"><span class="pre">reikna.core.Indices</span></tt> object instead of a list.</li>
+<li>ADDED: classmethod <tt class="docutils literal"><span class="pre">PureParallel.from_trf()</span></tt>, which allows one to create a pure parallel computation out of a transformation.</li>
+<li>FIXED: improved <tt class="docutils literal"><span class="pre">Computation.compile()</span></tt> performance for complicated computations by precreating transformation templates.</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2>0.3.5 (6 Aug 2013)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>FIXED: bug with virtual size algorithms returning floating point global and local sizes in Py2.</li>
 </ul>
 </div>
-<div class="section" id="id1">
-<h2>0.3.4 (3 Aug 2013)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h2>0.3.4 (3 Aug 2013)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>CHANGED: virtual sizes algorithms were rewritten and are now more maintainable.
 In addition, virtual sizes can now handle any number of dimensions of local and global size,
@@ -94,8 +102,8 @@ Virtual size functions have their own independent return type.</li>
 <li>FIXED: package metadata.</li>
 </ul>
 </div>
-<div class="section" id="id2">
-<h2>0.3.2 (29 Jul 2013)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h2>0.3.2 (29 Jul 2013)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>ADDED: same module object, when being called without arguments from other modules/snippets, is rendered only once and returns the same prefix each time.
 This allows one to create structure declarations that can be used by functions in several modules.</li>
@@ -110,8 +118,8 @@ Now the ordering inside a list of initial computation parameters or a list of a 
 <li>FIXED: updated some obsolete computation docstrings.</li>
 </ul>
 </div>
-<div class="section" id="id3">
-<h2>0.3.1 (25 Jul 2013)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h2>0.3.1 (25 Jul 2013)<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>FIXED: too strict array type check for nested computations that caused some tests to fail.</li>
 <li>FIXED: default values of scalar parameters are now processed correctly.</li>
@@ -120,8 +128,8 @@ Now the ordering inside a list of initial computation parameters or a list of a 
 <li>INTERNAL: <tt class="docutils literal"><span class="pre">pylint</span></tt> was ran and many stylistic errors fixed.</li>
 </ul>
 </div>
-<div class="section" id="id4">
-<h2>0.3.0 (23 Jul 2013)<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h2>0.3.0 (23 Jul 2013)<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>Major core API change:</p>
 <ul class="simple">
 <li>Computations have function-like signatures with the standard <tt class="docutils literal"><span class="pre">Signature</span></tt> interface; no more separation of inputs/outputs/scalars.</li>
@@ -169,8 +177,8 @@ This opens the road for correct and automatic stride support (not fully implemen
 <li>FIXED: typo in <tt class="docutils literal"><span class="pre">cluda.api_discovery</span></tt>.</li>
 </ul>
 </div>
-<div class="section" id="id5">
-<h2>0.2.2 (20 Apr 2013)<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h2>0.2.2 (20 Apr 2013)<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>ADDED: ability to use custom argument names in transformations.</li>
 <li>ADDED: multi-argument <a class="reference internal" href="api/cluda.html#reikna.cluda.functions.mul" title="reikna.cluda.functions.mul"><tt class="xref py py-func docutils literal"><span class="pre">mul()</span></tt></a>.</li>
@@ -205,8 +213,8 @@ between internal allocations &#8212; necessary for nested computations.</li>
 (calculated using Gauss-Hermite quadrature).</li>
 </ul>
 </div>
-<div class="section" id="id6">
-<h2>0.2.0 (3 Mar 2013)<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h2>0.2.0 (3 Mar 2013)<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Added FFT computation (slightly optimized PyFFT version + Bluestein&#8217;s algorithm for non-power-of-2 FFT sizes)</li>
 <li>Added Python 3 compatibility</li>
@@ -242,18 +250,19 @@ between internal allocations &#8212; necessary for nested computations.</li>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Release history</a><ul>
-<li><a class="reference internal" href="#current-development-version">0.3.6 (current development version)</a></li>
-<li><a class="reference internal" href="#aug-2013">0.3.5 (6 Aug 2013)</a></li>
-<li><a class="reference internal" href="#id1">0.3.4 (3 Aug 2013)</a></li>
+<li><a class="reference internal" href="#current-development-version">0.3.7 (current development version)</a></li>
+<li><a class="reference internal" href="#aug-2013">0.3.6 (9 Aug 2013)</a></li>
+<li><a class="reference internal" href="#id1">0.3.5 (6 Aug 2013)</a></li>
+<li><a class="reference internal" href="#id2">0.3.4 (3 Aug 2013)</a></li>
 <li><a class="reference internal" href="#jul-2013">0.3.3 (29 Jul 2013)</a></li>
-<li><a class="reference internal" href="#id2">0.3.2 (29 Jul 2013)</a></li>
-<li><a class="reference internal" href="#id3">0.3.1 (25 Jul 2013)</a></li>
-<li><a class="reference internal" href="#id4">0.3.0 (23 Jul 2013)</a></li>
+<li><a class="reference internal" href="#id3">0.3.2 (29 Jul 2013)</a></li>
+<li><a class="reference internal" href="#id4">0.3.1 (25 Jul 2013)</a></li>
+<li><a class="reference internal" href="#id5">0.3.0 (23 Jul 2013)</a></li>
 <li><a class="reference internal" href="#may-2013">0.2.4 (11 May 2013)</a></li>
 <li><a class="reference internal" href="#apr-2013">0.2.3 (25 Apr 2013)</a></li>
-<li><a class="reference internal" href="#id5">0.2.2 (20 Apr 2013)</a></li>
+<li><a class="reference internal" href="#id6">0.2.2 (20 Apr 2013)</a></li>
 <li><a class="reference internal" href="#mar-2013">0.2.1 (8 Mar 2013)</a></li>
-<li><a class="reference internal" href="#id6">0.2.0 (3 Mar 2013)</a></li>
+<li><a class="reference internal" href="#id7">0.2.0 (3 Mar 2013)</a></li>
 <li><a class="reference internal" href="#sep-2012">0.1.0 (12 Sep 2012)</a></li>
 <li><a class="reference internal" href="#jul-2012">0.0.1 (22 Jul 2012)</a></li>
 </ul>
@@ -297,7 +306,7 @@ between internal allocations &#8212; necessary for nested computations.</li>
         <li class="right" >
           <a href="api/transformations.html" title="Transformations"
              >previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.6+dev.794e0c0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.7+dev.e4e285f documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

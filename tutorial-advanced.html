@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: advanced topics &mdash; reikna 0.3.5 documentation</title>
+    <title>Tutorial: advanced topics &mdash; reikna 0.3.6 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.3.5',
+        VERSION:     '0.3.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.5 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.3.6 documentation" href="index.html" />
     <link rel="next" title="API reference" href="api/index.html" />
     <link rel="prev" title="Tutorial: basics" href="tutorial-basic.html" />
  
@@ -58,7 +58,7 @@
         <li class="right" >
           <a href="tutorial-basic.html" title="Tutorial: basics"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.5 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.6 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -117,7 +117,8 @@ Parameters in transformations are typed, and it is possible to change data type 
 In our example <tt class="docutils literal"><span class="pre">out2</span></tt> has length 80, so the current index is checked before the output to make sure there is no out of bounds access.</p>
 <p><strong>Parameter objects.</strong>
 The transformation example above has some hardcoded stuff, for example the type of parameters (<tt class="docutils literal"><span class="pre">float</span></tt>), or their shapes (<tt class="docutils literal"><span class="pre">100</span></tt> and <tt class="docutils literal"><span class="pre">80</span></tt>).
-These can be accessed from argument objects <tt class="docutils literal"><span class="pre">out1</span></tt>, <tt class="docutils literal"><span class="pre">in1</span></tt> etc; they all have the type <a class="reference internal" href="api/core.html#reikna.core.transformation.KernelParameter" title="reikna.core.transformation.KernelParameter"><tt class="xref py py-class docutils literal"><span class="pre">KernelParameter</span></tt></a>.</p>
+These can be accessed from argument objects <tt class="docutils literal"><span class="pre">out1</span></tt>, <tt class="docutils literal"><span class="pre">in1</span></tt> etc; they all have the type <a class="reference internal" href="api/core.html#reikna.core.transformation.KernelParameter" title="reikna.core.transformation.KernelParameter"><tt class="xref py py-class docutils literal"><span class="pre">KernelParameter</span></tt></a>.
+In addition, the transformation code gets an <a class="reference internal" href="api/core.html#reikna.core.Indices" title="reikna.core.Indices"><tt class="xref py py-class docutils literal"><span class="pre">Indices</span></tt></a> object with the name <tt class="docutils literal"><span class="pre">idxs</span></tt>, which allows one to manipulate index names directly.</p>
 </div>
 <div class="section" id="writing-a-computation">
 <span id="tutorial-advanced-computation"></span><h2>Writing a computation<a class="headerlink" href="#writing-a-computation" title="Permalink to this headline">¶</a></h2>
@@ -252,7 +253,7 @@ Also, they must have <a class="reference internal" href="api/cluda.html#VIRTUAL_
         <li class="right" >
           <a href="tutorial-basic.html" title="Tutorial: basics"
              >previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.5 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.3.6 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
