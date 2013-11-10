@@ -6,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Reikna, the pure Python GPGPU library &mdash; reikna 0.3.6 documentation</title>
+    <title>Reikna, the pure Python GPGPU library &mdash; reikna 0.4.0 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.3.6',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,9 +24,14 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.6 documentation" href="#" />
+    <link rel="top" title="reikna 0.4.0 documentation" href="#" />
     <link rel="next" title="Introduction" href="introduction.html" />
- 
+
+   
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700' rel='stylesheet' type='text/css'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
 <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-34054312-1']);
@@ -42,6 +47,11 @@
 
   </head>
   <body>
+  
+  
+  <div class=indexwrapper>
+  
+
     <div class="related">
       <h3>Navigation</h3>
       <ul>
@@ -54,7 +64,7 @@
         <li class="right" >
           <a href="introduction.html" title="Introduction"
              accesskey="N">next</a> |</li>
-        <li><a href="#">reikna 0.3.6 documentation</a> &raquo;</li> 
+        <li><a href="#">reikna 0.4.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -65,15 +75,25 @@
             
   <div class="section" id="reikna-the-pure-python-gpgpu-library">
 <h1>Reikna, the pure Python GPGPU library<a class="headerlink" href="#reikna-the-pure-python-gpgpu-library" title="Permalink to this headline">¶</a></h1>
-<p><em>This is the documentation for the stable version 0.3.6. Current development documentation is</em> <a class="reference external" href="/dev/">here</a>.</p>
-<p><tt class="docutils literal"><span class="pre">Reikna</span></tt> is a library containing various GPU algorithms built on top of <a class="reference external" href="http://documen.tician.de/pycuda">PyCuda</a> and <a class="reference external" href="http://documen.tician.de/pyopencl">PyOpenCL</a>.
+<p><em>This is the documentation for the stable version 0.4.0. Current development documentation is</em> <a class="reference external" href="/dev/">here</a>.</p>
+<p><tt class="docutils literal"><span class="pre">Reikna</span></tt> is a library containing various GPU algorithms built on top of <a class="reference external" href="http://documen.tician.de/pycuda">PyCUDA</a> and <a class="reference external" href="http://documen.tician.de/pyopencl">PyOpenCL</a>.
 The main design goals are:</p>
 <ul class="simple">
 <li>separation of computation cores (matrix multiplication, random numbers generation etc) from simple transformations on their input and output values (scaling, typecast etc);</li>
 <li>separation of the preparation and execution stage, maximizing the performance of the execution stage at the expense of the preparation stage (in other words, aiming at large simulations)</li>
-<li>partial abstraction from Cuda/OpenCL</li>
+<li>partial abstraction from CUDA/OpenCL</li>
 </ul>
-<p><tt class="docutils literal"><span class="pre">Reikna</span></tt> is hosted <a class="reference external" href="http://github.com/Manticore/reikna">on GitHub</a>, issues should be filed there too.</p>
+<p>The installation is as simple as</p>
+<div class="highlight-python"><pre>$ pip install reikna</pre>
+</div>
+<div class="section" id="community-resources">
+<h2>Community resources<a class="headerlink" href="#community-resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://github.com/Manticore/reikna">Source repository</a> on GitHub;</li>
+<li><a class="reference external" href="http://github.com/Manticore/reikna/issues">Issue tracker</a>, <em>ibid.</em>;</li>
+<li><a class="reference external" href="https://groups.google.com/d/forum/reikna">Discussion forum</a> on Google Groups.</li>
+</ul>
+</div>
 </div>
 <div class="section" id="contents">
 <h1>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h1>
@@ -116,6 +136,8 @@ The main design goals are:</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="history.html">Release history</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="history.html#current-development-version">0.5.0 (current development version)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="history.html#nov-2013">0.4.0 (10 Nov 2013)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="history.html#aug-2013">0.3.6 (9 Aug 2013)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="history.html#id1">0.3.5 (6 Aug 2013)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="history.html#id2">0.3.4 (3 Aug 2013)</a></li>
@@ -152,16 +174,21 @@ The main design goals are:</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Reikna, the pure Python GPGPU library</a></li>
+<li><a class="reference internal" href="#">Reikna, the pure Python GPGPU library</a><ul>
+<li><a class="reference internal" href="#community-resources">Community resources</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#contents">Contents</a><ul>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
-
-  <h4>Next topic</h4>
-  <p class="topless"><a href="introduction.html"
-                        title="next chapter">Introduction</a></p>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="introduction.html" title="next chapter">Introduction</a></li>
+  </ul></li>
+</ul>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/index.txt"
@@ -184,24 +211,17 @@ The main design goals are:</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="introduction.html" title="Introduction"
-             >next</a> |</li>
-        <li><a href="#">reikna 0.3.6 documentation</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer">
-        &copy; Copyright 2012-2013, Bogdan Opanchuk.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
-    </div>
+  
+    <a href="http://github.com/Manticore/reikna"><img style="position: fixed; top: 0; right: 0; border: 0;"
+    src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+  
+
+  <div class="footer">
+    &copy; 2012-2013, Bogdan Opanchuk.
+    Created with <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
+  </div>
+  
   </body>
 </html>

@@ -6,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Introduction &mdash; reikna 0.3.7+dev.e4e285f documentation</title>
+    <title>Introduction &mdash; reikna 0.5.0+dev.e01b169 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.3.7+dev.e4e285f',
+        VERSION:     '0.5.0+dev.e01b169',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,10 +24,15 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.7+dev.e4e285f documentation" href="index.html" />
+    <link rel="top" title="reikna 0.5.0+dev.e01b169 documentation" href="index.html" />
     <link rel="next" title="Tutorial: modules and snippets" href="tutorial-modules.html" />
     <link rel="prev" title="Reikna, the pure Python GPGPU library" href="index.html" />
- 
+
+   
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700' rel='stylesheet' type='text/css'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
 <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-34054312-1']);
@@ -43,6 +48,9 @@
 
   </head>
   <body>
+  
+  
+
     <div class="related">
       <h3>Navigation</h3>
       <ul>
@@ -58,7 +66,7 @@
         <li class="right" >
           <a href="index.html" title="Reikna, the pure Python GPGPU library"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.7+dev.e4e285f documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.5.0+dev.e01b169 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -73,9 +81,9 @@
 For more details see <a class="reference internal" href="tutorial-basic.html#tutorial-basic"><em>basic</em></a> and <a class="reference internal" href="tutorial-advanced.html#tutorial-advanced"><em>advanced</em></a> tutorials.</p>
 <div class="section" id="cluda">
 <h2>CLUDA<a class="headerlink" href="#cluda" title="Permalink to this headline">¶</a></h2>
-<p>CLUDA is an abstraction layer on top of <tt class="docutils literal"><span class="pre">PyCUDA</span></tt>/<tt class="docutils literal"><span class="pre">PyOpenCL</span></tt>.
+<p>CLUDA is an abstraction layer on top of PyCUDA/PyOpenCL.
 Its main purpose is to separate the rest of <tt class="docutils literal"><span class="pre">reikna</span></tt> from the difference in their APIs, but it can be used by itself too for some simple tasks.</p>
-<p>Consider the following example, which is very similar to the one from the index page on PyCuda documentation:</p>
+<p>Consider the following example, which is very similar to the one from the index page on PyCUDA documentation:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">import</span> <span class="nn">reikna.cluda</span> <span class="kn">as</span> <span class="nn">cluda</span>
 
@@ -272,13 +280,13 @@ Note that the computation has a new signature now, and the compiled <tt class="d
 </ul>
 </li>
 </ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Reikna, the pure Python GPGPU library</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="tutorial-modules.html"
-                        title="next chapter">Tutorial: modules and snippets</a></p>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Reikna, the pure Python GPGPU library</a></li>
+      <li>Next: <a href="tutorial-modules.html" title="next chapter">Tutorial: modules and snippets</a></li>
+  </ul></li>
+</ul>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/introduction.txt"
@@ -301,27 +309,12 @@ Note that the computation has a new signature now, and the compiled <tt class="d
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="tutorial-modules.html" title="Tutorial: modules and snippets"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Reikna, the pure Python GPGPU library"
-             >previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.7+dev.e4e285f documentation</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer">
-        &copy; Copyright 2012-2013, Bogdan Opanchuk.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
-    </div>
+  
+
+  <div class="footer">
+    &copy; 2012-2013, Bogdan Opanchuk.
+    Created with <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
   </body>
 </html>

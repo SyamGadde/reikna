@@ -6,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Core functionality &mdash; reikna 0.3.7+dev.e4e285f documentation</title>
+    <title>Core functionality &mdash; reikna 0.5.0+dev.e01b169 documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.7+dev.e4e285f',
+        VERSION:     '0.5.0+dev.e01b169',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,11 +24,16 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.7+dev.e4e285f documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.5.0+dev.e01b169 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Computations" href="computations.html" />
     <link rel="prev" title="CLUDA layer" href="cluda.html" />
- 
+
+   
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700' rel='stylesheet' type='text/css'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
 <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-34054312-1']);
@@ -44,6 +49,9 @@
 
   </head>
   <body>
+  
+  
+
     <div class="related">
       <h3>Navigation</h3>
       <ul>
@@ -59,7 +67,7 @@
         <li class="right" >
           <a href="cluda.html" title="CLUDA layer"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.7+dev.e4e285f documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.5.0+dev.e01b169 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -94,7 +102,8 @@ Scalars are represented by an empty tuple.</p>
 <dl class="attribute">
 <dt id="reikna.core.Type.ctype">
 <tt class="descname">ctype</tt><a class="headerlink" href="#reikna.core.Type.ctype" title="Permalink to this definition">¶</a></dt>
-<dd><p>A string with the name of C type corresponding to <a class="reference internal" href="#reikna.core.Type.dtype" title="reikna.core.Type.dtype"><tt class="xref py py-attr docutils literal"><span class="pre">dtype</span></tt></a>.</p>
+<dd><p>A string with the name of C type corresponding to <a class="reference internal" href="#reikna.core.Type.dtype" title="reikna.core.Type.dtype"><tt class="xref py py-attr docutils literal"><span class="pre">dtype</span></tt></a>,
+or a module if it is a struct type.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -257,9 +266,11 @@ Called by the methods that change the signature.</p>
 
 <dl class="method">
 <dt id="reikna.core.Computation.compile">
-<tt class="descname">compile</tt><big>(</big><em>thread</em><big>)</big><a class="headerlink" href="#reikna.core.Computation.compile" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">compile</tt><big>(</big><em>thread</em>, <em>fast_math=False</em><big>)</big><a class="headerlink" href="#reikna.core.Computation.compile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compiles the computation with the given <a class="reference internal" href="cluda.html#reikna.cluda.api.Thread" title="reikna.cluda.api.Thread"><tt class="xref py py-class docutils literal"><span class="pre">Thread</span></tt></a> object
-and returns a <a class="reference internal" href="#reikna.core.computation.ComputationCallable" title="reikna.core.computation.ComputationCallable"><tt class="xref py py-class docutils literal"><span class="pre">ComputationCallable</span></tt></a> object.</p>
+and returns a <a class="reference internal" href="#reikna.core.computation.ComputationCallable" title="reikna.core.computation.ComputationCallable"><tt class="xref py py-class docutils literal"><span class="pre">ComputationCallable</span></tt></a> object.
+If <tt class="docutils literal"><span class="pre">fast_math</span></tt> is enabled, the compilation of all kernels is performed using
+the compiler options for fast and imprecise mathematical functions.</p>
 </dd></dl>
 
 <dl class="method">
@@ -567,13 +578,15 @@ using the indices used by the caller of the transformation.</p>
 </ul>
 </li>
 </ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="cluda.html"
-                        title="previous chapter">CLUDA layer</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="computations.html"
-                        title="next chapter">Computations</a></p>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">API reference</a><ul>
+      <li>Previous: <a href="cluda.html" title="previous chapter">CLUDA layer</a></li>
+      <li>Next: <a href="computations.html" title="next chapter">Computations</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/api/core.txt"
@@ -596,28 +609,12 @@ using the indices used by the caller of the transformation.</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="computations.html" title="Computations"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="cluda.html" title="CLUDA layer"
-             >previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.7+dev.e4e285f documentation</a> &raquo;</li>
-          <li><a href="index.html" >API reference</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer">
-        &copy; Copyright 2012-2013, Bogdan Opanchuk.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
-    </div>
+  
+
+  <div class="footer">
+    &copy; 2012-2013, Bogdan Opanchuk.
+    Created with <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
   </body>
 </html>

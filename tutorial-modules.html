@@ -6,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: modules and snippets &mdash; reikna 0.3.6 documentation</title>
+    <title>Tutorial: modules and snippets &mdash; reikna 0.4.0 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.3.6',
+        VERSION:     '0.4.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,10 +24,15 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.6 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.4.0 documentation" href="index.html" />
     <link rel="next" title="Tutorial: basics" href="tutorial-basic.html" />
     <link rel="prev" title="Introduction" href="introduction.html" />
- 
+
+   
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700' rel='stylesheet' type='text/css'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
 <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-34054312-1']);
@@ -43,6 +48,9 @@
 
   </head>
   <body>
+  
+  
+
     <div class="related">
       <h3>Navigation</h3>
       <ul>
@@ -58,7 +66,7 @@
         <li class="right" >
           <a href="introduction.html" title="Introduction"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.6 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.4.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -107,6 +115,7 @@ Consider the following snippet:</p>
     arr[idx] = x + 1;
 }</pre>
 </div>
+<p>If the snippet is used without parentheses (e.g. <tt class="docutils literal"><span class="pre">${add}</span></tt>), it is equivalent to calling it without arguments (<tt class="docutils literal"><span class="pre">${add()}</span></tt>).</p>
 <p>The root code that gets passed to <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread.compile" title="reikna.cluda.api.Thread.compile"><tt class="xref py py-meth docutils literal"><span class="pre">compile()</span></tt></a> can be viewed as a snippet with an empty signature.</p>
 </div>
 <div class="section" id="modules">
@@ -148,14 +157,14 @@ The result is attached to the source file.</li>
 <li>The corresponding value in the current <tt class="docutils literal"><span class="pre">render_kwds</span></tt> is replaced by the newly assigned prefix.</li>
 </ol>
 <p>With the code above, the rendered module will produce the code</p>
-<div class="highlight-python"><pre>WITHIN_KERNEL int _module0(int x)
+<div class="highlight-python"><pre>WITHIN_KERNEL int _module0_(int x)
 {
     return x + 1 + 2;
 }</pre>
 </div>
-<p>and the <tt class="docutils literal"><span class="pre">add</span></tt> keyword in the <tt class="docutils literal"><span class="pre">render_kwds</span></tt> gets its value changed to <tt class="docutils literal"><span class="pre">_module0</span></tt>.
+<p>and the <tt class="docutils literal"><span class="pre">add</span></tt> keyword in the <tt class="docutils literal"><span class="pre">render_kwds</span></tt> gets its value changed to <tt class="docutils literal"><span class="pre">_module0_</span></tt>.
 Then the main code is rendered and appended to the previously renderd parts, giving</p>
-<div class="highlight-python"><pre>WITHIN_KERNEL int _module0(int x)
+<div class="highlight-python"><pre>WITHIN_KERNEL int _module0_(int x)
 {
     return x + 1;
 }
@@ -164,11 +173,16 @@ KERNEL void test(int *arr)
 {
     const SIZE_T idx = get_global_id(0);
     int a = arr[idx];
-    arr[idx] = _module0(x);
+    arr[idx] = _module0_(x);
 }</pre>
 </div>
 <p>which is then passed to the compiler.
 If your module&#8217;s template def does not take any arguments except for <tt class="docutils literal"><span class="pre">prefix</span></tt>, you can call it in the parent template just as <tt class="docutils literal"><span class="pre">${add}</span></tt> (without empty parentheses).</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Note that <tt class="docutils literal"><span class="pre">add</span></tt> in this case is not a string, it is an object that has <tt class="docutils literal"><span class="pre">__str__()</span></tt> defined.
+If you want to concatenate a module prefix with some other string, you have to either call <tt class="docutils literal"><span class="pre">str()</span></tt> explicitly (<tt class="docutils literal"><span class="pre">str(add)</span> <span class="pre">+</span> <span class="pre">&quot;abc&quot;</span></tt>), or concatenate it inside a template (<tt class="docutils literal"><span class="pre">${add}</span> <span class="pre">abc</span></tt>).</p>
+</div>
 <p>Modules can reference snippets in their <tt class="docutils literal"><span class="pre">render_kwds</span></tt>, which, in turn, can reference other modules.
 This produces a tree-like structure with the snippet made from the code passed by user at the root.
 When it is rendered, it is traversed depth-first, modules are extracted from it and arranged in a flat list in the order of appearance.
@@ -231,7 +245,7 @@ By default, objects of type <tt class="docutils literal"><span class="pre">tuple
 <div class="section" id="nontrivial-example">
 <h2>Nontrivial example<a class="headerlink" href="#nontrivial-example" title="Permalink to this headline">¶</a></h2>
 <p>Modules were introduced to help split big kernels into small reusable pieces which in <tt class="docutils literal"><span class="pre">CUDA</span></tt> or <tt class="docutils literal"><span class="pre">OpenCL</span></tt> program would be put into different source or header files.
-For example, a random number generator may be assembled from a function generating random integers, a function transforming these integers into random numbers with a certain distribution, and a <a class="reference internal" href="api/computations.html#reikna.pureparallel.PureParallel" title="reikna.pureparallel.PureParallel"><tt class="xref py py-class docutils literal"><span class="pre">reikna.pureparallel.PureParallel</span></tt></a> computation calling these functions and saving results to global memory.
+For example, a random number generator may be assembled from a function generating random integers, a function transforming these integers into random numbers with a certain distribution, and a <a class="reference internal" href="api/computations.html#reikna.pureparallel.PureParallel" title="reikna.pureparallel.PureParallel"><tt class="xref py py-class docutils literal"><span class="pre">PureParallel</span></tt></a> computation calling these functions and saving results to global memory.
 These two functions can be extracted into separate modules, so that a user could call them from some custom kernel if he does not need to store the intermediate results.</p>
 <p>Going further with this example, one notices that functions that produce randoms with sophisticated distributions are often based on simpler distributions.
 For instance, the commonly used Marsaglia algorithm for generating Gamma-distributed random numbers requires several uniformly and normally distributed randoms.
@@ -273,13 +287,13 @@ Instead of copy-pasting the function or setting its parameters dynamically (whic
 </ul>
 </li>
 </ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="introduction.html"
-                        title="previous chapter">Introduction</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="tutorial-basic.html"
-                        title="next chapter">Tutorial: basics</a></p>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="introduction.html" title="previous chapter">Introduction</a></li>
+      <li>Next: <a href="tutorial-basic.html" title="next chapter">Tutorial: basics</a></li>
+  </ul></li>
+</ul>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/tutorial-modules.txt"
@@ -302,27 +316,12 @@ Instead of copy-pasting the function or setting its parameters dynamically (whic
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="tutorial-basic.html" title="Tutorial: basics"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="introduction.html" title="Introduction"
-             >previous</a> |</li>
-        <li><a href="index.html">reikna 0.3.6 documentation</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer">
-        &copy; Copyright 2012-2013, Bogdan Opanchuk.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
-    </div>
+  
+
+  <div class="footer">
+    &copy; 2012-2013, Bogdan Opanchuk.
+    Created with <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
   </body>
 </html>

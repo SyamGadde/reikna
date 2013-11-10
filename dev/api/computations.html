@@ -6,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Computations &mdash; reikna 0.3.7+dev.e4e285f documentation</title>
+    <title>Computations &mdash; reikna 0.5.0+dev.e01b169 documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.3.7+dev.e4e285f',
+        VERSION:     '0.5.0+dev.e01b169',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,11 +24,16 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.3.7+dev.e4e285f documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.5.0+dev.e01b169 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Transformations" href="transformations.html" />
     <link rel="prev" title="Core functionality" href="core.html" />
- 
+
+   
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700' rel='stylesheet' type='text/css'>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
 <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-34054312-1']);
@@ -44,6 +49,9 @@
 
   </head>
   <body>
+  
+  
+
     <div class="related">
       <h3>Navigation</h3>
       <ul>
@@ -59,7 +67,7 @@
         <li class="right" >
           <a href="core.html" title="Core functionality"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.7+dev.e4e285f documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.5.0+dev.e01b169 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -245,7 +253,9 @@ which will take the names of two arguments to join.</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>arr_t</strong> &#8211; an array-like defining the initial array.</li>
 <li><strong>predicate</strong> &#8211; a <a class="reference internal" href="#reikna.reduce.Predicate" title="reikna.reduce.Predicate"><tt class="xref py py-class docutils literal"><span class="pre">Predicate</span></tt></a> object.</li>
-<li><strong>axes</strong> &#8211; a list of sequential axes to reduce over.</li>
+<li><strong>axes</strong> &#8211; a list of non-repeating axes to reduce over.
+If <tt class="docutils literal"><span class="pre">None</span></tt>, the whole array will be reduced
+(in which case the shape of the output array is <tt class="docutils literal"><span class="pre">(1,)</span></tt>).</li>
 </ul>
 </td>
 </tr>
@@ -465,8 +475,8 @@ This state is then passed to, and updated by a <a class="reference internal" hre
 <li><strong>generators_dim</strong> &#8211; the number of dimensions (counting from the end)
 which will use independent generators.
 For example, if <tt class="docutils literal"><span class="pre">randoms_arr</span></tt> has the shape <tt class="docutils literal"><span class="pre">(100,</span> <span class="pre">200,</span> <span class="pre">300)</span></tt> and
-<tt class="docutils literal"><span class="pre">generators_dim</span></tt> is <tt class="docutils literal"><span class="pre">2</span></tt>, then every sub-array <tt class="docutils literal"><span class="pre">(100,</span> <span class="pre">:,</span> <span class="pre">:)</span></tt>
-will use an independent generator.</li>
+<tt class="docutils literal"><span class="pre">generators_dim</span></tt> is <tt class="docutils literal"><span class="pre">2</span></tt>, then in every sub-array <tt class="docutils literal"><span class="pre">(j,</span> <span class="pre">:,</span> <span class="pre">:)</span></tt>,
+<tt class="docutils literal"><span class="pre">j</span> <span class="pre">=</span> <span class="pre">0</span> <span class="pre">..</span> <span class="pre">99</span></tt>, every element will use an independent generator.</li>
 <li><strong>sampler</strong> &#8211; a <a class="reference internal" href="#reikna.cbrng.samplers.Sampler" title="reikna.cbrng.samplers.Sampler"><tt class="xref py py-class docutils literal"><span class="pre">Sampler</span></tt></a> object.</li>
 <li><strong>seed</strong> &#8211; <tt class="docutils literal"><span class="pre">None</span></tt> for random seed, or an integer.</li>
 </ul>
@@ -519,9 +529,15 @@ All attributes are equal to the ones of <tt class="docutils literal"><span class
 <dd><p>Contains a CBRNG bijection module and accompanying metadata.
 Supports <tt class="docutils literal"><span class="pre">__process_modules__</span></tt> protocol.</p>
 <dl class="attribute">
-<dt id="reikna.cbrng.bijections.Bijection.dtype">
-<tt class="descname">dtype</tt><a class="headerlink" href="#reikna.cbrng.bijections.Bijection.dtype" title="Permalink to this definition">¶</a></dt>
+<dt id="reikna.cbrng.bijections.Bijection.word_dtype">
+<tt class="descname">word_dtype</tt><a class="headerlink" href="#reikna.cbrng.bijections.Bijection.word_dtype" title="Permalink to this definition">¶</a></dt>
 <dd><p>The data type of the integer word used by the generator.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="reikna.cbrng.bijections.Bijection.key_words">
+<tt class="descname">key_words</tt><a class="headerlink" href="#reikna.cbrng.bijections.Bijection.key_words" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of words used by the key.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -531,9 +547,26 @@ Supports <tt class="docutils literal"><span class="pre">__process_modules__</spa
 </dd></dl>
 
 <dl class="attribute">
-<dt id="reikna.cbrng.bijections.Bijection.key_words">
-<tt class="descname">key_words</tt><a class="headerlink" href="#reikna.cbrng.bijections.Bijection.key_words" title="Permalink to this definition">¶</a></dt>
-<dd><p>The number of words used by the key.</p>
+<dt id="reikna.cbrng.bijections.Bijection.key_dtype">
+<tt class="descname">key_dtype</tt><a class="headerlink" href="#reikna.cbrng.bijections.Bijection.key_dtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <tt class="docutils literal"><span class="pre">numpy.dtype</span></tt> object representing a bijection key.
+Contains a single array field <tt class="docutils literal"><span class="pre">v</span></tt> with <tt class="docutils literal"><span class="pre">key_words</span></tt> of <tt class="docutils literal"><span class="pre">word_dtype</span></tt> elements.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="reikna.cbrng.bijections.Bijection.counter_dtype">
+<tt class="descname">counter_dtype</tt><a class="headerlink" href="#reikna.cbrng.bijections.Bijection.counter_dtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <tt class="docutils literal"><span class="pre">numpy.dtype</span></tt> object representing a bijection counter.
+Contains a single array field <tt class="docutils literal"><span class="pre">v</span></tt> with <tt class="docutils literal"><span class="pre">key_words</span></tt> of <tt class="docutils literal"><span class="pre">word_dtype</span></tt> elements.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="reikna.cbrng.bijections.Bijection.raw_functions">
+<tt class="descname">raw_functions</tt><a class="headerlink" href="#reikna.cbrng.bijections.Bijection.raw_functions" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary <tt class="docutils literal"><span class="pre">dtype:function_name</span></tt> of available functions <tt class="docutils literal"><span class="pre">function_name</span></tt>
+in <a class="reference internal" href="#reikna.cbrng.bijections.Bijection.module" title="reikna.cbrng.bijections.Bijection.module"><tt class="xref py py-attr docutils literal"><span class="pre">module</span></tt></a> that produce a random full-range integer <tt class="docutils literal"><span class="pre">dtype</span></tt>
+from a <a class="reference internal" href="#State" title="State"><tt class="xref c c-type docutils literal"><span class="pre">State</span></tt></a>, advancing it.
+Available functions: <a class="reference internal" href="#get_raw_uint32" title="get_raw_uint32"><tt class="xref c c-func docutils literal"><span class="pre">get_raw_uint32()</span></tt></a>, <a class="reference internal" href="#get_raw_uint64" title="get_raw_uint64"><tt class="xref c c-func docutils literal"><span class="pre">get_raw_uint64()</span></tt></a>.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -556,84 +589,86 @@ It provides the C functions below.</p>
 </dd></dl>
 
 <dl class="type">
-<dt id="word">
-<tt class="descname">word</tt><a class="headerlink" href="#word" title="Permalink to this definition">¶</a></dt>
-<dd><p>Contains the type corresponding to <a class="reference internal" href="#reikna.cbrng.bijections.Bijection.dtype" title="reikna.cbrng.bijections.Bijection.dtype"><tt class="xref py py-attr docutils literal"><span class="pre">dtype</span></tt></a>.</p>
+<dt id="Word">
+<tt class="descname">Word</tt><a class="headerlink" href="#Word" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contains the type corresponding to <a class="reference internal" href="#reikna.cbrng.bijections.Bijection.word_dtype" title="reikna.cbrng.bijections.Bijection.word_dtype"><tt class="xref py py-attr docutils literal"><span class="pre">word_dtype</span></tt></a>.</p>
 </dd></dl>
 
 <dl class="type">
-<dt id="COUNTER">
-<tt class="descname">COUNTER</tt><a class="headerlink" href="#COUNTER" title="Permalink to this definition">¶</a></dt>
-<dd><p>Describes the bijection counter, or its output.</p>
+<dt id="Key">
+<tt class="descname">Key</tt><a class="headerlink" href="#Key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describes the bijection key.
+Alias for the structure generated from <a class="reference internal" href="#reikna.cbrng.bijections.Bijection.key_dtype" title="reikna.cbrng.bijections.Bijection.key_dtype"><tt class="xref py py-attr docutils literal"><span class="pre">key_dtype</span></tt></a>.</p>
 <dl class="member">
 <dt>
-<tt class="descname">word v[COUNTER_WORDS]</tt></dt>
+<tt class="descname">Word v[KEY_WORDS]</tt></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="type">
-<dt id="KEY">
-<tt class="descname">KEY</tt><a class="headerlink" href="#KEY" title="Permalink to this definition">¶</a></dt>
-<dd><p>Describes the bijection key.</p>
+<dt id="Counter">
+<tt class="descname">Counter</tt><a class="headerlink" href="#Counter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describes the bijection counter, or its output.
+Alias for the structure generated from <a class="reference internal" href="#reikna.cbrng.bijections.Bijection.counter_dtype" title="reikna.cbrng.bijections.Bijection.counter_dtype"><tt class="xref py py-attr docutils literal"><span class="pre">counter_dtype</span></tt></a>.</p>
 <dl class="member">
 <dt>
-<tt class="descname">word v[KEY_WORDS]</tt></dt>
+<tt class="descname">Word v[COUNTER_WORDS]</tt></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="function">
 <dt id="make_counter_from_int">
-<a class="reference internal" href="#COUNTER" title="COUNTER">COUNTER</a> <tt class="descname">make_counter_from_int</tt><big>(</big>int<em>&nbsp;x</em><big>)</big><a class="headerlink" href="#make_counter_from_int" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#Counter" title="Counter">Counter</a> <tt class="descname">make_counter_from_int</tt><big>(</big>int<em>&nbsp;x</em><big>)</big><a class="headerlink" href="#make_counter_from_int" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a counter object from an integer.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="bijection">
-<a class="reference internal" href="#COUNTER" title="COUNTER">COUNTER</a> <tt class="descname">bijection</tt><big>(</big><a class="reference internal" href="#KEY" title="KEY">KEY</a><em>&nbsp;key</em>, <a class="reference internal" href="#COUNTER" title="COUNTER">COUNTER</a><em>&nbsp;counter</em><big>)</big><a class="headerlink" href="#bijection" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#Counter" title="Counter">Counter</a> <tt class="descname">bijection</tt><big>(</big><a class="reference internal" href="#Key" title="Key">Key</a><em>&nbsp;key</em>, <a class="reference internal" href="#Counter" title="Counter">Counter</a><em>&nbsp;counter</em><big>)</big><a class="headerlink" href="#bijection" title="Permalink to this definition">¶</a></dt>
 <dd><p>The main bijection function.</p>
 </dd></dl>
 
 <dl class="type">
-<dt id="STATE">
-<tt class="descname">STATE</tt><a class="headerlink" href="#STATE" title="Permalink to this definition">¶</a></dt>
+<dt id="State">
+<tt class="descname">State</tt><a class="headerlink" href="#State" title="Permalink to this definition">¶</a></dt>
 <dd><p>A structure containing the CBRNG state which is used by <a class="reference internal" href="#module-reikna.cbrng.samplers" title="reikna.cbrng.samplers"><tt class="xref py py-mod docutils literal"><span class="pre">samplers</span></tt></a>.</p>
-</dd></dl>
-
-<dl class="type">
-<dt id="uint32">
-<tt class="descname">uint32</tt><a class="headerlink" href="#uint32" title="Permalink to this definition">¶</a></dt>
-<dd><p>A type of unigned 32-bit word.</p>
-</dd></dl>
-
-<dl class="type">
-<dt id="uint64">
-<tt class="descname">uint64</tt><a class="headerlink" href="#uint64" title="Permalink to this definition">¶</a></dt>
-<dd><p>A type of unigned 64-bit word.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="make_state">
-<a class="reference internal" href="#STATE" title="STATE">STATE</a> <tt class="descname">make_state</tt><big>(</big><a class="reference internal" href="#KEY" title="KEY">KEY</a><em>&nbsp;key</em>, <a class="reference internal" href="#COUNTER" title="COUNTER">COUNTER</a><em>&nbsp;counter</em><big>)</big><a class="headerlink" href="#make_state" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#State" title="State">State</a> <tt class="descname">make_state</tt><big>(</big><a class="reference internal" href="#Key" title="Key">Key</a><em>&nbsp;key</em>, <a class="reference internal" href="#Counter" title="Counter">Counter</a><em>&nbsp;counter</em><big>)</big><a class="headerlink" href="#make_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new state object.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="get_next_unused_counter">
-<a class="reference internal" href="#COUNTER" title="COUNTER">COUNTER</a> <tt class="descname">get_next_unused_counter</tt><big>(</big><a class="reference internal" href="#STATE" title="STATE">STATE</a><em>&nbsp;state</em><big>)</big><a class="headerlink" href="#get_next_unused_counter" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#Counter" title="Counter">Counter</a> <tt class="descname">get_next_unused_counter</tt><big>(</big><a class="reference internal" href="#State" title="State">State</a><em>&nbsp;state</em><big>)</big><a class="headerlink" href="#get_next_unused_counter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extracts a counter which has not been used in random sampling.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="uint32">
+<tt class="descname">uint32</tt><a class="headerlink" href="#uint32" title="Permalink to this definition">¶</a></dt>
+<dd><p>A type of unsigned 32-bit word, corresponds to <tt class="docutils literal"><span class="pre">numpy.uint32</span></tt>.</p>
+</dd></dl>
+
+<dl class="type">
+<dt id="uint64">
+<tt class="descname">uint64</tt><a class="headerlink" href="#uint64" title="Permalink to this definition">¶</a></dt>
+<dd><p>A type of unsigned 64-bit word, corresponds to <tt class="docutils literal"><span class="pre">numpy.uint64</span></tt>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="get_raw_uint32">
-<a class="reference internal" href="#uint32" title="uint32">uint32</a> <tt class="descname">get_raw_uint32</tt><big>(</big><a class="reference internal" href="#STATE" title="STATE">STATE</a><em>&nbsp;*state</em><big>)</big><a class="headerlink" href="#get_raw_uint32" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#uint32" title="uint32">uint32</a> <tt class="descname">get_raw_uint32</tt><big>(</big><a class="reference internal" href="#State" title="State">State</a><em>&nbsp;*state</em><big>)</big><a class="headerlink" href="#get_raw_uint32" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns uniformly distributed unsigned 32-bit word and updates the state.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="get_raw_uint64">
-<a class="reference internal" href="#uint64" title="uint64">uint64</a> <tt class="descname">get_raw_uint64</tt><big>(</big><a class="reference internal" href="#STATE" title="STATE">STATE</a><em>&nbsp;*state</em><big>)</big><a class="headerlink" href="#get_raw_uint64" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#uint64" title="uint64">uint64</a> <tt class="descname">get_raw_uint64</tt><big>(</big><a class="reference internal" href="#State" title="State">State</a><em>&nbsp;*state</em><big>)</big><a class="headerlink" href="#get_raw_uint64" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns uniformly distributed unsigned 64-bit word and updates the state.</p>
 </dd></dl>
 
@@ -722,14 +757,14 @@ It provides the C functions below.</p>
 </dd></dl>
 
 <dl class="type">
-<dt id="value">
-<tt class="descname">value</tt><a class="headerlink" href="#value" title="Permalink to this definition">¶</a></dt>
+<dt id="Value">
+<tt class="descname">Value</tt><a class="headerlink" href="#Value" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains the type corresponding to <a class="reference internal" href="#reikna.cbrng.samplers.Sampler.dtype" title="reikna.cbrng.samplers.Sampler.dtype"><tt class="xref py py-attr docutils literal"><span class="pre">dtype</span></tt></a>.</p>
 </dd></dl>
 
 <dl class="type">
-<dt id="RESULT">
-<tt class="descname">RESULT</tt><a class="headerlink" href="#RESULT" title="Permalink to this definition">¶</a></dt>
+<dt id="Result">
+<tt class="descname">Result</tt><a class="headerlink" href="#Result" title="Permalink to this definition">¶</a></dt>
 <dd><p>Describes the sampling result.</p>
 <dl class="member">
 <dt>
@@ -740,7 +775,7 @@ It provides the C functions below.</p>
 
 <dl class="type">
 <dt id="sample">
-<a class="reference internal" href="#RESULT" title="RESULT">RESULT</a> <tt class="descname">sample</tt><big>(</big><a class="reference internal" href="#STATE" title="STATE">STATE</a><em>&nbsp;*state</em><big>)</big><a class="headerlink" href="#sample" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#Result" title="Result">Result</a> <tt class="descname">sample</tt><big>(</big><a class="reference internal" href="#State" title="State">State</a><em>&nbsp;*state</em><big>)</big><a class="headerlink" href="#sample" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs the sampling, updating the state.</p>
 </dd></dl>
 
@@ -800,7 +835,7 @@ Supports <tt class="docutils literal"><span class="pre">__process_modules__</spa
 
 <dl class="function">
 <dt id="key_from_int">
-<a class="reference internal" href="#KEY" title="KEY">KEY</a> <tt class="descname">key_from_int</tt><big>(</big>int<em>&nbsp;idx</em><big>)</big><a class="headerlink" href="#key_from_int" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="#Key" title="Key">Key</a> <tt class="descname">key_from_int</tt><big>(</big>int<em>&nbsp;idx</em><big>)</big><a class="headerlink" href="#key_from_int" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates and returns a key, suitable for the bijection which was given to the constructor.</p>
 </dd></dl>
 
@@ -862,13 +897,15 @@ Uses the same algorithm as the module.</p>
 </ul>
 </li>
 </ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="core.html"
-                        title="previous chapter">Core functionality</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="transformations.html"
-                        title="next chapter">Transformations</a></p>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">API reference</a><ul>
+      <li>Previous: <a href="core.html" title="previous chapter">Core functionality</a></li>
+      <li>Next: <a href="transformations.html" title="next chapter">Transformations</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/api/computations.txt"
@@ -891,28 +928,12 @@ Uses the same algorithm as the module.</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="transformations.html" title="Transformations"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="core.html" title="Core functionality"
-             >previous</a> |</li>
-        <li><a href="../index.html">reikna 0.3.7+dev.e4e285f documentation</a> &raquo;</li>
-          <li><a href="index.html" >API reference</a> &raquo;</li> 
-      </ul>
-    </div>
-    <div class="footer">
-        &copy; Copyright 2012-2013, Bogdan Opanchuk.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
-    </div>
+  
+
+  <div class="footer">
+    &copy; 2012-2013, Bogdan Opanchuk.
+    Created with <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
   </body>
 </html>
