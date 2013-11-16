@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Computations &mdash; reikna 0.5.0+dev.e01b169 documentation</title>
+    <title>Computations &mdash; reikna 0.5.0+dev.e4fe6b5 documentation</title>
     
     <link rel="stylesheet" href="../_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.0+dev.e01b169',
+        VERSION:     '0.5.0+dev.e4fe6b5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.5.0+dev.e01b169 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.5.0+dev.e4fe6b5 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Transformations" href="transformations.html" />
     <link rel="prev" title="Core functionality" href="core.html" />
@@ -67,7 +67,7 @@
         <li class="right" >
           <a href="core.html" title="Core functionality"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.5.0+dev.e01b169 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.5.0+dev.e4fe6b5 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -137,7 +137,7 @@ or the corresponding <a class="reference internal" href="core.html#reikna.core.t
 <span id="linear-algebra"></span><h2>Linear algebra<a class="headerlink" href="#module-reikna.matrixmul" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="reikna.matrixmul.MatrixMul">
-<em class="property">class </em><tt class="descclassname">reikna.matrixmul.</tt><tt class="descname">MatrixMul</tt><big>(</big><em>a_arr</em>, <em>b_arr</em>, <em>out_arr=None</em>, <em>block_width_override=None</em><big>)</big><a class="headerlink" href="#reikna.matrixmul.MatrixMul" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">reikna.matrixmul.</tt><tt class="descname">MatrixMul</tt><big>(</big><em>a_arr</em>, <em>b_arr</em>, <em>out_arr=None</em>, <em>block_width_override=None</em>, <em>transposed_a=False</em>, <em>transposed_b=False</em><big>)</big><a class="headerlink" href="#reikna.matrixmul.MatrixMul" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="core.html#reikna.core.Computation" title="reikna.core.Computation"><tt class="xref py py-class docutils literal"><span class="pre">Computation</span></tt></a></p>
 <p>Multiplies two matrices using last two dimensions and batching over remaining dimensions.
 For batching to work, the products of remaining dimensions should be equal
@@ -154,6 +154,10 @@ For batching to work, the products of remaining dimensions should be equal
 will be derived from <tt class="docutils literal"><span class="pre">a_arr</span></tt> and <tt class="docutils literal"><span class="pre">b_arr</span></tt>.</li>
 <li><strong>block_width_override</strong> &#8211; if provided, it will used as a block size of
 the multiplication kernel.</li>
+<li><strong>transposed_a</strong> &#8211; if <tt class="docutils literal"><span class="pre">True</span></tt>, the first matrix will be transposed
+before the multiplication.</li>
+<li><strong>transposed_b</strong> &#8211; if <tt class="docutils literal"><span class="pre">True</span></tt>, the second matrix will be transposed
+before the multiplication.</li>
 </ul>
 </td>
 </tr>
