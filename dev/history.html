@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Release history &mdash; reikna 0.5.0+dev.e4fe6b5 documentation</title>
+    <title>Release history &mdash; reikna 0.5.0+dev.3bbaad2 documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.5.0+dev.e4fe6b5',
+        VERSION:     '0.5.0+dev.3bbaad2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.5.0+dev.e4fe6b5 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.5.0+dev.3bbaad2 documentation" href="index.html" />
     <link rel="prev" title="Transformations" href="api/transformations.html" />
 
    
@@ -62,7 +62,7 @@
         <li class="right" >
           <a href="api/transformations.html" title="Transformations"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.5.0+dev.e4fe6b5 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.5.0+dev.3bbaad2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -76,7 +76,22 @@
 <div class="section" id="current-development-version">
 <h2>0.5.0 (current development version)<a class="headerlink" href="#current-development-version" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>CHANGED: added <tt class="docutils literal"><span class="pre">transposed_a</span></tt> and <tt class="docutils literal"><span class="pre">transposed_b</span></tt> keyword parameters to <a class="reference internal" href="api/computations.html#reikna.matrixmul.MatrixMul" title="reikna.matrixmul.MatrixMul"><tt class="xref py py-class docutils literal"><span class="pre">MatrixMul</span></tt></a>.</li>
+<li>CHANGED: <a class="reference internal" href="api/core.html#reikna.core.transformation.KernelParameter" title="reikna.core.transformation.KernelParameter"><tt class="xref py py-class docutils literal"><span class="pre">KernelParameter</span></tt></a> is not derived from <a class="reference internal" href="api/core.html#reikna.core.Type" title="reikna.core.Type"><tt class="xref py py-class docutils literal"><span class="pre">Type</span></tt></a> anymore (although it still retains the corresponding attributes).</li>
+<li>CHANGED: <a class="reference internal" href="api/computations.html#reikna.reduce.Predicate" title="reikna.reduce.Predicate"><tt class="xref py py-class docutils literal"><span class="pre">Predicate</span></tt></a> now takes a dtype&#8217;d value as <tt class="docutils literal"><span class="pre">empty</span></tt>, not a string.</li>
+<li>CHANGED: The logic of processing struct dtypes was reworked, and <cite>adjust_alignment</cite> was removed.
+Instead, one should use <a class="reference internal" href="api/cluda.html#reikna.cluda.dtypes.adjust_offsets" title="reikna.cluda.dtypes.adjust_offsets"><tt class="xref py py-func docutils literal"><span class="pre">adjust_offsets()</span></tt></a> (which does not take a <tt class="docutils literal"><span class="pre">Thread</span></tt> parameter) to get a dtype with the offsets and itemsize equal to those a compiler would set.
+On the other hand, <a class="reference internal" href="api/cluda.html#reikna.cluda.dtypes.ctype_module" title="reikna.cluda.dtypes.ctype_module"><tt class="xref py py-func docutils literal"><span class="pre">ctype_module()</span></tt></a> attempts to set the alignments such that the field offsets are the same as in the given numpy dtype
+(unless <tt class="docutils literal"><span class="pre">ignore_alignments</span></tt> flag is set).</li>
+<li>ADDED: struct dtypes support in <a class="reference internal" href="api/cluda.html#reikna.cluda.dtypes.c_constant" title="reikna.cluda.dtypes.c_constant"><tt class="xref py py-func docutils literal"><span class="pre">c_constant()</span></tt></a>.</li>
+<li>ADDED: <a class="reference internal" href="api/cluda.html#reikna.cluda.dtypes.flatten_dtype" title="reikna.cluda.dtypes.flatten_dtype"><tt class="xref py py-func docutils literal"><span class="pre">flatten_dtype()</span></tt></a> helper function.</li>
+<li>ADDED: added <tt class="docutils literal"><span class="pre">transposed_a</span></tt> and <tt class="docutils literal"><span class="pre">transposed_b</span></tt> keyword parameters to <a class="reference internal" href="api/computations.html#reikna.matrixmul.MatrixMul" title="reikna.matrixmul.MatrixMul"><tt class="xref py py-class docutils literal"><span class="pre">MatrixMul</span></tt></a>.</li>
+<li>ADDED: algorithm cascading to <a class="reference internal" href="api/computations.html#reikna.reduce.Reduce" title="reikna.reduce.Reduce"><tt class="xref py py-class docutils literal"><span class="pre">Reduce</span></tt></a>, leading to 3-4 times increase in performance.</li>
+<li>ADDED: <a class="reference internal" href="api/cluda.html#reikna.cluda.functions.polar_unit" title="reikna.cluda.functions.polar_unit"><tt class="xref py py-func docutils literal"><span class="pre">polar_unit()</span></tt></a> function module in CLUDA.</li>
+<li>ADDED: support for arrays with 0-dimensional shape as computation and transformation arguments.</li>
+<li>FIXED: a bug in <a class="reference internal" href="api/computations.html#reikna.reduce.Reduce" title="reikna.reduce.Reduce"><tt class="xref py py-class docutils literal"><span class="pre">Reduce</span></tt></a>, which lead to incorrect results in cases when the reduction power is exactly equal to the maximum one.</li>
+<li>FIXED: <a class="reference internal" href="api/computations.html#reikna.transpose.Transpose" title="reikna.transpose.Transpose"><tt class="xref py py-class docutils literal"><span class="pre">Transpose</span></tt></a> now works correctly for struct dtypes.</li>
+<li>FIXED: <a class="reference internal" href="api/helpers.html#reikna.helpers.bounding_power_of_2" title="reikna.helpers.bounding_power_of_2"><tt class="xref py py-class docutils literal"><span class="pre">bounding_power_of_2</span></tt></a> now correctly returns <tt class="docutils literal"><span class="pre">1</span></tt> instead of <tt class="docutils literal"><span class="pre">2</span></tt> being given <tt class="docutils literal"><span class="pre">1</span></tt> as an argument.</li>
+<li>FIXED: <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread.compile_static" title="reikna.cluda.api.Thread.compile_static"><tt class="xref py py-meth docutils literal"><span class="pre">compile_static()</span></tt></a> local size finding algorithm is much less prone to failure now.</li>
 </ul>
 </div>
 <div class="section" id="nov-2013">
@@ -89,7 +104,7 @@ Correspondingly, <tt class="docutils literal"><span class="pre">THREAD_FAST_MATH
 <li>CHANGED: CBRNG modules are using the dtype-to-ctype support.
 Correspondingly, the C types for keys and counters can be obtained by calling <a class="reference internal" href="api/cluda.html#reikna.cluda.dtypes.ctype_module" title="reikna.cluda.dtypes.ctype_module"><tt class="xref py py-func docutils literal"><span class="pre">ctype_module()</span></tt></a> on <a class="reference internal" href="api/computations.html#reikna.cbrng.bijections.Bijection.key_dtype" title="reikna.cbrng.bijections.Bijection.key_dtype"><tt class="xref py py-attr docutils literal"><span class="pre">key_dtype</span></tt></a> and <a class="reference internal" href="api/computations.html#reikna.cbrng.bijections.Bijection.counter_dtype" title="reikna.cbrng.bijections.Bijection.counter_dtype"><tt class="xref py py-attr docutils literal"><span class="pre">counter_dtype</span></tt></a> attributes.
 The module wrappers still define their types, but their names are using a different naming convention now.</li>
-<li>ADDED: module generator for nested dtypes (<a class="reference internal" href="api/cluda.html#reikna.cluda.dtypes.ctype_module" title="reikna.cluda.dtypes.ctype_module"><tt class="xref py py-func docutils literal"><span class="pre">ctype_module()</span></tt></a>) and a function to get natural field offsets for a given API/device (<a class="reference internal" href="api/cluda.html#reikna.cluda.dtypes.adjust_alignment" title="reikna.cluda.dtypes.adjust_alignment"><tt class="xref py py-func docutils literal"><span class="pre">adjust_alignment()</span></tt></a>).</li>
+<li>ADDED: module generator for nested dtypes (<a class="reference internal" href="api/cluda.html#reikna.cluda.dtypes.ctype_module" title="reikna.cluda.dtypes.ctype_module"><tt class="xref py py-func docutils literal"><span class="pre">ctype_module()</span></tt></a>) and a function to get natural field offsets for a given API/device (<tt class="docutils literal"><span class="pre">adjust_alignment</span></tt>).</li>
 <li>ADDED: <tt class="docutils literal"><span class="pre">fast_math</span></tt> keyword parameter in <a class="reference internal" href="api/core.html#reikna.core.Computation.compile" title="reikna.core.Computation.compile"><tt class="xref py py-meth docutils literal"><span class="pre">compile()</span></tt></a>.
 In other words, now <tt class="docutils literal"><span class="pre">fast_math</span></tt> can be set per computation.</li>
 <li>ADDED: <a class="reference internal" href="api/cluda.html#ALIGN" title="ALIGN"><tt class="xref c c-macro docutils literal"><span class="pre">ALIGN</span></tt></a> macro is available in CLUDA kernels.</li>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Core functionality &mdash; reikna 0.5.0+dev.e4fe6b5 documentation</title>
+    <title>Core functionality &mdash; reikna 0.5.0+dev.3bbaad2 documentation</title>
     
     <link rel="stylesheet" href="../_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.0+dev.e4fe6b5',
+        VERSION:     '0.5.0+dev.3bbaad2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.5.0+dev.e4fe6b5 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.5.0+dev.3bbaad2 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Computations" href="computations.html" />
     <link rel="prev" title="CLUDA layer" href="cluda.html" />
@@ -67,7 +67,7 @@
         <li class="right" >
           <a href="cluda.html" title="CLUDA layer"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.5.0+dev.e4fe6b5 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.5.0+dev.3bbaad2 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -495,8 +495,7 @@ which are only interested in array metadata.</p>
 <dl class="class">
 <dt id="reikna.core.transformation.KernelParameter">
 <em class="property">class </em><tt class="descclassname">reikna.core.transformation.</tt><tt class="descname">KernelParameter</tt><a class="headerlink" href="#reikna.core.transformation.KernelParameter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#reikna.core.Type" title="reikna.core.Type"><tt class="xref py py-class docutils literal"><span class="pre">Type</span></tt></a></p>
-<p>Providing an interface for accessing kernel arguments in a template.
+<dd><p>Providing an interface for accessing kernel arguments in a template.
 Depending on the parameter type, and whether it is used
 inside a computation or a transformation template,
 can have different load/store attributes available.</p>
@@ -504,6 +503,27 @@ can have different load/store attributes available.</p>
 <dt id="reikna.core.transformation.KernelParameter.name">
 <tt class="descname">name</tt><a class="headerlink" href="#reikna.core.transformation.KernelParameter.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parameter name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="reikna.core.transformation.KernelParameter.shape">
+<tt class="descname">shape</tt><a class="headerlink" href="#reikna.core.transformation.KernelParameter.shape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="reikna.core.transformation.KernelParameter.dtype">
+<tt class="descname">dtype</tt><a class="headerlink" href="#reikna.core.transformation.KernelParameter.dtype" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="reikna.core.transformation.KernelParameter.ctype">
+<tt class="descname">ctype</tt><a class="headerlink" href="#reikna.core.transformation.KernelParameter.ctype" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="reikna.core.transformation.KernelParameter.strides">
+<tt class="descname">strides</tt><a class="headerlink" href="#reikna.core.transformation.KernelParameter.strides" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as in <a class="reference internal" href="#reikna.core.Type" title="reikna.core.Type"><tt class="xref py py-class docutils literal"><span class="pre">Type</span></tt></a>.</p>
 </dd></dl>
 
 <dl class="method">
