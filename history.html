@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Release history &mdash; reikna 0.4.0 documentation</title>
+    <title>Release history &mdash; reikna 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.4.0',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.4.0 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.5.0 documentation" href="index.html" />
     <link rel="prev" title="Transformations" href="api/transformations.html" />
 
    
@@ -62,7 +62,7 @@
         <li class="right" >
           <a href="api/transformations.html" title="Transformations"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.4.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.5.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -73,12 +73,29 @@
             
   <div class="section" id="release-history">
 <h1>Release history<a class="headerlink" href="#release-history" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="current-development-version">
-<h2>0.5.0 (current development version)<a class="headerlink" href="#current-development-version" title="Permalink to this headline">¶</a></h2>
-<p>Under construction.</p>
-</div>
 <div class="section" id="nov-2013">
-<h2>0.4.0 (10 Nov 2013)<a class="headerlink" href="#nov-2013" title="Permalink to this headline">¶</a></h2>
+<h2>0.5.0 (25 Nov 2013)<a class="headerlink" href="#nov-2013" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>CHANGED: <a class="reference internal" href="api/core.html#reikna.core.transformation.KernelParameter" title="reikna.core.transformation.KernelParameter"><tt class="xref py py-class docutils literal"><span class="pre">KernelParameter</span></tt></a> is not derived from <a class="reference internal" href="api/core.html#reikna.core.Type" title="reikna.core.Type"><tt class="xref py py-class docutils literal"><span class="pre">Type</span></tt></a> anymore (although it still retains the corresponding attributes).</li>
+<li>CHANGED: <a class="reference internal" href="api/computations.html#reikna.reduce.Predicate" title="reikna.reduce.Predicate"><tt class="xref py py-class docutils literal"><span class="pre">Predicate</span></tt></a> now takes a dtype&#8217;d value as <tt class="docutils literal"><span class="pre">empty</span></tt>, not a string.</li>
+<li>CHANGED: The logic of processing struct dtypes was reworked, and <tt class="docutils literal"><span class="pre">adjust_alignment</span></tt> was removed.
+Instead, one should use <a class="reference internal" href="api/cluda.html#reikna.cluda.dtypes.align" title="reikna.cluda.dtypes.align"><tt class="xref py py-func docutils literal"><span class="pre">align()</span></tt></a> (which does not take a <tt class="docutils literal"><span class="pre">Thread</span></tt> parameter) to get a dtype with the offsets and itemsize equal to those a compiler would set.
+On the other hand, <a class="reference internal" href="api/cluda.html#reikna.cluda.dtypes.ctype_module" title="reikna.cluda.dtypes.ctype_module"><tt class="xref py py-func docutils literal"><span class="pre">ctype_module()</span></tt></a> attempts to set the alignments such that the field offsets are the same as in the given numpy dtype
+(unless <tt class="docutils literal"><span class="pre">ignore_alignments</span></tt> flag is set).</li>
+<li>ADDED: struct dtypes support in <a class="reference internal" href="api/cluda.html#reikna.cluda.dtypes.c_constant" title="reikna.cluda.dtypes.c_constant"><tt class="xref py py-func docutils literal"><span class="pre">c_constant()</span></tt></a>.</li>
+<li>ADDED: <a class="reference internal" href="api/cluda.html#reikna.cluda.dtypes.flatten_dtype" title="reikna.cluda.dtypes.flatten_dtype"><tt class="xref py py-func docutils literal"><span class="pre">flatten_dtype()</span></tt></a> helper function.</li>
+<li>ADDED: added <tt class="docutils literal"><span class="pre">transposed_a</span></tt> and <tt class="docutils literal"><span class="pre">transposed_b</span></tt> keyword parameters to <a class="reference internal" href="api/computations.html#reikna.matrixmul.MatrixMul" title="reikna.matrixmul.MatrixMul"><tt class="xref py py-class docutils literal"><span class="pre">MatrixMul</span></tt></a>.</li>
+<li>ADDED: algorithm cascading to <a class="reference internal" href="api/computations.html#reikna.reduce.Reduce" title="reikna.reduce.Reduce"><tt class="xref py py-class docutils literal"><span class="pre">Reduce</span></tt></a>, leading to 3-4 times increase in performance.</li>
+<li>ADDED: <a class="reference internal" href="api/cluda.html#reikna.cluda.functions.polar_unit" title="reikna.cluda.functions.polar_unit"><tt class="xref py py-func docutils literal"><span class="pre">polar_unit()</span></tt></a> function module in CLUDA.</li>
+<li>ADDED: support for arrays with 0-dimensional shape as computation and transformation arguments.</li>
+<li>FIXED: a bug in <a class="reference internal" href="api/computations.html#reikna.reduce.Reduce" title="reikna.reduce.Reduce"><tt class="xref py py-class docutils literal"><span class="pre">Reduce</span></tt></a>, which lead to incorrect results in cases when the reduction power is exactly equal to the maximum one.</li>
+<li>FIXED: <a class="reference internal" href="api/computations.html#reikna.transpose.Transpose" title="reikna.transpose.Transpose"><tt class="xref py py-class docutils literal"><span class="pre">Transpose</span></tt></a> now works correctly for struct dtypes.</li>
+<li>FIXED: <a class="reference internal" href="api/helpers.html#reikna.helpers.bounding_power_of_2" title="reikna.helpers.bounding_power_of_2"><tt class="xref py py-class docutils literal"><span class="pre">bounding_power_of_2</span></tt></a> now correctly returns <tt class="docutils literal"><span class="pre">1</span></tt> instead of <tt class="docutils literal"><span class="pre">2</span></tt> being given <tt class="docutils literal"><span class="pre">1</span></tt> as an argument.</li>
+<li>FIXED: <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread.compile_static" title="reikna.cluda.api.Thread.compile_static"><tt class="xref py py-meth docutils literal"><span class="pre">compile_static()</span></tt></a> local size finding algorithm is much less prone to failure now.</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2>0.4.0 (10 Nov 2013)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>CHANGED: <tt class="docutils literal"><span class="pre">supports_dtype()</span></tt> method moved from <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread" title="reikna.cluda.api.Thread"><tt class="xref py py-class docutils literal"><span class="pre">Thread</span></tt></a> to <a class="reference internal" href="api/cluda.html#reikna.cluda.api.DeviceParameters" title="reikna.cluda.api.DeviceParameters"><tt class="xref py py-class docutils literal"><span class="pre">DeviceParameters</span></tt></a>.</li>
 <li>CHANGED: <tt class="docutils literal"><span class="pre">fast_math</span></tt> keyword parameter moved from <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread" title="reikna.cluda.api.Thread"><tt class="xref py py-class docutils literal"><span class="pre">Thread</span></tt></a> constructor to <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread.compile" title="reikna.cluda.api.Thread.compile"><tt class="xref py py-meth docutils literal"><span class="pre">compile()</span></tt></a> and <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread.compile_static" title="reikna.cluda.api.Thread.compile_static"><tt class="xref py py-meth docutils literal"><span class="pre">compile_static()</span></tt></a>.
@@ -87,7 +104,7 @@ Correspondingly, <tt class="docutils literal"><span class="pre">THREAD_FAST_MATH
 <li>CHANGED: CBRNG modules are using the dtype-to-ctype support.
 Correspondingly, the C types for keys and counters can be obtained by calling <a class="reference internal" href="api/cluda.html#reikna.cluda.dtypes.ctype_module" title="reikna.cluda.dtypes.ctype_module"><tt class="xref py py-func docutils literal"><span class="pre">ctype_module()</span></tt></a> on <a class="reference internal" href="api/computations.html#reikna.cbrng.bijections.Bijection.key_dtype" title="reikna.cbrng.bijections.Bijection.key_dtype"><tt class="xref py py-attr docutils literal"><span class="pre">key_dtype</span></tt></a> and <a class="reference internal" href="api/computations.html#reikna.cbrng.bijections.Bijection.counter_dtype" title="reikna.cbrng.bijections.Bijection.counter_dtype"><tt class="xref py py-attr docutils literal"><span class="pre">counter_dtype</span></tt></a> attributes.
 The module wrappers still define their types, but their names are using a different naming convention now.</li>
-<li>ADDED: module generator for nested dtypes (<a class="reference internal" href="api/cluda.html#reikna.cluda.dtypes.ctype_module" title="reikna.cluda.dtypes.ctype_module"><tt class="xref py py-func docutils literal"><span class="pre">ctype_module()</span></tt></a>) and a function to get natural field offsets for a given API/device (<a class="reference internal" href="api/cluda.html#reikna.cluda.dtypes.adjust_alignment" title="reikna.cluda.dtypes.adjust_alignment"><tt class="xref py py-func docutils literal"><span class="pre">adjust_alignment()</span></tt></a>).</li>
+<li>ADDED: module generator for nested dtypes (<a class="reference internal" href="api/cluda.html#reikna.cluda.dtypes.ctype_module" title="reikna.cluda.dtypes.ctype_module"><tt class="xref py py-func docutils literal"><span class="pre">ctype_module()</span></tt></a>) and a function to get natural field offsets for a given API/device (<tt class="docutils literal"><span class="pre">adjust_alignment</span></tt>).</li>
 <li>ADDED: <tt class="docutils literal"><span class="pre">fast_math</span></tt> keyword parameter in <a class="reference internal" href="api/core.html#reikna.core.Computation.compile" title="reikna.core.Computation.compile"><tt class="xref py py-meth docutils literal"><span class="pre">compile()</span></tt></a>.
 In other words, now <tt class="docutils literal"><span class="pre">fast_math</span></tt> can be set per computation.</li>
 <li>ADDED: <a class="reference internal" href="api/cluda.html#ALIGN" title="ALIGN"><tt class="xref c c-macro docutils literal"><span class="pre">ALIGN</span></tt></a> macro is available in CLUDA kernels.</li>
@@ -107,14 +124,14 @@ In other words, now <tt class="docutils literal"><span class="pre">fast_math</sp
 <li>FIXED: improved <tt class="docutils literal"><span class="pre">Computation.compile()</span></tt> performance for complicated computations by precreating transformation templates.</li>
 </ul>
 </div>
-<div class="section" id="id1">
-<h2>0.3.5 (6 Aug 2013)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h2>0.3.5 (6 Aug 2013)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>FIXED: bug with virtual size algorithms returning floating point global and local sizes in Py2.</li>
 </ul>
 </div>
-<div class="section" id="id2">
-<h2>0.3.4 (3 Aug 2013)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h2>0.3.4 (3 Aug 2013)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>CHANGED: virtual sizes algorithms were rewritten and are now more maintainable.
 In addition, virtual sizes can now handle any number of dimensions of local and global size,
@@ -132,8 +149,8 @@ Virtual size functions have their own independent return type.</li>
 <li>FIXED: package metadata.</li>
 </ul>
 </div>
-<div class="section" id="id3">
-<h2>0.3.2 (29 Jul 2013)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h2>0.3.2 (29 Jul 2013)<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>ADDED: same module object, when being called without arguments from other modules/snippets, is rendered only once and returns the same prefix each time.
 This allows one to create structure declarations that can be used by functions in several modules.</li>
@@ -148,8 +165,8 @@ Now the ordering inside a list of initial computation parameters or a list of a 
 <li>FIXED: updated some obsolete computation docstrings.</li>
 </ul>
 </div>
-<div class="section" id="id4">
-<h2>0.3.1 (25 Jul 2013)<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h2>0.3.1 (25 Jul 2013)<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>FIXED: too strict array type check for nested computations that caused some tests to fail.</li>
 <li>FIXED: default values of scalar parameters are now processed correctly.</li>
@@ -158,8 +175,8 @@ Now the ordering inside a list of initial computation parameters or a list of a 
 <li>INTERNAL: <tt class="docutils literal"><span class="pre">pylint</span></tt> was ran and many stylistic errors fixed.</li>
 </ul>
 </div>
-<div class="section" id="id5">
-<h2>0.3.0 (23 Jul 2013)<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h2>0.3.0 (23 Jul 2013)<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>Major core API change:</p>
 <ul class="simple">
 <li>Computations have function-like signatures with the standard <tt class="docutils literal"><span class="pre">Signature</span></tt> interface; no more separation of inputs/outputs/scalars.</li>
@@ -207,8 +224,8 @@ This opens the road for correct and automatic stride support (not fully implemen
 <li>FIXED: typo in <tt class="docutils literal"><span class="pre">cluda.api_discovery</span></tt>.</li>
 </ul>
 </div>
-<div class="section" id="id6">
-<h2>0.2.2 (20 Apr 2013)<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h2>0.2.2 (20 Apr 2013)<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>ADDED: ability to use custom argument names in transformations.</li>
 <li>ADDED: multi-argument <a class="reference internal" href="api/cluda.html#reikna.cluda.functions.mul" title="reikna.cluda.functions.mul"><tt class="xref py py-func docutils literal"><span class="pre">mul()</span></tt></a>.</li>
@@ -243,8 +260,8 @@ between internal allocations &#8212; necessary for nested computations.</li>
 (calculated using Gauss-Hermite quadrature).</li>
 </ul>
 </div>
-<div class="section" id="id7">
-<h2>0.2.0 (3 Mar 2013)<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h2>0.2.0 (3 Mar 2013)<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Added FFT computation (slightly optimized PyFFT version + Bluestein&#8217;s algorithm for non-power-of-2 FFT sizes)</li>
 <li>Added Python 3 compatibility</li>
@@ -280,20 +297,20 @@ between internal allocations &#8212; necessary for nested computations.</li>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Release history</a><ul>
-<li><a class="reference internal" href="#current-development-version">0.5.0 (current development version)</a></li>
-<li><a class="reference internal" href="#nov-2013">0.4.0 (10 Nov 2013)</a></li>
+<li><a class="reference internal" href="#nov-2013">0.5.0 (25 Nov 2013)</a></li>
+<li><a class="reference internal" href="#id1">0.4.0 (10 Nov 2013)</a></li>
 <li><a class="reference internal" href="#aug-2013">0.3.6 (9 Aug 2013)</a></li>
-<li><a class="reference internal" href="#id1">0.3.5 (6 Aug 2013)</a></li>
-<li><a class="reference internal" href="#id2">0.3.4 (3 Aug 2013)</a></li>
+<li><a class="reference internal" href="#id2">0.3.5 (6 Aug 2013)</a></li>
+<li><a class="reference internal" href="#id3">0.3.4 (3 Aug 2013)</a></li>
 <li><a class="reference internal" href="#jul-2013">0.3.3 (29 Jul 2013)</a></li>
-<li><a class="reference internal" href="#id3">0.3.2 (29 Jul 2013)</a></li>
-<li><a class="reference internal" href="#id4">0.3.1 (25 Jul 2013)</a></li>
-<li><a class="reference internal" href="#id5">0.3.0 (23 Jul 2013)</a></li>
+<li><a class="reference internal" href="#id4">0.3.2 (29 Jul 2013)</a></li>
+<li><a class="reference internal" href="#id5">0.3.1 (25 Jul 2013)</a></li>
+<li><a class="reference internal" href="#id6">0.3.0 (23 Jul 2013)</a></li>
 <li><a class="reference internal" href="#may-2013">0.2.4 (11 May 2013)</a></li>
 <li><a class="reference internal" href="#apr-2013">0.2.3 (25 Apr 2013)</a></li>
-<li><a class="reference internal" href="#id6">0.2.2 (20 Apr 2013)</a></li>
+<li><a class="reference internal" href="#id7">0.2.2 (20 Apr 2013)</a></li>
 <li><a class="reference internal" href="#mar-2013">0.2.1 (8 Mar 2013)</a></li>
-<li><a class="reference internal" href="#id7">0.2.0 (3 Mar 2013)</a></li>
+<li><a class="reference internal" href="#id8">0.2.0 (3 Mar 2013)</a></li>
 <li><a class="reference internal" href="#sep-2012">0.1.0 (12 Sep 2012)</a></li>
 <li><a class="reference internal" href="#jul-2012">0.0.1 (22 Jul 2012)</a></li>
 </ul>

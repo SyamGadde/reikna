@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>CLUDA layer &mdash; reikna 0.4.0 documentation</title>
+    <title>CLUDA layer &mdash; reikna 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.4.0',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.4.0 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.5.0 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Core functionality" href="core.html" />
     <link rel="prev" title="Helpers" href="helpers.html" />
@@ -67,7 +67,7 @@
         <li class="right" >
           <a href="helpers.html" title="Helpers"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.4.0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.5.0 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -770,21 +770,21 @@ and the lack of C++ synthax which would allow one to write them.</p>
 <dl class="function">
 <dt id="reikna.cluda.functions.cast">
 <tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">cast</tt><big>(</big><em>out_dtype</em>, <em>in_dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.cast" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a>
+<dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a> with a function of one argument
 that casts values of <tt class="docutils literal"><span class="pre">in_dtype</span></tt> to <tt class="docutils literal"><span class="pre">out_dtype</span></tt>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="reikna.cluda.functions.conj">
 <tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">conj</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.conj" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a>
+<dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a> with a function of one argument
 that conjugates the value of type <tt class="docutils literal"><span class="pre">dtype</span></tt> (must be a complex data type).</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="reikna.cluda.functions.div">
 <tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">div</tt><big>(</big><em>in_dtype1</em>, <em>in_dtype2</em>, <em>out_dtype=None</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.div" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a>
+<dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a> with a function of two arguments
 that divides values of <tt class="docutils literal"><span class="pre">in_dtype1</span></tt> and <tt class="docutils literal"><span class="pre">in_dtype2</span></tt>.
 If <tt class="docutils literal"><span class="pre">out_dtype</span></tt> is given, it will be set as a return type for this function.</p>
 </dd></dl>
@@ -792,7 +792,7 @@ If <tt class="docutils literal"><span class="pre">out_dtype</span></tt> is given
 <dl class="function">
 <dt id="reikna.cluda.functions.exp">
 <tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">exp</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.exp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a>
+<dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a> with a function of one argument
 that exponentiates the value of type <tt class="docutils literal"><span class="pre">dtype</span></tt>
 (must be a real or complex data type).</p>
 </dd></dl>
@@ -800,25 +800,33 @@ that exponentiates the value of type <tt class="docutils literal"><span class="p
 <dl class="function">
 <dt id="reikna.cluda.functions.mul">
 <tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">mul</tt><big>(</big><em>*in_dtypes</em>, <em>out_dtype=None</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.mul" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a>
-that multiplies values of types <tt class="docutils literal"><span class="pre">in_dtypes</span></tt>.
+<dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a>  with a function of
+<tt class="docutils literal"><span class="pre">len(in_dtypes)</span></tt> arguments that multiplies values of types <tt class="docutils literal"><span class="pre">in_dtypes</span></tt>.
 If <tt class="docutils literal"><span class="pre">out_dtype</span></tt> is given, it will be set as a return type for this function.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="reikna.cluda.functions.norm">
 <tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">norm</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.norm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a>
-that returns the norm of the value of type <tt class="docutils literal"><span class="pre">dtype</span></tt>
+<dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a> with a function of one argument
+that returns the 2-norm of the value of type <tt class="docutils literal"><span class="pre">dtype</span></tt>
 (product by the complex conjugate if the value is complex, square otherwise).</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="reikna.cluda.functions.polar">
 <tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">polar</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.polar" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a>
-that calculates <tt class="docutils literal"><span class="pre">rho</span> <span class="pre">*</span> <span class="pre">exp(i</span> <span class="pre">*</span> <span class="pre">theta)</span></tt>
+<dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a> with a function of two arguments
+that returns the complex-valued <tt class="docutils literal"><span class="pre">rho</span> <span class="pre">*</span> <span class="pre">exp(i</span> <span class="pre">*</span> <span class="pre">theta)</span></tt>
 for values <tt class="docutils literal"><span class="pre">rho,</span> <span class="pre">theta</span></tt> of type <tt class="docutils literal"><span class="pre">dtype</span></tt> (must be a real data type).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="reikna.cluda.functions.polar_unit">
+<tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">polar_unit</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.polar_unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a> with a function of one argument
+that returns a complex number <tt class="docutils literal"><span class="pre">(cos(theta),</span> <span class="pre">sin(theta))</span></tt>
+for a value <tt class="docutils literal"><span class="pre">theta</span></tt> of type <tt class="docutils literal"><span class="pre">dtype</span></tt> (must be a real data type).</p>
 </dd></dl>
 
 </div>
@@ -1001,17 +1009,19 @@ Since its dimensions can differ from actual call dimensions, these functions hav
 <h2>Datatype tools<a class="headerlink" href="#datatype-tools" title="Permalink to this headline">¶</a></h2>
 <p>This module contains various convenience functions which operate with <tt class="docutils literal"><span class="pre">numpy.dtype</span></tt> objects.</p>
 <span class="target" id="module-reikna.cluda.dtypes"></span><dl class="function">
-<dt id="reikna.cluda.dtypes.adjust_alignment">
-<tt class="descclassname">reikna.cluda.dtypes.</tt><tt class="descname">adjust_alignment</tt><big>(</big><em>thr</em>, <em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.dtypes.adjust_alignment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a new data type object with the same fields as in <tt class="docutils literal"><span class="pre">dtype</span></tt>
-and the field offsets set by the compiler in <tt class="docutils literal"><span class="pre">thr</span></tt>.
-All existing non-standard offsets in <tt class="docutils literal"><span class="pre">dtype</span></tt> are ignored.</p>
+<dt id="reikna.cluda.dtypes.align">
+<tt class="descclassname">reikna.cluda.dtypes.</tt><tt class="descname">align</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.dtypes.align" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new struct dtype with the field offsets changed to the ones a compiler would use
+(without being given any explicit alignment qualifiers).
+Ignores all existing explicit itemsizes and offsets.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="reikna.cluda.dtypes.c_constant">
 <tt class="descclassname">reikna.cluda.dtypes.</tt><tt class="descname">c_constant</tt><big>(</big><em>val</em>, <em>dtype=None</em><big>)</big><a class="headerlink" href="#reikna.cluda.dtypes.c_constant" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a C-style numerical constant.</p>
+<dd><p>Returns a C-style numerical constant.
+If <tt class="docutils literal"><span class="pre">val</span></tt> has a struct dtype, the generated constant will have the form <tt class="docutils literal"><span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></tt>
+and can be used as an initializer for a variable.</p>
 </dd></dl>
 
 <dl class="function">
@@ -1040,23 +1050,49 @@ All existing non-standard offsets in <tt class="docutils literal"><span class="p
 
 <dl class="function">
 <dt id="reikna.cluda.dtypes.ctype_module">
-<tt class="descclassname">reikna.cluda.dtypes.</tt><tt class="descname">ctype_module</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.dtypes.ctype_module" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">reikna.cluda.dtypes.</tt><tt class="descname">ctype_module</tt><big>(</big><em>dtype</em>, <em>ignore_alignment=False</em><big>)</big><a class="headerlink" href="#reikna.cluda.dtypes.ctype_module" title="Permalink to this definition">¶</a></dt>
 <dd><p>For a struct type, returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a> object
 with the <tt class="docutils literal"><span class="pre">typedef</span></tt> of a struct corresponding to the given <tt class="docutils literal"><span class="pre">dtype</span></tt>
 (with its name set to the module prefix);
-falls back to <a class="reference internal" href="#reikna.cluda.dtypes.ctype" title="reikna.cluda.dtypes.ctype"><tt class="xref py py-func docutils literal"><span class="pre">ctype()</span></tt></a> otherwise.
-The structure definition includes the alignment required
-to produce field offsets specified in <tt class="docutils literal"><span class="pre">dtype</span></tt>.</p>
+falls back to <a class="reference internal" href="#reikna.cluda.dtypes.ctype" title="reikna.cluda.dtypes.ctype"><tt class="xref py py-func docutils literal"><span class="pre">ctype()</span></tt></a> otherwise.</p>
+<p>The structure definition includes the alignment required
+to produce field offsets specified in <tt class="docutils literal"><span class="pre">dtype</span></tt>;
+therefore, <tt class="docutils literal"><span class="pre">dtype</span></tt> must be either a simple type, or have
+proper offsets and dtypes (the ones that can be reporoduced in C
+using explicit alignment attributes, but without additional padding)
+and the attribute <tt class="docutils literal"><span class="pre">isalignedstruct</span> <span class="pre">==</span> <span class="pre">True</span></tt>.
+An aligned dtype can be produced either by standard means
+(<tt class="docutils literal"><span class="pre">aligned</span></tt> flag in <tt class="docutils literal"><span class="pre">numpy.dtype</span></tt> constructor and explicit offsets and itemsizes),
+or created out of an arbitrary dtype with the help of <a class="reference internal" href="#reikna.cluda.dtypes.align" title="reikna.cluda.dtypes.align"><tt class="xref py py-func docutils literal"><span class="pre">align()</span></tt></a>.</p>
+<p>If <tt class="docutils literal"><span class="pre">ignore_alignment</span></tt> is True, all of the above is ignored.
+The C structures produced will not have any explicit alignment modifiers.
+As a result, the the field offsets of <tt class="docutils literal"><span class="pre">dtype</span></tt> may differ from the ones
+chosen by the compiler.</p>
 <p>Modules are cached and the function returns a single module instance for equal <tt class="docutils literal"><span class="pre">dtype</span></tt>&#8216;s.
 Therefore inside a kernel it will be rendered with the same prefix everywhere it is used.
 This results in a behavior characteristic for a structural type system,
 same as for the basic dtype-ctype conversion.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">As of <tt class="docutils literal"><span class="pre">numpy</span></tt> 1.8, the <tt class="docutils literal"><span class="pre">isalignedstruct</span></tt> attribute is not enough to ensure
+a mapping between a dtype and a C struct with only the fields that are present in the dtype.
+Therefore, <tt class="docutils literal"><span class="pre">ctype_module</span></tt> will make some additional checks and raise <tt class="docutils literal"><span class="pre">ValueError</span></tt>
+if it is not the case.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="reikna.cluda.dtypes.detect_type">
 <tt class="descclassname">reikna.cluda.dtypes.</tt><tt class="descname">detect_type</tt><big>(</big><em>val</em><big>)</big><a class="headerlink" href="#reikna.cluda.dtypes.detect_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find out the data type of <tt class="docutils literal"><span class="pre">val</span></tt>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="reikna.cluda.dtypes.flatten_dtype">
+<tt class="descclassname">reikna.cluda.dtypes.</tt><tt class="descname">flatten_dtype</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.dtypes.flatten_dtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of tuples <tt class="docutils literal"><span class="pre">(path,</span> <span class="pre">dtype)</span></tt> for each of the basic dtypes in
+a (possibly nested) <tt class="docutils literal"><span class="pre">dtype</span></tt>.
+<tt class="docutils literal"><span class="pre">path</span></tt> is a list of field names leading to the corresponding element.</p>
 </dd></dl>
 
 <dl class="function">

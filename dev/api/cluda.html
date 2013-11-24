@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>CLUDA layer &mdash; reikna 0.5.0+dev.3bbaad2 documentation</title>
+    <title>CLUDA layer &mdash; reikna 0.6.0+dev.394b5a6 documentation</title>
     
     <link rel="stylesheet" href="../_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.5.0+dev.3bbaad2',
+        VERSION:     '0.6.0+dev.394b5a6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.5.0+dev.3bbaad2 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.6.0+dev.394b5a6 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Core functionality" href="core.html" />
     <link rel="prev" title="Helpers" href="helpers.html" />
@@ -67,7 +67,7 @@
         <li class="right" >
           <a href="helpers.html" title="Helpers"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.5.0+dev.3bbaad2 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.6.0+dev.394b5a6 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -1009,10 +1009,11 @@ Since its dimensions can differ from actual call dimensions, these functions hav
 <h2>Datatype tools<a class="headerlink" href="#datatype-tools" title="Permalink to this headline">¶</a></h2>
 <p>This module contains various convenience functions which operate with <tt class="docutils literal"><span class="pre">numpy.dtype</span></tt> objects.</p>
 <span class="target" id="module-reikna.cluda.dtypes"></span><dl class="function">
-<dt id="reikna.cluda.dtypes.adjust_offsets">
-<tt class="descclassname">reikna.cluda.dtypes.</tt><tt class="descname">adjust_offsets</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.dtypes.adjust_offsets" title="Permalink to this definition">¶</a></dt>
+<dt id="reikna.cluda.dtypes.align">
+<tt class="descclassname">reikna.cluda.dtypes.</tt><tt class="descname">align</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.dtypes.align" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a new struct dtype with the field offsets changed to the ones a compiler would use
-(without being given any explicit alignment qualifiers).</p>
+(without being given any explicit alignment qualifiers).
+Ignores all existing explicit itemsizes and offsets.</p>
 </dd></dl>
 
 <dl class="function">
@@ -1053,24 +1054,30 @@ and can be used as an initializer for a variable.</p>
 <dd><p>For a struct type, returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a> object
 with the <tt class="docutils literal"><span class="pre">typedef</span></tt> of a struct corresponding to the given <tt class="docutils literal"><span class="pre">dtype</span></tt>
 (with its name set to the module prefix);
-falls back to <a class="reference internal" href="#reikna.cluda.dtypes.ctype" title="reikna.cluda.dtypes.ctype"><tt class="xref py py-func docutils literal"><span class="pre">ctype()</span></tt></a> otherwise.
-The structure definition includes the alignment required
-to produce field offsets specified in <tt class="docutils literal"><span class="pre">dtype</span></tt>.</p>
+falls back to <a class="reference internal" href="#reikna.cluda.dtypes.ctype" title="reikna.cluda.dtypes.ctype"><tt class="xref py py-func docutils literal"><span class="pre">ctype()</span></tt></a> otherwise.</p>
+<p>The structure definition includes the alignment required
+to produce field offsets specified in <tt class="docutils literal"><span class="pre">dtype</span></tt>;
+therefore, <tt class="docutils literal"><span class="pre">dtype</span></tt> must be either a simple type, or have
+proper offsets and dtypes (the ones that can be reporoduced in C
+using explicit alignment attributes, but without additional padding)
+and the attribute <tt class="docutils literal"><span class="pre">isalignedstruct</span> <span class="pre">==</span> <span class="pre">True</span></tt>.
+An aligned dtype can be produced either by standard means
+(<tt class="docutils literal"><span class="pre">aligned</span></tt> flag in <tt class="docutils literal"><span class="pre">numpy.dtype</span></tt> constructor and explicit offsets and itemsizes),
+or created out of an arbitrary dtype with the help of <a class="reference internal" href="#reikna.cluda.dtypes.align" title="reikna.cluda.dtypes.align"><tt class="xref py py-func docutils literal"><span class="pre">align()</span></tt></a>.</p>
+<p>If <tt class="docutils literal"><span class="pre">ignore_alignment</span></tt> is True, all of the above is ignored.
+The C structures produced will not have any explicit alignment modifiers.
+As a result, the the field offsets of <tt class="docutils literal"><span class="pre">dtype</span></tt> may differ from the ones
+chosen by the compiler.</p>
 <p>Modules are cached and the function returns a single module instance for equal <tt class="docutils literal"><span class="pre">dtype</span></tt>&#8216;s.
 Therefore inside a kernel it will be rendered with the same prefix everywhere it is used.
 This results in a behavior characteristic for a structural type system,
 same as for the basic dtype-ctype conversion.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>For a struct <tt class="docutils literal"><span class="pre">dtype</span></tt>, <tt class="docutils literal"><span class="pre">ctype_module</span></tt> will attempt to set alignments such that
-the rendered structure has the same itemsize and field offsets as the <tt class="docutils literal"><span class="pre">dtype</span></tt>.
-If it is not possible, a <tt class="docutils literal"><span class="pre">ValueError</span></tt> will be raised.</p>
-<p>If <tt class="docutils literal"><span class="pre">ignore_alignment</span></tt> is <tt class="docutils literal"><span class="pre">True</span></tt>, all alignment modifiers will be omitted.
-As a result, the the field offsets of <tt class="docutils literal"><span class="pre">dtype</span></tt> may differ from the ones
-chosen by the compiler.
-Set it only if you intend to use the structure internally in a kernel.</p>
-<p class="last">Offsets can be adjusted automatically to the ones that are guaranteed to work
-with the help of <a class="reference internal" href="#reikna.cluda.dtypes.adjust_offsets" title="reikna.cluda.dtypes.adjust_offsets"><tt class="xref py py-func docutils literal"><span class="pre">adjust_offsets()</span></tt></a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">As of <tt class="docutils literal"><span class="pre">numpy</span></tt> 1.8, the <tt class="docutils literal"><span class="pre">isalignedstruct</span></tt> attribute is not enough to ensure
+a mapping between a dtype and a C struct with only the fields that are present in the dtype.
+Therefore, <tt class="docutils literal"><span class="pre">ctype_module</span></tt> will make some additional checks and raise <tt class="docutils literal"><span class="pre">ValueError</span></tt>
+if it is not the case.</p>
 </div>
 </dd></dl>
 
