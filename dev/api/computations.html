@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Computations &mdash; reikna 0.6.0+dev.080d072 documentation</title>
+    <title>Computations &mdash; reikna 0.6.0+dev.f7dbb45 documentation</title>
     
     <link rel="stylesheet" href="../_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.6.0+dev.080d072',
+        VERSION:     '0.6.0+dev.f7dbb45',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.6.0+dev.080d072 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.6.0+dev.f7dbb45 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Transformations" href="transformations.html" />
     <link rel="prev" title="Core functionality" href="core.html" />
@@ -67,7 +67,7 @@
         <li class="right" >
           <a href="core.html" title="Core functionality"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.6.0+dev.080d072 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.6.0+dev.f7dbb45 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -801,9 +801,16 @@ Returns a <a class="reference internal" href="#reikna.cbrng.samplers.Sampler" ti
 <tt class="descclassname">reikna.cbrng.samplers.</tt><tt class="descname">normal_bm</tt><big>(</big><em>bijection</em>, <em>dtype</em>, <em>mean=0</em>, <em>std=1</em><big>)</big><a class="headerlink" href="#reikna.cbrng.samplers.normal_bm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates normally distributed random numbers with the mean <tt class="docutils literal"><span class="pre">mean</span></tt> and
 the standard deviation <tt class="docutils literal"><span class="pre">std</span></tt> using Box-Muller transform.
-Supported dtypes: <tt class="docutils literal"><span class="pre">float(32/64)</span></tt>.
-Produces two random numbers per call.
+Supported dtypes: <tt class="docutils literal"><span class="pre">float(32/64)</span></tt>, <tt class="docutils literal"><span class="pre">complex(64/128)</span></tt>.
+Produces two random numbers per call for real types and one number for complex types.
 Returns a <a class="reference internal" href="#reikna.cbrng.samplers.Sampler" title="reikna.cbrng.samplers.Sampler"><tt class="xref py py-class docutils literal"><span class="pre">Sampler</span></tt></a> object.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In case of a complex <tt class="docutils literal"><span class="pre">dtype</span></tt>, <tt class="docutils literal"><span class="pre">std</span></tt> refers to the standard deviation of the
+complex numbers (same as <tt class="docutils literal"><span class="pre">numpy.std()</span></tt> returns), not real and imaginary components
+(which will be normally distributed with the standard deviation <tt class="docutils literal"><span class="pre">std</span> <span class="pre">/</span> <span class="pre">sqrt(2)</span></tt>).
+Consequently, while <tt class="docutils literal"><span class="pre">mean</span></tt> is of type <tt class="docutils literal"><span class="pre">dtype</span></tt>, <tt class="docutils literal"><span class="pre">std</span></tt> must be real.</p>
+</div>
 </dd></dl>
 
 <dl class="function">

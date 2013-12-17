@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Release history &mdash; reikna 0.6.0+dev.080d072 documentation</title>
+    <title>Release history &mdash; reikna 0.6.0+dev.f7dbb45 documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.6.0+dev.080d072',
+        VERSION:     '0.6.0+dev.f7dbb45',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.6.0+dev.080d072 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.6.0+dev.f7dbb45 documentation" href="index.html" />
     <link rel="prev" title="Transformations" href="api/transformations.html" />
 
    
@@ -62,7 +62,7 @@
         <li class="right" >
           <a href="api/transformations.html" title="Transformations"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.6.0+dev.080d072 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.6.0+dev.f7dbb45 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -76,6 +76,16 @@
 <div class="section" id="current-development-version">
 <h2>0.6.0 (current development version)<a class="headerlink" href="#current-development-version" title="Permalink to this headline">¶</a></h2>
 <p>Under construction.</p>
+</div>
+<div class="section" id="dec-2013">
+<h2>0.5.2 (17 Dec 2013)<a class="headerlink" href="#dec-2013" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>ADDED: <a class="reference internal" href="api/computations.html#reikna.cbrng.samplers.normal_bm" title="reikna.cbrng.samplers.normal_bm"><tt class="xref py py-func docutils literal"><span class="pre">normal_bm()</span></tt></a> now supports complex dtypes.</li>
+<li>FIXED: a nested <a class="reference internal" href="api/computations.html#reikna.pureparallel.PureParallel" title="reikna.pureparallel.PureParallel"><tt class="xref py py-class docutils literal"><span class="pre">PureParallel</span></tt></a> can now take several identical argument objects as arguments.</li>
+<li>FIXED: a nested computation can now take a single input/output argument (e.g. a temporary array) as separate input and output arguments.</li>
+<li>FIXED: a critical bug in <a class="reference internal" href="api/computations.html#reikna.cbrng.CBRNG" title="reikna.cbrng.CBRNG"><tt class="xref py py-class docutils literal"><span class="pre">CBRNG</span></tt></a> that could lead to the counter array not being updated.</li>
+<li>FIXED: convenience constructors of <a class="reference internal" href="api/computations.html#reikna.cbrng.CBRNG" title="reikna.cbrng.CBRNG"><tt class="xref py py-class docutils literal"><span class="pre">CBRNG</span></tt></a> can now properly handle <tt class="docutils literal"><span class="pre">None</span></tt> as <tt class="docutils literal"><span class="pre">samplers_kwds</span></tt>.</li>
+</ul>
 </div>
 <div class="section" id="nov-2013">
 <h2>0.5.1 (30 Nov 2013)<a class="headerlink" href="#nov-2013" title="Permalink to this headline">¶</a></h2>
@@ -308,6 +318,7 @@ between internal allocations &#8212; necessary for nested computations.</li>
   <ul>
 <li><a class="reference internal" href="#">Release history</a><ul>
 <li><a class="reference internal" href="#current-development-version">0.6.0 (current development version)</a></li>
+<li><a class="reference internal" href="#dec-2013">0.5.2 (17 Dec 2013)</a></li>
 <li><a class="reference internal" href="#nov-2013">0.5.1 (30 Nov 2013)</a></li>
 <li><a class="reference internal" href="#id1">0.5.0 (25 Nov 2013)</a></li>
 <li><a class="reference internal" href="#id2">0.4.0 (10 Nov 2013)</a></li>
