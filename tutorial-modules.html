@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: modules and snippets &mdash; reikna 0.5.2 documentation</title>
+    <title>Tutorial: modules and snippets &mdash; reikna 0.6.0 documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.5.2',
+        VERSION:     '0.6.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.5.2 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.6.0 documentation" href="index.html" />
     <link rel="next" title="Tutorial: basics" href="tutorial-basic.html" />
     <link rel="prev" title="Introduction" href="introduction.html" />
 
@@ -66,7 +66,7 @@
         <li class="right" >
           <a href="introduction.html" title="Introduction"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.5.2 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.6.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -83,7 +83,7 @@ Therefore it helps if you know how they work under the hood.</p>
 <div class="section" id="snippets">
 <h2>Snippets<a class="headerlink" href="#snippets" title="Permalink to this headline">¶</a></h2>
 <p>Snippets are <tt class="docutils literal"><span class="pre">Mako</span></tt> template defs (essentially functions returning rendered text) with the associated dictionary of render keywords.
-Some computations which are parametrized by custom code (for example, <a class="reference internal" href="api/computations.html#reikna.pureparallel.PureParallel" title="reikna.pureparallel.PureParallel"><tt class="xref py py-class docutils literal"><span class="pre">PureParallel</span></tt></a>) require this code to be provided in form of a snippet with a certain call signature.
+Some computations which are parametrized by custom code (for example, <a class="reference internal" href="api/computations.html#reikna.algorithms.PureParallel" title="reikna.algorithms.PureParallel"><tt class="xref py py-class docutils literal"><span class="pre">PureParallel</span></tt></a>) require this code to be provided in form of a snippet with a certain call signature.
 When a snippet is used in a template, the result is quite straightworward: its template function is called, rendering and returning its contents, just as a normal <tt class="docutils literal"><span class="pre">Mako</span></tt> def.</p>
 <p>Let us demonstrate it with a simple example.
 Consider the following snippet:</p>
@@ -245,7 +245,7 @@ By default, objects of type <tt class="docutils literal"><span class="pre">tuple
 <div class="section" id="nontrivial-example">
 <h2>Nontrivial example<a class="headerlink" href="#nontrivial-example" title="Permalink to this headline">¶</a></h2>
 <p>Modules were introduced to help split big kernels into small reusable pieces which in <tt class="docutils literal"><span class="pre">CUDA</span></tt> or <tt class="docutils literal"><span class="pre">OpenCL</span></tt> program would be put into different source or header files.
-For example, a random number generator may be assembled from a function generating random integers, a function transforming these integers into random numbers with a certain distribution, and a <a class="reference internal" href="api/computations.html#reikna.pureparallel.PureParallel" title="reikna.pureparallel.PureParallel"><tt class="xref py py-class docutils literal"><span class="pre">PureParallel</span></tt></a> computation calling these functions and saving results to global memory.
+For example, a random number generator may be assembled from a function generating random integers, a function transforming these integers into random numbers with a certain distribution, and a <a class="reference internal" href="api/computations.html#reikna.algorithms.PureParallel" title="reikna.algorithms.PureParallel"><tt class="xref py py-class docutils literal"><span class="pre">PureParallel</span></tt></a> computation calling these functions and saving results to global memory.
 These two functions can be extracted into separate modules, so that a user could call them from some custom kernel if he does not need to store the intermediate results.</p>
 <p>Going further with this example, one notices that functions that produce randoms with sophisticated distributions are often based on simpler distributions.
 For instance, the commonly used Marsaglia algorithm for generating Gamma-distributed random numbers requires several uniformly and normally distributed randoms.

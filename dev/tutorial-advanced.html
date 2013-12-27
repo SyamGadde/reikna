@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: advanced topics &mdash; reikna 0.6.0+dev.f7dbb45 documentation</title>
+    <title>Tutorial: advanced topics &mdash; reikna 0.6.1+dev.b08925a documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.6.0+dev.f7dbb45',
+        VERSION:     '0.6.1+dev.b08925a',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.6.0+dev.f7dbb45 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.6.1+dev.b08925a documentation" href="index.html" />
     <link rel="next" title="API reference" href="api/index.html" />
     <link rel="prev" title="Tutorial: basics" href="tutorial-basic.html" />
 
@@ -66,7 +66,7 @@
         <li class="right" >
           <a href="tutorial-basic.html" title="Tutorial: basics"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.6.0+dev.f7dbb45 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.6.1+dev.b08925a documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -93,7 +93,7 @@ For the purpose of this tutorial you only need to know several things about the 
 <span id="tutorial-advanced-transformation"></span><h2>Writing a transformation<a class="headerlink" href="#writing-a-transformation" title="Permalink to this headline">¶</a></h2>
 <p>Some common transformations are already available from <a class="reference internal" href="api/transformations.html#module-reikna.transformations" title="reikna.transformations"><tt class="xref py py-mod docutils literal"><span class="pre">transformations</span></tt></a> module.
 But you can create a custom one if you need to.
-Transformations are based on the class <a class="reference internal" href="api/core.html#reikna.core.Transformation" title="reikna.core.Transformation"><tt class="xref py py-class docutils literal"><span class="pre">Transformation</span></tt></a>, and are very similar to <a class="reference internal" href="api/computations.html#reikna.pureparallel.PureParallel" title="reikna.pureparallel.PureParallel"><tt class="xref py py-class docutils literal"><span class="pre">PureParallel</span></tt></a> instances, with some additional limitations.</p>
+Transformations are based on the class <a class="reference internal" href="api/core.html#reikna.core.Transformation" title="reikna.core.Transformation"><tt class="xref py py-class docutils literal"><span class="pre">Transformation</span></tt></a>, and are very similar to <a class="reference internal" href="api/computations.html#reikna.algorithms.PureParallel" title="reikna.algorithms.PureParallel"><tt class="xref py py-class docutils literal"><span class="pre">PureParallel</span></tt></a> instances, with some additional limitations.</p>
 <p>Let us consider a (not very useful, but quite involved) example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">tr</span> <span class="o">=</span> <span class="n">Transformation</span><span class="p">(</span>
     <span class="p">[</span>

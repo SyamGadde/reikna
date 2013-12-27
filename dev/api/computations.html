@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Computations &mdash; reikna 0.6.0+dev.f7dbb45 documentation</title>
+    <title>Computations &mdash; reikna 0.6.1+dev.b08925a documentation</title>
     
     <link rel="stylesheet" href="../_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.6.0+dev.f7dbb45',
+        VERSION:     '0.6.1+dev.b08925a',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.6.0+dev.f7dbb45 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.6.1+dev.b08925a documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Transformations" href="transformations.html" />
     <link rel="prev" title="Core functionality" href="core.html" />
@@ -67,7 +67,7 @@
         <li class="right" >
           <a href="core.html" title="Core functionality"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.6.0+dev.f7dbb45 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.6.1+dev.b08925a documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -79,11 +79,14 @@
             
   <div class="section" id="computations">
 <h1>Computations<a class="headerlink" href="#computations" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-reikna.pureparallel">
-<span id="pure-parallel-computations"></span><h2>Pure parallel computations<a class="headerlink" href="#module-reikna.pureparallel" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-reikna.algorithms">
+<span id="algorithms"></span><h2>Algorithms<a class="headerlink" href="#module-reikna.algorithms" title="Permalink to this headline">¶</a></h2>
+<p>General purpose algorithms.</p>
+<div class="section" id="pure-parallel-computations">
+<h3>Pure parallel computations<a class="headerlink" href="#pure-parallel-computations" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
-<dt id="reikna.pureparallel.PureParallel">
-<em class="property">class </em><tt class="descclassname">reikna.pureparallel.</tt><tt class="descname">PureParallel</tt><big>(</big><em>parameters</em>, <em>code</em>, <em>guiding_array=None</em>, <em>render_kwds=None</em><big>)</big><a class="headerlink" href="#reikna.pureparallel.PureParallel" title="Permalink to this definition">¶</a></dt>
+<dt id="reikna.algorithms.PureParallel">
+<em class="property">class </em><tt class="descclassname">reikna.algorithms.</tt><tt class="descname">PureParallel</tt><big>(</big><em>parameters</em>, <em>code</em>, <em>guiding_array=None</em>, <em>render_kwds=None</em><big>)</big><a class="headerlink" href="#reikna.algorithms.PureParallel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="core.html#reikna.core.Computation" title="reikna.core.Computation"><tt class="xref py py-class docutils literal"><span class="pre">Computation</span></tt></a></p>
 <p>A general class for pure parallel computations
 (i.e. with no interaction between threads).</p>
@@ -110,8 +113,8 @@ By default, the first parameter is chosen.</li>
 </tbody>
 </table>
 <dl class="function">
-<dt id="reikna.pureparallel.PureParallel.compiled_signature">
-<tt class="descname">compiled_signature</tt><big>(</big><em>*args</em><big>)</big><a class="headerlink" href="#reikna.pureparallel.PureParallel.compiled_signature" title="Permalink to this definition">¶</a></dt>
+<dt id="reikna.algorithms.PureParallel.compiled_signature">
+<tt class="descname">compiled_signature</tt><big>(</big><em>*args</em><big>)</big><a class="headerlink" href="#reikna.algorithms.PureParallel.compiled_signature" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -123,8 +126,8 @@ By default, the first parameter is chosen.</li>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="reikna.pureparallel.PureParallel.from_trf">
-<em class="property">classmethod </em><tt class="descname">from_trf</tt><big>(</big><em>trf</em>, <em>guiding_array=None</em><big>)</big><a class="headerlink" href="#reikna.pureparallel.PureParallel.from_trf" title="Permalink to this definition">¶</a></dt>
+<dt id="reikna.algorithms.PureParallel.from_trf">
+<em class="property">classmethod </em><tt class="descname">from_trf</tt><big>(</big><em>trf</em>, <em>guiding_array=None</em><big>)</big><a class="headerlink" href="#reikna.algorithms.PureParallel.from_trf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a <tt class="docutils literal"><span class="pre">PureParallel</span></tt> instance from a <a class="reference internal" href="core.html#reikna.core.Transformation" title="reikna.core.Transformation"><tt class="xref py py-class docutils literal"><span class="pre">Transformation</span></tt></a> object.
 <tt class="docutils literal"><span class="pre">guiding_array</span></tt> can be a string with a name of an array parameter from <tt class="docutils literal"><span class="pre">trf</span></tt>,
 or the corresponding <a class="reference internal" href="core.html#reikna.core.transformation.TransformationParameter" title="reikna.core.transformation.TransformationParameter"><tt class="xref py py-class docutils literal"><span class="pre">TransformationParameter</span></tt></a> object.</p>
@@ -133,11 +136,126 @@ or the corresponding <a class="reference internal" href="core.html#reikna.core.t
 </dd></dl>
 
 </div>
-<div class="section" id="module-reikna.matrixmul">
-<span id="linear-algebra"></span><h2>Linear algebra<a class="headerlink" href="#module-reikna.matrixmul" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="transposition-permutation">
+<h3>Transposition (permutation)<a class="headerlink" href="#transposition-permutation" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
-<dt id="reikna.matrixmul.MatrixMul">
-<em class="property">class </em><tt class="descclassname">reikna.matrixmul.</tt><tt class="descname">MatrixMul</tt><big>(</big><em>a_arr</em>, <em>b_arr</em>, <em>out_arr=None</em>, <em>block_width_override=None</em>, <em>transposed_a=False</em>, <em>transposed_b=False</em><big>)</big><a class="headerlink" href="#reikna.matrixmul.MatrixMul" title="Permalink to this definition">¶</a></dt>
+<dt id="reikna.algorithms.Transpose">
+<em class="property">class </em><tt class="descclassname">reikna.algorithms.</tt><tt class="descname">Transpose</tt><big>(</big><em>arr_t</em>, <em>axes=None</em>, <em>block_width_override=None</em><big>)</big><a class="headerlink" href="#reikna.algorithms.Transpose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="core.html#reikna.core.Computation" title="reikna.core.Computation"><tt class="xref py py-class docutils literal"><span class="pre">Computation</span></tt></a></p>
+<p>Changes the order of axes in a multidimensional array.
+Works analogous to <tt class="docutils literal"><span class="pre">numpy.transpose</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>arr_t</strong> &#8211; an array-like defining the initial array.</li>
+<li><strong>axes</strong> &#8211; tuple with the new axes order.
+If <tt class="docutils literal"><span class="pre">None</span></tt>, then axes will be reversed.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="reikna.algorithms.Transpose.compiled_signature">
+<tt class="descname">compiled_signature</tt><big>(</big><em>output:o</em>, <em>input:i</em><big>)</big><a class="headerlink" href="#reikna.algorithms.Transpose.compiled_signature" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>output</strong> &#8211; an array with all the attributes of <tt class="docutils literal"><span class="pre">arr_t</span></tt>,
+with the shape permuted according to <tt class="docutils literal"><span class="pre">axes</span></tt>.</li>
+<li><strong>input</strong> &#8211; an array with all the attributes of <tt class="docutils literal"><span class="pre">arr_t</span></tt>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="reduction">
+<h3>Reduction<a class="headerlink" href="#reduction" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="reikna.algorithms.Predicate">
+<em class="property">class </em><tt class="descclassname">reikna.algorithms.</tt><tt class="descname">Predicate</tt><big>(</big><em>operation</em>, <em>empty</em><big>)</big><a class="headerlink" href="#reikna.algorithms.Predicate" title="Permalink to this definition">¶</a></dt>
+<dd><p>A predicate used in <a class="reference internal" href="#reikna.algorithms.Reduce" title="reikna.algorithms.Reduce"><tt class="xref py py-class docutils literal"><span class="pre">Reduce</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>operation</strong> &#8211; a <a class="reference internal" href="cluda.html#reikna.cluda.Snippet" title="reikna.cluda.Snippet"><tt class="xref py py-class docutils literal"><span class="pre">Snippet</span></tt></a> object with two parameters
+which will take the names of two arguments to join.</li>
+<li><strong>empty</strong> &#8211; a numpy scalar with the empty value of the argument
+(the one which, being joined by another argument, does not change it).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="reikna.algorithms.predicate_sum">
+<tt class="descclassname">reikna.algorithms.</tt><tt class="descname">predicate_sum</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.algorithms.predicate_sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference internal" href="#reikna.algorithms.Predicate" title="reikna.algorithms.Predicate"><tt class="xref py py-class docutils literal"><span class="pre">Predicate</span></tt></a> object which sums its arguments.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="reikna.algorithms.Reduce">
+<em class="property">class </em><tt class="descclassname">reikna.algorithms.</tt><tt class="descname">Reduce</tt><big>(</big><em>arr_t</em>, <em>predicate</em>, <em>axes=None</em><big>)</big><a class="headerlink" href="#reikna.algorithms.Reduce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="core.html#reikna.core.Computation" title="reikna.core.Computation"><tt class="xref py py-class docutils literal"><span class="pre">Computation</span></tt></a></p>
+<p>Reduces the array over given axis using given binary operation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>arr_t</strong> &#8211; an array-like defining the initial array.</li>
+<li><strong>predicate</strong> &#8211; a <a class="reference internal" href="#reikna.algorithms.Predicate" title="reikna.algorithms.Predicate"><tt class="xref py py-class docutils literal"><span class="pre">Predicate</span></tt></a> object.</li>
+<li><strong>axes</strong> &#8211; a list of non-repeating axes to reduce over.
+If <tt class="docutils literal"><span class="pre">None</span></tt>, the whole array will be reduced
+(in which case the shape of the output array is <tt class="docutils literal"><span class="pre">(1,)</span></tt>).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="reikna.algorithms.Reduce.compiled_signature">
+<tt class="descname">compiled_signature</tt><big>(</big><em>output:o</em>, <em>input:i</em><big>)</big><a class="headerlink" href="#reikna.algorithms.Reduce.compiled_signature" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>input</strong> &#8211; an array with the attributes of <tt class="docutils literal"><span class="pre">arr_t</span></tt>.</li>
+<li><strong>output</strong> &#8211; an array with the attributes of <tt class="docutils literal"><span class="pre">arr_t</span></tt>,
+with its shape missing axes from <tt class="docutils literal"><span class="pre">axes</span></tt>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-reikna.linalg">
+<span id="linear-algebra"></span><h2>Linear algebra<a class="headerlink" href="#module-reikna.linalg" title="Permalink to this headline">¶</a></h2>
+<p>Linear algebra algorithms.</p>
+<div class="section" id="matrix-multiplication-dot-product">
+<h3>Matrix multiplication (dot product)<a class="headerlink" href="#matrix-multiplication-dot-product" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="reikna.linalg.MatrixMul">
+<em class="property">class </em><tt class="descclassname">reikna.linalg.</tt><tt class="descname">MatrixMul</tt><big>(</big><em>a_arr</em>, <em>b_arr</em>, <em>out_arr=None</em>, <em>block_width_override=None</em>, <em>transposed_a=False</em>, <em>transposed_b=False</em><big>)</big><a class="headerlink" href="#reikna.linalg.MatrixMul" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="core.html#reikna.core.Computation" title="reikna.core.Computation"><tt class="xref py py-class docutils literal"><span class="pre">Computation</span></tt></a></p>
 <p>Multiplies two matrices using last two dimensions and batching over remaining dimensions.
 For batching to work, the products of remaining dimensions should be equal
@@ -164,8 +282,8 @@ before the multiplication.</li>
 </tbody>
 </table>
 <dl class="method">
-<dt id="reikna.matrixmul.MatrixMul.compiled_signature">
-<tt class="descname">compiled_signature</tt><big>(</big><em>output:o</em>, <em>matrix_a:i</em>, <em>matrix_b:i</em><big>)</big><a class="headerlink" href="#reikna.matrixmul.MatrixMul.compiled_signature" title="Permalink to this definition">¶</a></dt>
+<dt id="reikna.linalg.MatrixMul.compiled_signature">
+<tt class="descname">compiled_signature</tt><big>(</big><em>output:o</em>, <em>matrix_a:i</em>, <em>matrix_b:i</em><big>)</big><a class="headerlink" href="#reikna.linalg.MatrixMul.compiled_signature" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -183,91 +301,34 @@ before the multiplication.</li>
 
 </dd></dl>
 
-<span class="target" id="module-reikna.transpose"></span><dl class="class">
-<dt id="reikna.transpose.Transpose">
-<em class="property">class </em><tt class="descclassname">reikna.transpose.</tt><tt class="descname">Transpose</tt><big>(</big><em>arr_t</em>, <em>axes=None</em>, <em>block_width_override=None</em><big>)</big><a class="headerlink" href="#reikna.transpose.Transpose" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="core.html#reikna.core.Computation" title="reikna.core.Computation"><tt class="xref py py-class docutils literal"><span class="pre">Computation</span></tt></a></p>
-<p>Changes the order of axes in a multidimensional array.
-Works analogous to <tt class="docutils literal"><span class="pre">numpy.transpose</span></tt>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>arr_t</strong> &#8211; an array-like defining the initial array.</li>
-<li><strong>axes</strong> &#8211; tuple with the new axes order.
-If <tt class="docutils literal"><span class="pre">None</span></tt>, then axes will be reversed.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="function">
-<dt id="reikna.transpose.Transpose.compiled_signature">
-<tt class="descname">compiled_signature</tt><big>(</big><em>output:o</em>, <em>input:i</em><big>)</big><a class="headerlink" href="#reikna.transpose.Transpose.compiled_signature" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>output</strong> &#8211; an array with all the attributes of <tt class="docutils literal"><span class="pre">arr_t</span></tt>,
-with the shape permuted according to <tt class="docutils literal"><span class="pre">axes</span></tt>.</li>
-<li><strong>input</strong> &#8211; an array with all the attributes of <tt class="docutils literal"><span class="pre">arr_t</span></tt>.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
 </div>
-<div class="section" id="module-reikna.reduce">
-<span id="algorithms"></span><h2>Algorithms<a class="headerlink" href="#module-reikna.reduce" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="matrix-norms">
+<h3>Matrix norms<a class="headerlink" href="#matrix-norms" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
-<dt id="reikna.reduce.Predicate">
-<em class="property">class </em><tt class="descclassname">reikna.reduce.</tt><tt class="descname">Predicate</tt><big>(</big><em>operation</em>, <em>empty</em><big>)</big><a class="headerlink" href="#reikna.reduce.Predicate" title="Permalink to this definition">¶</a></dt>
-<dd><p>A predicate used in <a class="reference internal" href="#reikna.reduce.Reduce" title="reikna.reduce.Reduce"><tt class="xref py py-class docutils literal"><span class="pre">Reduce</span></tt></a>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>operation</strong> &#8211; a <a class="reference internal" href="cluda.html#reikna.cluda.Snippet" title="reikna.cluda.Snippet"><tt class="xref py py-class docutils literal"><span class="pre">Snippet</span></tt></a> object with two parameters
-which will take the names of two arguments to join.</li>
-<li><strong>empty</strong> &#8211; a numpy scalar with the empty value of the argument
-(the one which, being joined by another argument, does not change it).</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="class">
-<dt id="reikna.reduce.Reduce">
-<em class="property">class </em><tt class="descclassname">reikna.reduce.</tt><tt class="descname">Reduce</tt><big>(</big><em>arr_t</em>, <em>predicate</em>, <em>axes=None</em><big>)</big><a class="headerlink" href="#reikna.reduce.Reduce" title="Permalink to this definition">¶</a></dt>
+<dt id="reikna.linalg.EntrywiseNorm">
+<em class="property">class </em><tt class="descclassname">reikna.linalg.</tt><tt class="descname">EntrywiseNorm</tt><big>(</big><em>arr_t</em>, <em>order=2</em>, <em>axes=None</em><big>)</big><a class="headerlink" href="#reikna.linalg.EntrywiseNorm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="core.html#reikna.core.Computation" title="reikna.core.Computation"><tt class="xref py py-class docutils literal"><span class="pre">Computation</span></tt></a></p>
-<p>Reduces the array over given axis using given binary operation.</p>
+<p>Calculates the entrywise matrix norm (same as <tt class="docutils literal"><span class="pre">numpy.linalg.norm</span></tt>)
+of an arbitrary order <span class="math">\(r\)</span>:</p>
+<div class="math">
+\[||A||_r = \left( \sum_{i,j,\ldots} |A_{i,j,\ldots}|^r \right)^{1 / r}\]</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>arr_t</strong> &#8211; an array-like defining the initial array.</li>
-<li><strong>predicate</strong> &#8211; a <a class="reference internal" href="#reikna.reduce.Predicate" title="reikna.reduce.Predicate"><tt class="xref py py-class docutils literal"><span class="pre">Predicate</span></tt></a> object.</li>
-<li><strong>axes</strong> &#8211; a list of non-repeating axes to reduce over.
-If <tt class="docutils literal"><span class="pre">None</span></tt>, the whole array will be reduced
-(in which case the shape of the output array is <tt class="docutils literal"><span class="pre">(1,)</span></tt>).</li>
+<li><strong>order</strong> &#8211; the order <span class="math">\(r\)</span> (any real number).</li>
+<li><strong>axes</strong> &#8211; a list of non-repeating axes to sum over.
+If <tt class="docutils literal"><span class="pre">None</span></tt>, the norm of the whole array will be calculated.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
-<dt id="reikna.reduce.Reduce.compiled_signature">
-<tt class="descname">compiled_signature</tt><big>(</big><em>output:o</em>, <em>input:i</em><big>)</big><a class="headerlink" href="#reikna.reduce.Reduce.compiled_signature" title="Permalink to this definition">¶</a></dt>
+<dt id="reikna.linalg.EntrywiseNorm.compiled_signature">
+<tt class="descname">compiled_signature</tt><big>(</big><em>output:o</em>, <em>input:i</em><big>)</big><a class="headerlink" href="#reikna.linalg.EntrywiseNorm.compiled_signature" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -285,12 +346,7 @@ with its shape missing axes from <tt class="docutils literal"><span class="pre">
 
 </dd></dl>
 
-<dl class="function">
-<dt id="reikna.reduce.predicate_sum">
-<tt class="descclassname">reikna.reduce.</tt><tt class="descname">predicate_sum</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.reduce.predicate_sum" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a <a class="reference internal" href="#reikna.reduce.Predicate" title="reikna.reduce.Predicate"><tt class="xref py py-class docutils literal"><span class="pre">Predicate</span></tt></a> object which sums its arguments.</p>
-</dd></dl>
-
+</div>
 </div>
 <div class="section" id="fast-fourier-transform">
 <h2>Fast Fourier transform<a class="headerlink" href="#fast-fourier-transform" title="Permalink to this headline">¶</a></h2>
@@ -896,9 +952,17 @@ Uses the same algorithm as the module.</p>
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Computations</a><ul>
-<li><a class="reference internal" href="#module-reikna.pureparallel">Pure parallel computations</a></li>
-<li><a class="reference internal" href="#module-reikna.matrixmul">Linear algebra</a></li>
-<li><a class="reference internal" href="#module-reikna.reduce">Algorithms</a></li>
+<li><a class="reference internal" href="#module-reikna.algorithms">Algorithms</a><ul>
+<li><a class="reference internal" href="#pure-parallel-computations">Pure parallel computations</a></li>
+<li><a class="reference internal" href="#transposition-permutation">Transposition (permutation)</a></li>
+<li><a class="reference internal" href="#reduction">Reduction</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-reikna.linalg">Linear algebra</a><ul>
+<li><a class="reference internal" href="#matrix-multiplication-dot-product">Matrix multiplication (dot product)</a></li>
+<li><a class="reference internal" href="#matrix-norms">Matrix norms</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#fast-fourier-transform">Fast Fourier transform</a></li>
 <li><a class="reference internal" href="#discrete-harmonic-transform">Discrete harmonic transform</a></li>
 <li><a class="reference internal" href="#module-reikna.cbrng">Counter-based random number generators</a><ul>

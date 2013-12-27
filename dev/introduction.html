@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Introduction &mdash; reikna 0.6.0+dev.f7dbb45 documentation</title>
+    <title>Introduction &mdash; reikna 0.6.1+dev.b08925a documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.6.0+dev.f7dbb45',
+        VERSION:     '0.6.1+dev.b08925a',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.6.0+dev.f7dbb45 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.6.1+dev.b08925a documentation" href="index.html" />
     <link rel="next" title="Tutorial: modules and snippets" href="tutorial-modules.html" />
     <link rel="prev" title="Reikna, the pure Python GPGPU library" href="index.html" />
 
@@ -66,7 +66,7 @@
         <li class="right" >
           <a href="index.html" title="Reikna, the pure Python GPGPU library"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.6.0+dev.f7dbb45 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.6.1+dev.b08925a documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -180,7 +180,7 @@ Transformations are compiled into the main computation kernel and are therefore 
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span>
 <span class="kn">import</span> <span class="nn">reikna.cluda</span> <span class="kn">as</span> <span class="nn">cluda</span>
-<span class="kn">from</span> <span class="nn">reikna.matrixmul</span> <span class="kn">import</span> <span class="n">MatrixMul</span>
+<span class="kn">from</span> <span class="nn">reikna.linalg</span> <span class="kn">import</span> <span class="n">MatrixMul</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">cluda</span><span class="o">.</span><span class="n">ocl_api</span><span class="p">()</span>
 <span class="n">thr</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">Thread</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
@@ -203,7 +203,7 @@ Transformations are compiled into the main computation kernel and are therefore 
 <span class="k">print</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">res_dev</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">-</span> <span class="n">res_reference</span><span class="p">)</span> <span class="o">/</span> <span class="n">norm</span><span class="p">(</span><span class="n">res_reference</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Most of the code above should be already familiar, with the exception of the creation of <a class="reference internal" href="api/computations.html#reikna.matrixmul.MatrixMul" title="reikna.matrixmul.MatrixMul"><tt class="xref py py-class docutils literal"><span class="pre">MatrixMul</span></tt></a> object.
+<p>Most of the code above should be already familiar, with the exception of the creation of <a class="reference internal" href="api/computations.html#reikna.linalg.MatrixMul" title="reikna.linalg.MatrixMul"><tt class="xref py py-class docutils literal"><span class="pre">MatrixMul</span></tt></a> object.
 The computation constructor takes two array-like objects, representing arrays that will participate in the computation.
 After that the computation object has to be compiled.
 The <a class="reference internal" href="api/core.html#reikna.core.Computation.compile" title="reikna.core.Computation.compile"><tt class="xref py py-meth docutils literal"><span class="pre">compile()</span></tt></a> method requires a <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread" title="reikna.cluda.api.Thread"><tt class="xref py py-class docutils literal"><span class="pre">Thread</span></tt></a> object, which serves as a source of data about the target API and device, and provides an execution queue.</p>
@@ -218,7 +218,7 @@ Transformation API allows you to connect these transformations to the core compu
 <span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span>
 <span class="kn">import</span> <span class="nn">reikna.cluda</span> <span class="kn">as</span> <span class="nn">cluda</span>
 <span class="kn">from</span> <span class="nn">reikna.core</span> <span class="kn">import</span> <span class="n">Type</span>
-<span class="kn">from</span> <span class="nn">reikna.matrixmul</span> <span class="kn">import</span> <span class="n">MatrixMul</span>
+<span class="kn">from</span> <span class="nn">reikna.linalg</span> <span class="kn">import</span> <span class="n">MatrixMul</span>
 <span class="kn">from</span> <span class="nn">reikna.transformations</span> <span class="kn">import</span> <span class="n">combine_complex</span>
 
 <span class="n">api</span> <span class="o">=</span> <span class="n">cluda</span><span class="o">.</span><span class="n">ocl_api</span><span class="p">()</span>
@@ -259,7 +259,7 @@ Transformation API allows you to connect these transformations to the core compu
 </div>
 <p>We have used a pre-created transformation <a class="reference internal" href="api/transformations.html#reikna.transformations.combine_complex" title="reikna.transformations.combine_complex"><tt class="xref py py-func docutils literal"><span class="pre">combine_complex()</span></tt></a> from <a class="reference internal" href="api/transformations.html#module-reikna.transformations" title="reikna.transformations"><tt class="xref py py-mod docutils literal"><span class="pre">reikna.transformations</span></tt></a> for simplicity; developing a custom transformation is also possible and described in <a class="reference internal" href="tutorial-advanced.html#tutorial-advanced-transformation"><em>Writing a transformation</em></a>.
 From the documentation we know that it transforms two inputs into one output; therefore we need to attach it to one of the inputs of <tt class="docutils literal"><span class="pre">dot</span></tt> (identified by its name), and provide names for two new inputs.</p>
-<p>Names to attach to are obtained from the documentation for the particular computation; for <a class="reference internal" href="api/computations.html#reikna.matrixmul.MatrixMul" title="reikna.matrixmul.MatrixMul"><tt class="xref py py-class docutils literal"><span class="pre">MatrixMul</span></tt></a> these are <tt class="docutils literal"><span class="pre">out</span></tt>, <tt class="docutils literal"><span class="pre">a</span></tt> and <tt class="docutils literal"><span class="pre">b</span></tt>.</p>
+<p>Names to attach to are obtained from the documentation for the particular computation; for <a class="reference internal" href="api/computations.html#reikna.linalg.MatrixMul" title="reikna.linalg.MatrixMul"><tt class="xref py py-class docutils literal"><span class="pre">MatrixMul</span></tt></a> these are <tt class="docutils literal"><span class="pre">out</span></tt>, <tt class="docutils literal"><span class="pre">a</span></tt> and <tt class="docutils literal"><span class="pre">b</span></tt>.</p>
 <p>In the current example we have attached the transformations to both inputs.
 Note that the computation has a new signature now, and the compiled <tt class="docutils literal"><span class="pre">dot</span></tt> object now works with split complex numbers.</p>
 </div>

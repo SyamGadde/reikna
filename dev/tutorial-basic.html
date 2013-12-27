@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: basics &mdash; reikna 0.6.0+dev.f7dbb45 documentation</title>
+    <title>Tutorial: basics &mdash; reikna 0.6.1+dev.b08925a documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.6.0+dev.f7dbb45',
+        VERSION:     '0.6.1+dev.b08925a',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.6.0+dev.f7dbb45 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.6.1+dev.b08925a documentation" href="index.html" />
     <link rel="next" title="Tutorial: advanced topics" href="tutorial-advanced.html" />
     <link rel="prev" title="Tutorial: modules and snippets" href="tutorial-modules.html" />
 
@@ -66,7 +66,7 @@
         <li class="right" >
           <a href="tutorial-modules.html" title="Tutorial: modules and snippets"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.6.0+dev.f7dbb45 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.6.1+dev.b08925a documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -97,7 +97,7 @@ Some of these operations require additional memory to store intermediate results
 Every <a class="reference internal" href="api/core.html#reikna.core.Computation" title="reikna.core.Computation"><tt class="xref py py-class docutils literal"><span class="pre">Computation</span></tt></a> object has a <a class="reference internal" href="api/core.html#reikna.core.Computation.signature" title="reikna.core.Computation.signature"><tt class="xref py py-attr docutils literal"><span class="pre">signature</span></tt></a> attribute containing <tt class="docutils literal"><span class="pre">funcsigs.Signature</span></tt> object.
 It is the same signature object as can be exctracted from any Python function using <tt class="docutils literal"><span class="pre">funcsigs.signature</span></tt> function (or <tt class="docutils literal"><span class="pre">inspect.signature</span></tt> from the standard library for Python &gt;= 3.3).
 When the computation object is compiled, the resulting callable will have this exact signature.</p>
-<p>The base signature for any computation can be found in its documentation (and, sometimes, can depend on the arguments passed to its constructor &#8212; see, for example, <a class="reference internal" href="api/computations.html#reikna.pureparallel.PureParallel" title="reikna.pureparallel.PureParallel"><tt class="xref py py-class docutils literal"><span class="pre">PureParallel</span></tt></a>).
+<p>The base signature for any computation can be found in its documentation (and, sometimes, can depend on the arguments passed to its constructor &#8212; see, for example, <a class="reference internal" href="api/computations.html#reikna.algorithms.PureParallel" title="reikna.algorithms.PureParallel"><tt class="xref py py-class docutils literal"><span class="pre">PureParallel</span></tt></a>).
 The signature can change if a user connects transformations to some parameter via <a class="reference internal" href="api/core.html#reikna.core.Computation.connect" title="reikna.core.Computation.connect"><tt class="xref py py-meth docutils literal"><span class="pre">connect()</span></tt></a>; in this case the <a class="reference internal" href="api/core.html#reikna.core.Computation.signature" title="reikna.core.Computation.signature"><tt class="xref py py-attr docutils literal"><span class="pre">signature</span></tt></a> attribute will change accordingly.</p>
 <p>All attached transformations form a tree with roots being the base parameters computation has right after creation, and leaves forming the user-visible signature, which the compiled <a class="reference internal" href="api/core.html#reikna.core.computation.ComputationCallable" title="reikna.core.computation.ComputationCallable"><tt class="xref py py-class docutils literal"><span class="pre">ComputationCallable</span></tt></a> will have.</p>
 <p>As an example, let us consider a pure parallel computation object with one output, two inputs and a scalar parameter, which performs the calculation <tt class="docutils literal"><span class="pre">out</span> <span class="pre">=</span> <span class="pre">in1</span> <span class="pre">+</span> <span class="pre">in2</span> <span class="pre">+</span> <span class="pre">param</span></tt>:</p>
@@ -107,7 +107,7 @@ The signature can change if a user connects transformations to some parameter vi
 <span class="kn">from</span> <span class="nn">reikna</span> <span class="kn">import</span> <span class="n">cluda</span>
 <span class="kn">from</span> <span class="nn">reikna.cluda</span> <span class="kn">import</span> <span class="n">Snippet</span>
 <span class="kn">from</span> <span class="nn">reikna.core</span> <span class="kn">import</span> <span class="n">Transformation</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Annotation</span><span class="p">,</span> <span class="n">Parameter</span>
-<span class="kn">from</span> <span class="nn">reikna.pureparallel</span> <span class="kn">import</span> <span class="n">PureParallel</span>
+<span class="kn">from</span> <span class="nn">reikna.algorithms</span> <span class="kn">import</span> <span class="n">PureParallel</span>
 <span class="kn">import</span> <span class="nn">reikna.transformations</span> <span class="kn">as</span> <span class="nn">transformations</span>
 
 <span class="n">arr_t</span> <span class="o">=</span> <span class="n">Type</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
@@ -150,8 +150,8 @@ The computation signature is:</p>
 <p>We have used the pre-created transformation here for simplicity; writing custom transformations is described in <a class="reference internal" href="tutorial-advanced.html#tutorial-advanced-transformation"><em>Writing a transformation</em></a>.</p>
 <p>In addition, we want <tt class="docutils literal"><span class="pre">in2</span></tt> to be scaled before being passed to the main computation.
 To achieve this, we connect the scaling transformation to it:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">tr</span> <span class="o">=</span> <span class="n">transformations</span><span class="o">.</span><span class="n">scale_param</span><span class="p">(</span><span class="n">comp</span><span class="o">.</span><span class="n">parameter</span><span class="o">.</span><span class="n">in2</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">comp</span><span class="o">.</span><span class="n">parameter</span><span class="o">.</span><span class="n">in2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">in2_prime</span><span class="o">=</span><span class="n">tr</span><span class="o">.</span><span class="n">input</span><span class="p">,</span> <span class="n">param2</span><span class="o">=</span><span class="n">tr</span><span class="o">.</span><span class="n">coeff</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">tr</span> <span class="o">=</span> <span class="n">transformations</span><span class="o">.</span><span class="n">mul_param</span><span class="p">(</span><span class="n">comp</span><span class="o">.</span><span class="n">parameter</span><span class="o">.</span><span class="n">in2</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">comp</span><span class="o">.</span><span class="n">parameter</span><span class="o">.</span><span class="n">in2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">tr</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">in2_prime</span><span class="o">=</span><span class="n">tr</span><span class="o">.</span><span class="n">input</span><span class="p">,</span> <span class="n">param2</span><span class="o">=</span><span class="n">tr</span><span class="o">.</span><span class="n">param</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The transformation tree now looks like:</p>
@@ -200,7 +200,7 @@ When <tt class="docutils literal"><span class="pre">prepare_for</span></tt> is c
 <p>There are some limitations of the transformation mechanics:</p>
 <ol class="arabic simple">
 <li>Transformations are purely parallel, that is they cannot use local memory.
-In fact, they are very much like <a class="reference internal" href="api/computations.html#reikna.pureparallel.PureParallel" title="reikna.pureparallel.PureParallel"><tt class="xref py py-class docutils literal"><span class="pre">PureParallel</span></tt></a> computations,
+In fact, they are very much like <a class="reference internal" href="api/computations.html#reikna.algorithms.PureParallel" title="reikna.algorithms.PureParallel"><tt class="xref py py-class docutils literal"><span class="pre">PureParallel</span></tt></a> computations,
 except that the indices they use are defined by the main computation,
 and not set by the GPU driver.</li>
 <li>External endpoints of the output transformations cannot point to existing nodes in the transformation tree.

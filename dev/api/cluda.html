@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>CLUDA layer &mdash; reikna 0.6.0+dev.f7dbb45 documentation</title>
+    <title>CLUDA layer &mdash; reikna 0.6.1+dev.b08925a documentation</title>
     
     <link rel="stylesheet" href="../_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.6.0+dev.f7dbb45',
+        VERSION:     '0.6.1+dev.b08925a',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.6.0+dev.f7dbb45 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.6.1+dev.b08925a documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Core functionality" href="core.html" />
     <link rel="prev" title="Helpers" href="helpers.html" />
@@ -67,7 +67,7 @@
         <li class="right" >
           <a href="helpers.html" title="Helpers"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.6.0+dev.f7dbb45 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.6.1+dev.b08925a documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -768,6 +768,16 @@ All virtual allocations start from the beginning of real allocations.</p>
 which are used to compensate for the lack of complex number operations in OpenCL,
 and the lack of C++ synthax which would allow one to write them.</p>
 <dl class="function">
+<dt id="reikna.cluda.functions.add">
+<tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">add</tt><big>(</big><em>*in_dtypes</em>, <em>out_dtype=None</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a>  with a function of
+<tt class="docutils literal"><span class="pre">len(in_dtypes)</span></tt> arguments that adds values of types <tt class="docutils literal"><span class="pre">in_dtypes</span></tt>.
+If <tt class="docutils literal"><span class="pre">out_dtype</span></tt> is given, it will be set as a return type for this function.</p>
+<p>This is necessary since on some platforms the <tt class="docutils literal"><span class="pre">+</span></tt> operator for a complex and a real number
+works in an unexpected way (returning <tt class="docutils literal"><span class="pre">(a.x</span> <span class="pre">+</span> <span class="pre">b,</span> <span class="pre">a.y</span> <span class="pre">+</span> <span class="pre">b)</span></tt> instead of <tt class="docutils literal"><span class="pre">(a.x</span> <span class="pre">+</span> <span class="pre">b,</span> <span class="pre">a.y)</span></tt>).</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="reikna.cluda.functions.cast">
 <tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">cast</tt><big>(</big><em>out_dtype</em>, <em>in_dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.cast" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a> with a function of one argument
@@ -1025,6 +1035,14 @@ and can be used as an initializer for a variable.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="reikna.cluda.dtypes.c_path">
+<tt class="descclassname">reikna.cluda.dtypes.</tt><tt class="descname">c_path</tt><big>(</big><em>path</em><big>)</big><a class="headerlink" href="#reikna.cluda.dtypes.c_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string corresponding to the <tt class="docutils literal"><span class="pre">path</span></tt> to a struct element in C.
+The <tt class="docutils literal"><span class="pre">path</span></tt> is the sequence of field names/array indices returned from
+<a class="reference internal" href="#reikna.cluda.dtypes.flatten_dtype" title="reikna.cluda.dtypes.flatten_dtype"><tt class="xref py py-func docutils literal"><span class="pre">flatten_dtype()</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="reikna.cluda.dtypes.cast">
 <tt class="descclassname">reikna.cluda.dtypes.</tt><tt class="descname">cast</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.dtypes.cast" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns function that takes one argument and casts it to <tt class="docutils literal"><span class="pre">dtype</span></tt>.</p>
@@ -1088,11 +1106,19 @@ if it is not the case.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="reikna.cluda.dtypes.extract_field">
+<tt class="descclassname">reikna.cluda.dtypes.</tt><tt class="descname">extract_field</tt><big>(</big><em>arr</em>, <em>path</em><big>)</big><a class="headerlink" href="#reikna.cluda.dtypes.extract_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts an element from an array of struct dtype.
+The <tt class="docutils literal"><span class="pre">path</span></tt> is the sequence of field names/array indices returned from
+<a class="reference internal" href="#reikna.cluda.dtypes.flatten_dtype" title="reikna.cluda.dtypes.flatten_dtype"><tt class="xref py py-func docutils literal"><span class="pre">flatten_dtype()</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="reikna.cluda.dtypes.flatten_dtype">
 <tt class="descclassname">reikna.cluda.dtypes.</tt><tt class="descname">flatten_dtype</tt><big>(</big><em>dtype</em><big>)</big><a class="headerlink" href="#reikna.cluda.dtypes.flatten_dtype" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list of tuples <tt class="docutils literal"><span class="pre">(path,</span> <span class="pre">dtype)</span></tt> for each of the basic dtypes in
 a (possibly nested) <tt class="docutils literal"><span class="pre">dtype</span></tt>.
-<tt class="docutils literal"><span class="pre">path</span></tt> is a list of field names leading to the corresponding element.</p>
+<tt class="docutils literal"><span class="pre">path</span></tt> is a list of field names/array indices leading to the corresponding element.</p>
 </dd></dl>
 
 <dl class="function">
