@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: modules and snippets &mdash; reikna 0.6.0 documentation</title>
+    <title>Tutorial: modules and snippets &mdash; reikna 0.6.2 documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.6.0',
+        VERSION:     '0.6.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.6.0 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.6.2 documentation" href="index.html" />
     <link rel="next" title="Tutorial: basics" href="tutorial-basic.html" />
     <link rel="prev" title="Introduction" href="introduction.html" />
 
@@ -66,7 +66,7 @@
         <li class="right" >
           <a href="introduction.html" title="Introduction"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.6.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.6.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -108,12 +108,13 @@ Consider the following snippet:</p>
 </pre></div>
 </div>
 <p>As a result, the code that gets compiled is</p>
-<div class="highlight-python"><pre>KERNEL void test(int *arr)
+<div class="highlight-python"><div class="highlight"><pre>KERNEL void test(int *arr)
 {
     const SIZE_T idx = get_global_id(0);
     int a = arr[idx];
     arr[idx] = x + 1;
-}</pre>
+}
+</pre></div>
 </div>
 <p>If the snippet is used without parentheses (e.g. <tt class="docutils literal"><span class="pre">${add}</span></tt>), it is equivalent to calling it without arguments (<tt class="docutils literal"><span class="pre">${add()}</span></tt>).</p>
 <p>The root code that gets passed to <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread.compile" title="reikna.cluda.api.Thread.compile"><tt class="xref py py-meth docutils literal"><span class="pre">compile()</span></tt></a> can be viewed as a snippet with an empty signature.</p>
@@ -157,14 +158,15 @@ The result is attached to the source file.</li>
 <li>The corresponding value in the current <tt class="docutils literal"><span class="pre">render_kwds</span></tt> is replaced by the newly assigned prefix.</li>
 </ol>
 <p>With the code above, the rendered module will produce the code</p>
-<div class="highlight-python"><pre>WITHIN_KERNEL int _module0_(int x)
+<div class="highlight-python"><div class="highlight"><pre>WITHIN_KERNEL int _module0_(int x)
 {
     return x + 1 + 2;
-}</pre>
+}
+</pre></div>
 </div>
 <p>and the <tt class="docutils literal"><span class="pre">add</span></tt> keyword in the <tt class="docutils literal"><span class="pre">render_kwds</span></tt> gets its value changed to <tt class="docutils literal"><span class="pre">_module0_</span></tt>.
 Then the main code is rendered and appended to the previously renderd parts, giving</p>
-<div class="highlight-python"><pre>WITHIN_KERNEL int _module0_(int x)
+<div class="highlight-python"><div class="highlight"><pre>WITHIN_KERNEL int _module0_(int x)
 {
     return x + 1;
 }
@@ -174,7 +176,8 @@ KERNEL void test(int *arr)
     const SIZE_T idx = get_global_id(0);
     int a = arr[idx];
     arr[idx] = _module0_(x);
-}</pre>
+}
+</pre></div>
 </div>
 <p>which is then passed to the compiler.
 If your module&#8217;s template def does not take any arguments except for <tt class="docutils literal"><span class="pre">prefix</span></tt>, you can call it in the parent template just as <tt class="docutils literal"><span class="pre">${add}</span></tt> (without empty parentheses).</p>
@@ -252,7 +255,7 @@ For instance, the commonly used Marsaglia algorithm for generating Gamma-distrib
 Normally distributed randoms, in turn, require several uniformly distributed randoms &#8212; with the range which differs from the one for uniformly distributed randoms used by the initial Gamma distribution.
 Instead of copy-pasting the function or setting its parameters dynamically (which in more complicated cases may affect the performance), one just specifies the dependencies between modules and lets the underlying system handle things.</p>
 <p>The final render tree may look like:</p>
-<div class="highlight-python"><pre>Snippet(
+<div class="highlight-python"><div class="highlight"><pre>Snippet(
     PureParallel,
     render_kwds = {
       base_rng -&gt; Snippet(...)
@@ -265,7 +268,8 @@ Instead of copy-pasting the function or setting its parameters dynamically (whic
                )               render_kwds = {
                                  uniform -&gt; Snippet(...)
                                }
-                             )</pre>
+                             )
+</pre></div>
 </div>
 </div>
 </div>
@@ -319,7 +323,7 @@ Instead of copy-pasting the function or setting its parameters dynamically (whic
   
 
   <div class="footer">
-    &copy; 2012-2013, Bogdan Opanchuk.
+    &copy; 2012-2014, Bogdan Opanchuk.
     Created with <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
   

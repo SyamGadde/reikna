@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>CLUDA layer &mdash; reikna 0.6.0 documentation</title>
+    <title>CLUDA layer &mdash; reikna 0.6.2 documentation</title>
     
     <link rel="stylesheet" href="../_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.6.0',
+        VERSION:     '0.6.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.6.0 documentation" href="../index.html" />
+    <link rel="top" title="reikna 0.6.2 documentation" href="../index.html" />
     <link rel="up" title="API reference" href="index.html" />
     <link rel="next" title="Core functionality" href="core.html" />
     <link rel="prev" title="Helpers" href="helpers.html" />
@@ -67,7 +67,7 @@
         <li class="right" >
           <a href="helpers.html" title="Helpers"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">reikna 0.6.0 documentation</a> &raquo;</li>
+        <li><a href="../index.html">reikna 0.6.2 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">API reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -154,6 +154,13 @@ and the body equal to the string it returns;</li>
 </ul>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="function">
+<dt id="reikna.cluda.any_api">
+<tt class="descclassname">reikna.cluda.</tt><tt class="descname">any_api</tt><big>(</big><big>)</big><a class="headerlink" href="#reikna.cluda.any_api" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns one of the API modules supported by the system or raises an <tt class="docutils literal"><span class="pre">Exception</span></tt>
+if there are not any.</p>
 </dd></dl>
 
 <dl class="function">
@@ -552,7 +559,7 @@ Global and local sizes can have any length, providing that
 <tt class="docutils literal"><span class="pre">len(global_size)</span> <span class="pre">&gt;=</span> <span class="pre">len(local_size)</span></tt>, and the total number of work items and work groups
 is less than the corresponding total number available for the device.
 In order to get IDs and sizes in such kernels, virtual size functions have to be used
-(see <a class="reference internal" href="#VIRTUAL_SKIP_THREADS" title="VIRTUAL_SKIP_THREADS"><tt class="xref c c-macro docutils literal"><span class="pre">VIRTUAL_SKIP_THREADS</span></tt></a> and others for details).</p>
+(see <a class="reference internal" href="#c.VIRTUAL_SKIP_THREADS" title="VIRTUAL_SKIP_THREADS"><tt class="xref c c-macro docutils literal"><span class="pre">VIRTUAL_SKIP_THREADS</span></tt></a> and others for details).</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -839,6 +846,14 @@ that returns a complex number <tt class="docutils literal"><span class="pre">(co
 for a value <tt class="docutils literal"><span class="pre">theta</span></tt> of type <tt class="docutils literal"><span class="pre">dtype</span></tt> (must be a real data type).</p>
 </dd></dl>
 
+<dl class="function">
+<dt id="reikna.cluda.functions.pow">
+<tt class="descclassname">reikna.cluda.functions.</tt><tt class="descname">pow</tt><big>(</big><em>dtype</em>, <em>power_dtype=None</em><big>)</big><a class="headerlink" href="#reikna.cluda.functions.pow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference internal" href="#reikna.cluda.Module" title="reikna.cluda.Module"><tt class="xref py py-class docutils literal"><span class="pre">Module</span></tt></a> with a function of two arguments
+that raises the first argument of type <tt class="docutils literal"><span class="pre">dtype</span></tt> (must be a real or complex data type)
+to the power of the second argument (a corresponding real data type or an integer).</p>
+</dd></dl>
+
 </div>
 <div class="section" id="module-reikna.cluda.kernel">
 <span id="kernel-toolbox"></span><span id="cluda-kernel-toolbox"></span><h2>Kernel toolbox<a class="headerlink" href="#module-reikna.cluda.kernel" title="Permalink to this headline">¶</a></h2>
@@ -846,170 +861,171 @@ for a value <tt class="docutils literal"><span class="pre">theta</span></tt> of 
 <p>First, there are several objects available at the template rendering stage, namely <tt class="docutils literal"><span class="pre">numpy</span></tt>, <a class="reference internal" href="#module-reikna.cluda.dtypes" title="reikna.cluda.dtypes"><tt class="xref py py-mod docutils literal"><span class="pre">reikna.cluda.dtypes</span></tt></a> (as <tt class="docutils literal"><span class="pre">dtypes</span></tt>), and <a class="reference internal" href="helpers.html#module-reikna.helpers" title="reikna.helpers"><tt class="xref py py-mod docutils literal"><span class="pre">reikna.helpers</span></tt></a> (as <tt class="docutils literal"><span class="pre">helpers</span></tt>).</p>
 <p>Second, there is a set of macros attached to any kernel depending on the API it is being compiled for:</p>
 <dl class="macro">
-<dt id="CUDA">
-<tt class="descname">CUDA</tt><a class="headerlink" href="#CUDA" title="Permalink to this definition">¶</a></dt>
+<dt id="c.CUDA">
+<tt class="descname">CUDA</tt><a class="headerlink" href="#c.CUDA" title="Permalink to this definition">¶</a></dt>
 <dd><p>If defined, specifies that the kernel is being compiled for CUDA API.</p>
 </dd></dl>
 
 <dl class="macro">
-<dt id="COMPILE_FAST_MATH">
-<tt class="descname">COMPILE_FAST_MATH</tt><a class="headerlink" href="#COMPILE_FAST_MATH" title="Permalink to this definition">¶</a></dt>
+<dt id="c.COMPILE_FAST_MATH">
+<tt class="descname">COMPILE_FAST_MATH</tt><a class="headerlink" href="#c.COMPILE_FAST_MATH" title="Permalink to this definition">¶</a></dt>
 <dd><p>If defined, specifies that the compilation for this kernel was requested with <tt class="docutils literal"><span class="pre">fast_math</span> <span class="pre">==</span> <span class="pre">True</span></tt>.</p>
 </dd></dl>
 
 <dl class="macro">
-<dt id="LOCAL_BARRIER">
-<tt class="descname">LOCAL_BARRIER</tt><a class="headerlink" href="#LOCAL_BARRIER" title="Permalink to this definition">¶</a></dt>
+<dt id="c.LOCAL_BARRIER">
+<tt class="descname">LOCAL_BARRIER</tt><a class="headerlink" href="#c.LOCAL_BARRIER" title="Permalink to this definition">¶</a></dt>
 <dd><p>Synchronizes threads inside a block.</p>
 </dd></dl>
 
 <dl class="macro">
-<dt id="WITHIN_KERNEL">
-<tt class="descname">WITHIN_KERNEL</tt><a class="headerlink" href="#WITHIN_KERNEL" title="Permalink to this definition">¶</a></dt>
+<dt id="c.WITHIN_KERNEL">
+<tt class="descname">WITHIN_KERNEL</tt><a class="headerlink" href="#c.WITHIN_KERNEL" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modifier for a device-only function declaration.</p>
 </dd></dl>
 
 <dl class="macro">
-<dt id="KERNEL">
-<tt class="descname">KERNEL</tt><a class="headerlink" href="#KERNEL" title="Permalink to this definition">¶</a></dt>
+<dt id="c.KERNEL">
+<tt class="descname">KERNEL</tt><a class="headerlink" href="#c.KERNEL" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modifier for the kernel function declaration.</p>
 </dd></dl>
 
 <dl class="macro">
-<dt id="GLOBAL_MEM">
-<tt class="descname">GLOBAL_MEM</tt><a class="headerlink" href="#GLOBAL_MEM" title="Permalink to this definition">¶</a></dt>
+<dt id="c.GLOBAL_MEM">
+<tt class="descname">GLOBAL_MEM</tt><a class="headerlink" href="#c.GLOBAL_MEM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modifier for the global memory pointer argument.</p>
 </dd></dl>
 
 <dl class="macro">
-<dt id="LOCAL_MEM">
-<tt class="descname">LOCAL_MEM</tt><a class="headerlink" href="#LOCAL_MEM" title="Permalink to this definition">¶</a></dt>
+<dt id="c.LOCAL_MEM">
+<tt class="descname">LOCAL_MEM</tt><a class="headerlink" href="#c.LOCAL_MEM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modifier for the statically allocated local memory variable.</p>
 </dd></dl>
 
 <dl class="macro">
-<dt id="LOCAL_MEM_DYNAMIC">
-<tt class="descname">LOCAL_MEM_DYNAMIC</tt><a class="headerlink" href="#LOCAL_MEM_DYNAMIC" title="Permalink to this definition">¶</a></dt>
+<dt id="c.LOCAL_MEM_DYNAMIC">
+<tt class="descname">LOCAL_MEM_DYNAMIC</tt><a class="headerlink" href="#c.LOCAL_MEM_DYNAMIC" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modifier for the dynamically allocated local memory variable.</p>
 </dd></dl>
 
 <dl class="macro">
-<dt id="LOCAL_MEM_ARG">
-<tt class="descname">LOCAL_MEM_ARG</tt><a class="headerlink" href="#LOCAL_MEM_ARG" title="Permalink to this definition">¶</a></dt>
+<dt id="c.LOCAL_MEM_ARG">
+<tt class="descname">LOCAL_MEM_ARG</tt><a class="headerlink" href="#c.LOCAL_MEM_ARG" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modifier for the local memory argument in the device-only functions.</p>
 </dd></dl>
 
 <dl class="macro">
-<dt id="INLINE">
-<tt class="descname">INLINE</tt><a class="headerlink" href="#INLINE" title="Permalink to this definition">¶</a></dt>
+<dt id="c.INLINE">
+<tt class="descname">INLINE</tt><a class="headerlink" href="#c.INLINE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modifier for inline functions.</p>
 </dd></dl>
 
 <dl class="macro">
-<dt id="SIZE_T">
-<tt class="descname">SIZE_T</tt><a class="headerlink" href="#SIZE_T" title="Permalink to this definition">¶</a></dt>
+<dt id="c.SIZE_T">
+<tt class="descname">SIZE_T</tt><a class="headerlink" href="#c.SIZE_T" title="Permalink to this definition">¶</a></dt>
 <dd><p>The type of local/global IDs and sizes.
 Equal to <tt class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span></tt> for CUDA, and <tt class="docutils literal"><span class="pre">size_t</span></tt> for OpenCL
 (which can be 32- or 64-bit unsigned integer, depending on the device).</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="get_local_id">
-<a class="reference internal" href="#SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_local_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_local_id" title="Permalink to this definition">¶</a></dt>
+<dt id="c.get_local_id">
+<a class="reference internal" href="#c.SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_local_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#c.get_local_id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="get_group_id">
-<a class="reference internal" href="#SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_group_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_group_id" title="Permalink to this definition">¶</a></dt>
+<dt id="c.get_group_id">
+<a class="reference internal" href="#c.SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_group_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#c.get_group_id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="get_global_id">
-<a class="reference internal" href="#SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_global_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_global_id" title="Permalink to this definition">¶</a></dt>
+<dt id="c.get_global_id">
+<a class="reference internal" href="#c.SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_global_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#c.get_global_id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="get_local_size">
-<a class="reference internal" href="#SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_local_size</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_local_size" title="Permalink to this definition">¶</a></dt>
+<dt id="c.get_local_size">
+<a class="reference internal" href="#c.SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_local_size</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#c.get_local_size" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="get_num_groups">
-<a class="reference internal" href="#SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_num_groups</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_num_groups" title="Permalink to this definition">¶</a></dt>
+<dt id="c.get_num_groups">
+<a class="reference internal" href="#c.SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_num_groups</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#c.get_num_groups" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="get_global_size">
-<a class="reference internal" href="#SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_global_size</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#get_global_size" title="Permalink to this definition">¶</a></dt>
+<dt id="c.get_global_size">
+<a class="reference internal" href="#c.SIZE_T" title="SIZE_T">SIZE_T</a> <tt class="descname">get_global_size</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#c.get_global_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Local, group and global identifiers and sizes.
 In case of CUDA mimic the behavior of corresponding OpenCL functions.</p>
 </dd></dl>
 
 <dl class="macro">
-<dt id="VSIZE_T">
-<tt class="descname">VSIZE_T</tt><a class="headerlink" href="#VSIZE_T" title="Permalink to this definition">¶</a></dt>
+<dt id="c.VSIZE_T">
+<tt class="descname">VSIZE_T</tt><a class="headerlink" href="#c.VSIZE_T" title="Permalink to this definition">¶</a></dt>
 <dd><p>The type of local/global IDs in the virtual grid.
-It is separate from <a class="reference internal" href="#SIZE_T" title="SIZE_T"><tt class="xref c c-macro docutils literal"><span class="pre">SIZE_T</span></tt></a> because the former is intended to be equivalent to
+It is separate from <a class="reference internal" href="#c.SIZE_T" title="SIZE_T"><tt class="xref c c-macro docutils literal"><span class="pre">SIZE_T</span></tt></a> because the former is intended to be equivalent to
 what the backend is using, while <tt class="docutils literal"><span class="pre">VSIZE_T</span></tt> is a separate type and can be made larger
 than <tt class="docutils literal"><span class="pre">SIZE_T</span></tt> in the future if necessary.</p>
 </dd></dl>
 
 <dl class="macro">
-<dt id="ALIGN">
-<tt class="descname">ALIGN</tt><big>(</big>int<big>)</big><a class="headerlink" href="#ALIGN" title="Permalink to this definition">¶</a></dt>
+<dt id="c.ALIGN">
+<tt class="descname">ALIGN</tt><big>(</big>int<big>)</big><a class="headerlink" href="#c.ALIGN" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used to specify an explicit alignment (in bytes) for fields in structures, as</p>
-<div class="highlight-python"><pre>typedef struct {
+<div class="highlight-python"><div class="highlight"><pre>typedef struct {
     char ALIGN(4) a;
     int b;
-} MY_STRUCT;</pre>
+} MY_STRUCT;
+</pre></div>
 </div>
 </dd></dl>
 
 <dl class="macro">
-<dt id="VIRTUAL_SKIP_THREADS">
-<tt class="descname">VIRTUAL_SKIP_THREADS</tt><a class="headerlink" href="#VIRTUAL_SKIP_THREADS" title="Permalink to this definition">¶</a></dt>
+<dt id="c.VIRTUAL_SKIP_THREADS">
+<tt class="descname">VIRTUAL_SKIP_THREADS</tt><a class="headerlink" href="#c.VIRTUAL_SKIP_THREADS" title="Permalink to this definition">¶</a></dt>
 <dd><p>This macro should start any kernel compiled with <a class="reference internal" href="#reikna.cluda.api.Thread.compile_static" title="reikna.cluda.api.Thread.compile_static"><tt class="xref py py-meth docutils literal"><span class="pre">compile_static()</span></tt></a>.
 It skips all the empty threads resulting from fitting call parameters into backend limitations.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="virtual_local_id">
-<a class="reference internal" href="#VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_local_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_local_id" title="Permalink to this definition">¶</a></dt>
+<dt id="c.virtual_local_id">
+<a class="reference internal" href="#c.VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_local_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#c.virtual_local_id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="virtual_group_id">
-<a class="reference internal" href="#VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_group_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_group_id" title="Permalink to this definition">¶</a></dt>
+<dt id="c.virtual_group_id">
+<a class="reference internal" href="#c.VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_group_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#c.virtual_group_id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="virtual_global_id">
-<a class="reference internal" href="#VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_global_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_global_id" title="Permalink to this definition">¶</a></dt>
+<dt id="c.virtual_global_id">
+<a class="reference internal" href="#c.VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_global_id</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#c.virtual_global_id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="virtual_local_size">
-<a class="reference internal" href="#VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_local_size</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_local_size" title="Permalink to this definition">¶</a></dt>
+<dt id="c.virtual_local_size">
+<a class="reference internal" href="#c.VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_local_size</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#c.virtual_local_size" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="virtual_num_groups">
-<a class="reference internal" href="#VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_num_groups</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_num_groups" title="Permalink to this definition">¶</a></dt>
+<dt id="c.virtual_num_groups">
+<a class="reference internal" href="#c.VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_num_groups</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#c.virtual_num_groups" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="virtual_global_size">
-<a class="reference internal" href="#VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_global_size</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#virtual_global_size" title="Permalink to this definition">¶</a></dt>
+<dt id="c.virtual_global_size">
+<a class="reference internal" href="#c.VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_global_size</tt><big>(</big>int<em>&nbsp;dim</em><big>)</big><a class="headerlink" href="#c.virtual_global_size" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="virtual_global_flat_id">
-<a class="reference internal" href="#VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_global_flat_id</tt><big>(</big><big>)</big><a class="headerlink" href="#virtual_global_flat_id" title="Permalink to this definition">¶</a></dt>
+<dt id="c.virtual_global_flat_id">
+<a class="reference internal" href="#c.VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_global_flat_id</tt><big>(</big><big>)</big><a class="headerlink" href="#c.virtual_global_flat_id" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="virtual_global_flat_size">
-<a class="reference internal" href="#VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_global_flat_size</tt><big>(</big><big>)</big><a class="headerlink" href="#virtual_global_flat_size" title="Permalink to this definition">¶</a></dt>
+<dt id="c.virtual_global_flat_size">
+<a class="reference internal" href="#c.VSIZE_T" title="VSIZE_T">VSIZE_T</a> <tt class="descname">virtual_global_flat_size</tt><big>(</big><big>)</big><a class="headerlink" href="#c.virtual_global_flat_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Only available in <a class="reference internal" href="#reikna.cluda.api.StaticKernel" title="reikna.cluda.api.StaticKernel"><tt class="xref py py-class docutils literal"><span class="pre">StaticKernel</span></tt></a> objects obtained from <a class="reference internal" href="#reikna.cluda.api.Thread.compile_static" title="reikna.cluda.api.Thread.compile_static"><tt class="xref py py-meth docutils literal"><span class="pre">compile_static()</span></tt></a>.
 Since its dimensions can differ from actual call dimensions, these functions have to be used.</p>
 </dd></dl>
@@ -1239,7 +1255,7 @@ which takes into account types supported by GPUs.</p>
   
 
   <div class="footer">
-    &copy; 2012-2013, Bogdan Opanchuk.
+    &copy; 2012-2014, Bogdan Opanchuk.
     Created with <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
   

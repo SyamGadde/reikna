@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: advanced topics &mdash; reikna 0.6.0 documentation</title>
+    <title>Tutorial: advanced topics &mdash; reikna 0.6.2 documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.6.0',
+        VERSION:     '0.6.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.6.0 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.6.2 documentation" href="index.html" />
     <link rel="next" title="API reference" href="api/index.html" />
     <link rel="prev" title="Tutorial: basics" href="tutorial-basic.html" />
 
@@ -66,7 +66,7 @@
         <li class="right" >
           <a href="tutorial-basic.html" title="Tutorial: basics"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.6.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.6.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -133,12 +133,13 @@ In addition, the transformation code gets an <a class="reference internal" href=
 <p>A computation must derive <a class="reference internal" href="api/core.html#reikna.core.Computation" title="reikna.core.Computation"><tt class="xref py py-class docutils literal"><span class="pre">Computation</span></tt></a>.
 As an example, let us create a computation which calculates <tt class="docutils literal"><span class="pre">output</span> <span class="pre">=</span> <span class="pre">input1</span> <span class="pre">+</span> <span class="pre">input2</span> <span class="pre">*</span> <span class="pre">param</span></tt>.</p>
 <p>Defining a class:</p>
-<div class="highlight-python"><pre>import numpy
+<div class="highlight-python"><div class="highlight"><pre>import numpy
 
 from reikna.helpers import *
 from reikna.core import *
 
-class TestComputation(Computation):</pre>
+class TestComputation(Computation):
+</pre></div>
 </div>
 <p>Each computation class has to define the constructor, and the plan building callback.</p>
 <p><strong>Constructor.</strong>
@@ -197,8 +198,8 @@ The first argument will contain the string with the kernel declaration.</p>
 This will produce the corresponding request to the global memory or kernel arguments.</p>
 <p>If you need additional device functions, they have to be specified between <tt class="docutils literal"><span class="pre">&lt;%def</span> <span class="pre">...</span> <span class="pre">&gt;</span></tt> and <tt class="docutils literal"><span class="pre">${kernel_declaration}</span></tt>.
 Obviously, these functions can still use <tt class="docutils literal"><span class="pre">dtype</span></tt> and <tt class="docutils literal"><span class="pre">ctype</span></tt> object properties, although <tt class="docutils literal"><span class="pre">store_idx</span></tt> and <tt class="docutils literal"><span class="pre">load_idx</span></tt> will most likely result in compilation error (since they are rendered as macros using main kernel arguments).</p>
-<p>Since kernel call parameters (<tt class="docutils literal"><span class="pre">global_size</span></tt> and <tt class="docutils literal"><span class="pre">local_size</span></tt>) are specified on creation, all kernel calls are rendered as CLUDA static kernels (see <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread.compile_static" title="reikna.cluda.api.Thread.compile_static"><tt class="xref py py-meth docutils literal"><span class="pre">compile_static()</span></tt></a>) and therefore can use all the corresponding macros and functions (like <a class="reference internal" href="api/cluda.html#virtual_global_flat_id" title="virtual_global_flat_id"><tt class="xref c c-func docutils literal"><span class="pre">virtual_global_flat_id()</span></tt></a> in our kernel).
-Also, they must have <a class="reference internal" href="api/cluda.html#VIRTUAL_SKIP_THREADS" title="VIRTUAL_SKIP_THREADS"><tt class="xref c c-macro docutils literal"><span class="pre">VIRTUAL_SKIP_THREADS</span></tt></a> at the beginning of the kernel which remainder threads (which can be present, for example, if the workgroup size is not a multiple of the global size).</p>
+<p>Since kernel call parameters (<tt class="docutils literal"><span class="pre">global_size</span></tt> and <tt class="docutils literal"><span class="pre">local_size</span></tt>) are specified on creation, all kernel calls are rendered as CLUDA static kernels (see <a class="reference internal" href="api/cluda.html#reikna.cluda.api.Thread.compile_static" title="reikna.cluda.api.Thread.compile_static"><tt class="xref py py-meth docutils literal"><span class="pre">compile_static()</span></tt></a>) and therefore can use all the corresponding macros and functions (like <a class="reference internal" href="api/cluda.html#c.virtual_global_flat_id" title="virtual_global_flat_id"><tt class="xref c c-func docutils literal"><span class="pre">virtual_global_flat_id()</span></tt></a> in our kernel).
+Also, they must have <a class="reference internal" href="api/cluda.html#c.VIRTUAL_SKIP_THREADS" title="VIRTUAL_SKIP_THREADS"><tt class="xref c c-macro docutils literal"><span class="pre">VIRTUAL_SKIP_THREADS</span></tt></a> at the beginning of the kernel which remainder threads (which can be present, for example, if the workgroup size is not a multiple of the global size).</p>
 </div>
 </div>
 
@@ -249,7 +250,7 @@ Also, they must have <a class="reference internal" href="api/cluda.html#VIRTUAL_
   
 
   <div class="footer">
-    &copy; 2012-2013, Bogdan Opanchuk.
+    &copy; 2012-2014, Bogdan Opanchuk.
     Created with <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
   

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Tutorial: basics &mdash; reikna 0.6.0 documentation</title>
+    <title>Tutorial: basics &mdash; reikna 0.6.2 documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.6.0',
+        VERSION:     '0.6.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="reikna 0.6.0 documentation" href="index.html" />
+    <link rel="top" title="reikna 0.6.2 documentation" href="index.html" />
     <link rel="next" title="Tutorial: advanced topics" href="tutorial-advanced.html" />
     <link rel="prev" title="Tutorial: modules and snippets" href="tutorial-modules.html" />
 
@@ -66,7 +66,7 @@
         <li class="right" >
           <a href="tutorial-modules.html" title="Tutorial: modules and snippets"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">reikna 0.6.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">reikna 0.6.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -127,10 +127,11 @@ The signature can change if a user connects transformations to some parameter vi
 </div>
 <p>The details of creating the computation itself are not important for this example; they are provided here just for the sake of completeness.
 The initial transformation tree of <tt class="docutils literal"><span class="pre">comp</span></tt> object looks like:</p>
-<div class="highlight-python"><pre>   | out   | &gt;&gt;
+<div class="highlight-python"><div class="highlight"><pre>   | out   | &gt;&gt;
 &gt;&gt; | in1   |
 &gt;&gt; | in2   |
-&gt;&gt; | param |</pre>
+&gt;&gt; | param |
+</pre></div>
 </div>
 <p>Here the insides of <tt class="docutils literal"><span class="pre">||</span></tt> are the base computation (the one defined by the developer), and <tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt> denote inputs and outputs provided by the user.
 The computation signature is:</p>
@@ -155,12 +156,13 @@ To achieve this, we connect the scaling transformation to it:</p>
 </pre></div>
 </div>
 <p>The transformation tree now looks like:</p>
-<div class="highlight-python"><pre>                     | out   | ----&gt; out1 &gt;&gt;
+<div class="highlight-python"><div class="highlight"><pre>                     | out   | ----&gt; out1 &gt;&gt;
                      |       |   \-&gt; out2 &gt;&gt;
                   &gt;&gt; | in1   |
 &gt;&gt; in2_prime ------&gt; | in2   |
 &gt;&gt; param2 ----/      |       |
-                     | param |</pre>
+                     | param |
+</pre></div>
 </div>
 <p>As can be seen, nothing has changed from the base computation&#8217;s point of view: it still gets the same inputs and outputs to the same array.
 But user-supplied parameters (<tt class="docutils literal"><span class="pre">&gt;&gt;</span></tt>) have changed, which can be also seen in the value of the <a class="reference internal" href="api/core.html#reikna.core.Computation.signature" title="reikna.core.Computation.signature"><tt class="xref py py-attr docutils literal"><span class="pre">signature</span></tt></a>:</p>
@@ -258,7 +260,7 @@ On the other hand, input transformations can be safely connected to existing nod
   
 
   <div class="footer">
-    &copy; 2012-2013, Bogdan Opanchuk.
+    &copy; 2012-2014, Bogdan Opanchuk.
     Created with <a href="http://sphinx.pocoo.org/">Sphinx</a>.
   </div>
   
